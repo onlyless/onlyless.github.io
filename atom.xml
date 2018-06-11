@@ -18,8 +18,8 @@
   
   <entry>
     <title>博客复活</title>
-    <link href="https://www.djangoz.com/2018/06/11/blog-resurrection"/>
-    <id>https://www.djangoz.com/2018/06/11/blog-resurrection</id>
+    <link href="https://www.djangoz.com/2018/06/11/blog-resurrection/"/>
+    <id>https://www.djangoz.com/2018/06/11/blog-resurrection/</id>
     <published>2018-06-10T16:00:00.000Z</published>
     <updated>2018-06-11T05:42:20.000Z</updated>
     
@@ -41,8 +41,8 @@
   
   <entry>
     <title>Python实用小工具</title>
-    <link href="https://www.djangoz.com/2018/04/19/useful-in-python"/>
-    <id>https://www.djangoz.com/2018/04/19/useful-in-python</id>
+    <link href="https://www.djangoz.com/2018/04/19/useful-in-python/"/>
+    <id>https://www.djangoz.com/2018/04/19/useful-in-python/</id>
     <published>2018-04-18T16:00:00.000Z</published>
     <updated>2018-06-10T14:10:49.000Z</updated>
     
@@ -67,8 +67,8 @@
   
   <entry>
     <title>在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号</title>
-    <link href="https://www.djangoz.com/2018/03/10/flask-app"/>
-    <id>https://www.djangoz.com/2018/03/10/flask-app</id>
+    <link href="https://www.djangoz.com/2018/03/10/flask-app/"/>
+    <id>https://www.djangoz.com/2018/03/10/flask-app/</id>
     <published>2018-03-09T16:00:00.000Z</published>
     <updated>2018-06-10T14:11:13.000Z</updated>
     
@@ -93,8 +93,8 @@
   
   <entry>
     <title>ADB 用法大全</title>
-    <link href="https://www.djangoz.com/2018/02/02/awesome-adb"/>
-    <id>https://www.djangoz.com/2018/02/02/awesome-adb</id>
+    <link href="https://www.djangoz.com/2018/02/02/awesome-adb/"/>
+    <id>https://www.djangoz.com/2018/02/02/awesome-adb/</id>
     <published>2018-02-01T16:00:00.000Z</published>
     <updated>2018-06-11T04:55:26.000Z</updated>
     
@@ -119,8 +119,8 @@
   
   <entry>
     <title>基于图的Bfs的电影天堂爬虫</title>
-    <link href="https://www.djangoz.com/2017/12/31/Movie-heaven-crawler"/>
-    <id>https://www.djangoz.com/2017/12/31/Movie-heaven-crawler</id>
+    <link href="https://www.djangoz.com/2017/12/31/Movie-heaven-crawler/"/>
+    <id>https://www.djangoz.com/2017/12/31/Movie-heaven-crawler/</id>
     <published>2017-12-30T16:00:00.000Z</published>
     <updated>2018-06-10T13:53:34.000Z</updated>
     
@@ -144,8 +144,8 @@
   
   <entry>
     <title>简单地用Python玩了一下钓鱼网站</title>
-    <link href="https://www.djangoz.com/2017/12/01/play"/>
-    <id>https://www.djangoz.com/2017/12/01/play</id>
+    <link href="https://www.djangoz.com/2017/12/01/play/"/>
+    <id>https://www.djangoz.com/2017/12/01/play/</id>
     <published>2017-11-30T16:00:00.000Z</published>
     <updated>2018-06-10T13:49:58.000Z</updated>
     
@@ -169,8 +169,8 @@
   
   <entry>
     <title>IDEA 查看类UML关系图</title>
-    <link href="https://www.djangoz.com/2017/11/19/idea-uml"/>
-    <id>https://www.djangoz.com/2017/11/19/idea-uml</id>
+    <link href="https://www.djangoz.com/2017/11/19/idea-uml/"/>
+    <id>https://www.djangoz.com/2017/11/19/idea-uml/</id>
     <published>2017-11-18T16:00:00.000Z</published>
     <updated>2018-06-10T13:44:31.000Z</updated>
     
@@ -194,8 +194,8 @@
   
   <entry>
     <title>湖北工业大学教务系统查分,查课小程序</title>
-    <link href="https://www.djangoz.com/2017/10/27/Login-hbut"/>
-    <id>https://www.djangoz.com/2017/10/27/Login-hbut</id>
+    <link href="https://www.djangoz.com/2017/10/27/Login-hbut/"/>
+    <id>https://www.djangoz.com/2017/10/27/Login-hbut/</id>
     <published>2017-10-26T16:00:00.000Z</published>
     <updated>2018-06-10T13:38:38.000Z</updated>
     
@@ -220,8 +220,8 @@
   
   <entry>
     <title>统计文本中单词频率</title>
-    <link href="https://www.djangoz.com/2017/10/18/Vocabulary-Statistics"/>
-    <id>https://www.djangoz.com/2017/10/18/Vocabulary-Statistics</id>
+    <link href="https://www.djangoz.com/2017/10/18/Vocabulary-Statistics/"/>
+    <id>https://www.djangoz.com/2017/10/18/Vocabulary-Statistics/</id>
     <published>2017-10-17T16:00:00.000Z</published>
     <updated>2018-06-10T13:37:38.000Z</updated>
     
@@ -247,8 +247,8 @@
   
   <entry>
     <title>识别括号优先级的简易计算器</title>
-    <link href="https://www.djangoz.com/2017/09/30/simple-calculator"/>
-    <id>https://www.djangoz.com/2017/09/30/simple-calculator</id>
+    <link href="https://www.djangoz.com/2017/09/30/simple-calculator/"/>
+    <id>https://www.djangoz.com/2017/09/30/simple-calculator/</id>
     <published>2017-09-29T16:00:00.000Z</published>
     <updated>2018-06-10T13:26:40.000Z</updated>
     
@@ -272,8 +272,8 @@
   
   <entry>
     <title>Windows Cmd使用常用bash命令</title>
-    <link href="https://www.djangoz.com/2017/09/28/windows-use-bash"/>
-    <id>https://www.djangoz.com/2017/09/28/windows-use-bash</id>
+    <link href="https://www.djangoz.com/2017/09/28/windows-use-bash/"/>
+    <id>https://www.djangoz.com/2017/09/28/windows-use-bash/</id>
     <published>2017-09-27T16:00:00.000Z</published>
     <updated>2018-06-10T13:20:09.000Z</updated>
     
@@ -295,8 +295,8 @@
   
   <entry>
     <title>并查集(Union-Find)算法介绍</title>
-    <link href="https://www.djangoz.com/2017/09/12/union-find"/>
-    <id>https://www.djangoz.com/2017/09/12/union-find</id>
+    <link href="https://www.djangoz.com/2017/09/12/union-find/"/>
+    <id>https://www.djangoz.com/2017/09/12/union-find/</id>
     <published>2017-09-11T16:00:00.000Z</published>
     <updated>2018-06-10T14:21:02.000Z</updated>
     
@@ -320,8 +320,8 @@
   
   <entry>
     <title>Java实现简易的queue</title>
-    <link href="https://www.djangoz.com/2017/09/09/queue-in-java"/>
-    <id>https://www.djangoz.com/2017/09/09/queue-in-java</id>
+    <link href="https://www.djangoz.com/2017/09/09/queue-in-java/"/>
+    <id>https://www.djangoz.com/2017/09/09/queue-in-java/</id>
     <published>2017-09-08T16:00:00.000Z</published>
     <updated>2018-06-06T15:09:49.000Z</updated>
     
@@ -345,8 +345,8 @@
   
   <entry>
     <title>Java实现简易的stack</title>
-    <link href="https://www.djangoz.com/2017/09/09/stack-in-java"/>
-    <id>https://www.djangoz.com/2017/09/09/stack-in-java</id>
+    <link href="https://www.djangoz.com/2017/09/09/stack-in-java/"/>
+    <id>https://www.djangoz.com/2017/09/09/stack-in-java/</id>
     <published>2017-09-08T16:00:00.000Z</published>
     <updated>2018-06-06T15:11:40.000Z</updated>
     
@@ -370,8 +370,8 @@
   
   <entry>
     <title>Windows下访问linux分区文件</title>
-    <link href="https://www.djangoz.com/2017/08/18/windows-to-linux"/>
-    <id>https://www.djangoz.com/2017/08/18/windows-to-linux</id>
+    <link href="https://www.djangoz.com/2017/08/18/windows-to-linux/"/>
+    <id>https://www.djangoz.com/2017/08/18/windows-to-linux/</id>
     <published>2017-08-18T03:27:50.000Z</published>
     <updated>2017-08-24T14:33:36.000Z</updated>
     
@@ -393,10 +393,10 @@
   
   <entry>
     <title>更换主题</title>
-    <link href="https://www.djangoz.com/2017/08/17/change-theme"/>
-    <id>https://www.djangoz.com/2017/08/17/change-theme</id>
+    <link href="https://www.djangoz.com/2017/08/17/change-theme/"/>
+    <id>https://www.djangoz.com/2017/08/17/change-theme/</id>
     <published>2017-08-17T10:10:16.000Z</published>
-    <updated>2017-08-24T14:33:30.000Z</updated>
+    <updated>2018-06-11T06:27:07.797Z</updated>
     
     <content type="html"><![CDATA[<p>爱折腾的我又把原来网站换了框架，<br>把jekyll换成了hexo，<br>感觉hexo支持的主题看起来美观多了<br>该主题来自<a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank" rel="noopener">indigo</a></p>]]></content>
     
@@ -416,8 +416,8 @@
   
   <entry>
     <title>在Linux的环境安装shadowsocksR客户端</title>
-    <link href="https://www.djangoz.com/2017/08/16/linux-setup-ssr"/>
-    <id>https://www.djangoz.com/2017/08/16/linux-setup-ssr</id>
+    <link href="https://www.djangoz.com/2017/08/16/linux-setup-ssr/"/>
+    <id>https://www.djangoz.com/2017/08/16/linux-setup-ssr/</id>
     <published>2017-08-15T16:00:00.000Z</published>
     <updated>2018-06-06T15:05:42.000Z</updated>
     
@@ -440,8 +440,8 @@
   
   <entry>
     <title>求二叉树的最大深度和最小深度</title>
-    <link href="https://www.djangoz.com/2017/08/15/Depth-of-Binary-tree"/>
-    <id>https://www.djangoz.com/2017/08/15/Depth-of-Binary-tree</id>
+    <link href="https://www.djangoz.com/2017/08/15/Depth-of-Binary-tree/"/>
+    <id>https://www.djangoz.com/2017/08/15/Depth-of-Binary-tree/</id>
     <published>2017-08-14T16:00:00.000Z</published>
     <updated>2018-06-06T15:07:28.000Z</updated>
     
@@ -466,8 +466,8 @@
   
   <entry>
     <title>先随便写写</title>
-    <link href="https://www.djangoz.com/2017/08/12/wirte-something"/>
-    <id>https://www.djangoz.com/2017/08/12/wirte-something</id>
+    <link href="https://www.djangoz.com/2017/08/12/wirte-something/"/>
+    <id>https://www.djangoz.com/2017/08/12/wirte-something/</id>
     <published>2017-08-11T16:00:00.000Z</published>
     <updated>2018-06-06T14:55:53.000Z</updated>
     
@@ -489,8 +489,8 @@
   
   <entry>
     <title>创建博客成功</title>
-    <link href="https://www.djangoz.com/2017/08/11/first-time"/>
-    <id>https://www.djangoz.com/2017/08/11/first-time</id>
+    <link href="https://www.djangoz.com/2017/08/11/first-time/"/>
+    <id>https://www.djangoz.com/2017/08/11/first-time/</id>
     <published>2017-08-10T16:00:00.000Z</published>
     <updated>2018-06-06T14:51:16.000Z</updated>
     
