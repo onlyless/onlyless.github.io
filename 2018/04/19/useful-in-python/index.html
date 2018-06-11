@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="e">
+    
+    
+    
+    
+    <title>Python实用小工具 | DoubleZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="小程序">
+    <meta name="description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:">
+<meta name="keywords" content="小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实用小工具">
+<meta property="og:url" content="http://www.djangoz.com/2018/04/19/useful-in-python/index.html">
+<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.djangoz.com/img/useful-py.png">
+<meta property="og:updated_time" content="2018-06-10T14:10:49.754Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实用小工具">
+<meta name="twitter:description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:">
+<meta name="twitter:image" content="http://www.djangoz.com/img/useful-py.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DoubleZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python实用小工具</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python实用小工具</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-18T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-04-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-简单下载服务器"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. 简单下载服务器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-JSON解析小工具"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. JSON解析小工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-非交互式导入包"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 非交互式导入包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-pip-常用操作"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. pip 常用操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-加速pip安装"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. 加速pip安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-ipython"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. ipython</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-useful-in-python"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python实用小工具</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-19 00:00:00" datetime="2018-04-18T16:00:00.000Z"  itemprop="datePublished">2018-04-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="1-简单下载服务器"><a href="#1-简单下载服务器" class="headerlink" title="1. 简单下载服务器"></a>1. 简单下载服务器</h2><p> 在需要下载的路径中执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#python2</span><br><span class="line">python -m SimpleHTTPServer</span><br><span class="line"></span><br><span class="line">#python3</span><br><span class="line">python -m http.server</span><br></pre></td></tr></table></figure>
+
+<p>此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/useful-py.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br> 点击文件即可进行下载。<br> 也可直接对文件进行wget:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget &lt;your ip address&gt;:/8000/filename</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-JSON解析小工具"><a href="#2-JSON解析小工具" class="headerlink" title="2. JSON解析小工具"></a>2. JSON解析小工具</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># echo &apos;&#123;&quot;age&quot;:10, &quot;name&quot;:&quot;name1&quot;&#125;&apos; | python -m json.tool</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;age&quot;: 10,</span><br><span class="line">    &quot;name&quot;: &quot;name1&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-非交互式导入包"><a href="#3-非交互式导入包" class="headerlink" title="3. 非交互式导入包"></a>3. 非交互式导入包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &quot;import flask&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-pip-常用操作"><a href="#4-pip-常用操作" class="headerlink" title="4. pip 常用操作"></a>4. pip 常用操作</h2><p>1) 安装pip</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y python-pip</span><br></pre></td></tr></table></figure>
+
+<p>2)  查找包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip search flask</span><br></pre></td></tr></table></figure>
+
+<p>​3) 安装指定版本包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install flask==0.8</span><br></pre></td></tr></table></figure>
+
+<p>​4) 删除包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip uninstall flask</span><br></pre></td></tr></table></figure>
+
+<p>​5) 查看包信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip show flask</span><br></pre></td></tr></table></figure>
+
+<p>​6) 检查包依赖是否完整</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip check flask</span><br></pre></td></tr></table></figure>
+
+<p>​7) 查看已安装包列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip list</span><br></pre></td></tr></table></figure>
+
+<p>​8) 导出所有已安装包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>​9) 安装导出的所有包，可用于在其他服务器安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>​10) pip命令补全，tab键可补全。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip completion –bash &gt;&gt; ~/.profile</span><br><span class="line">source ~/.profile</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-加速pip安装"><a href="#5-加速pip安装" class="headerlink" title="5. 加速pip安装"></a>5. 加速pip安装</h2><p> pip<br>默认源地址pypi.python.org可能不稳定，可以用国内的阿里云源或者豆瓣的源代替，以豆瓣为例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a> flask</span><br></pre></td></tr></table></figure>
+
+<p>每次都这样修改比较麻烦，可以直接修改pip的配置文件将源加入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.pip</span><br><span class="line">cd ~/.pip</span><br><span class="line">vim pip.conf</span><br></pre></td></tr></table></figure>
+
+<p>加入如下内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a></span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+
+<p>windows下，直接在user目录中创建一个pip目录，如：C:\Users\xx\pip，新建文件pip.ini。内容同上。</p>
+<h2 id="6-ipython"><a href="#6-ipython" class="headerlink" title="6. ipython"></a>6. ipython</h2><p> 增强型的python交互式工具。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install ipython</span><br><span class="line">ipython</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-10T14:10:49.754Z" itemprop="dateUpdated">2018-06-10 22:10:49</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2018/04/19/useful-in-python/" target="_blank" rel="external">http://www.djangoz.com/2018/04/19/useful-in-python/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DoubleZ">
+            DoubleZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.djangoz.com/2018/04/19/useful-in-python/&title=《Python实用小工具》 — DoubleZ's blog&pic=http://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.djangoz.com/2018/04/19/useful-in-python/&title=《Python实用小工具》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.djangoz.com/2018/04/19/useful-in-python/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python实用小工具》 — DoubleZ's blog&url=http://www.djangoz.com/2018/04/19/useful-in-python/&via=http://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.djangoz.com/2018/04/19/useful-in-python/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/10/flask-app/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DoubleZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.djangoz.com/2018/04/19/useful-in-python/&title=《Python实用小工具》 — DoubleZ's blog&pic=http://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.djangoz.com/2018/04/19/useful-in-python/&title=《Python实用小工具》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.djangoz.com/2018/04/19/useful-in-python/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python实用小工具》 — DoubleZ's blog&url=http://www.djangoz.com/2018/04/19/useful-in-python/&via=http://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.djangoz.com/2018/04/19/useful-in-python/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aS46DQAxF0ex/02SaKALusyESrsuoRYeiDgPLn3q98LV9XJ93jv/7e39v5b11Lr5kyJDxWMZ2eB1viz/1u+n0A518GhkyZCzAIKEwXZqE3b2n+N5kyJAhIw2UJNXj92XIkCGjE3B5cOQFqgwZMmQcM0g5mr6erJYWzxfU4jJkyHggg3fd///3LfMNGTJkPIqxhRcZPfJStrOTrzVlyJAxmsEDHG/u14pVUlSfrCBDhozRjPToQzrg7DTXSLiXIUPGaoxacdsJkbVxZqvpJkOGjEcx7kjgeKhNj27sriNDhozRjM6i/OBpbUSaBmgZMmTMZnQKSF708hI3/XwyZMiYzUjHlsdb4U9xMDr2IUOGjAUY/dhFEspgW2mCKEOGjNGMfoMsvdN5I6rFZciQMY7Bm2Kd4rMTcOP6W4YMGeMYPIEj6WOaLBZLVpIaypAhYxyjVoKmY4NrwzQaEsiQIWMEIz0AQV5GtpKG6ZMMUIYMGaMZtbSPjy3T4WU/lZQhQ8ZUBnk4bcORUJu+8STDlSFDxmIM/koeRkkLrzbslCFDxjqM9JAWCZfphyPXbiCWIUPGUEbngEU/HHdWQJW3DBkyRjBqYa72G765WmNOhgwZsxm8fVaD8QMWrYArQ4aMBRhp/4pH7n7Ri2awMmTIkIGzy/SXabPvloArQ4aM0QwSNDujzSDcy5AhYwFG55hXf1SZdgFlyJCxGqNWOtYacOkn4KmkDBkyhjLeIHm8KstWOeoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

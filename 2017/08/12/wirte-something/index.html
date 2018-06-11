@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="e">
+    
+    
+    
+    
+    <title>先随便写写 | DoubleZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="闲言碎语">
+    <meta name="description" content="今天终于学会在静态网站上安装插件了(其实也不算，是直接用的别人的主题)，原来也不难，昨天弄了老半天都没弄出来　　还是写一写方法吧　　(⊙o⊙)…还是以后在写吧，现在还不会用markdown写文档　　初学者什么都不会~~o(&amp;gt;_&amp;lt;)o ~~　　还是直接贴我参考的地方吧(在GitHub页面上使用Jekyll插件](http://ixti.net/software/2013/01/28/">
+<meta name="keywords" content="闲言碎语">
+<meta property="og:type" content="article">
+<meta property="og:title" content="先随便写写">
+<meta property="og:url" content="http://www.djangoz.com/2017/08/12/wirte-something/index.html">
+<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:description" content="今天终于学会在静态网站上安装插件了(其实也不算，是直接用的别人的主题)，原来也不难，昨天弄了老半天都没弄出来　　还是写一写方法吧　　(⊙o⊙)…还是以后在写吧，现在还不会用markdown写文档　　初学者什么都不会~~o(&amp;gt;_&amp;lt;)o ~~　　还是直接贴我参考的地方吧(在GitHub页面上使用Jekyll插件](http://ixti.net/software/2013/01/28/">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-06T14:55:53.489Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="先随便写写">
+<meta name="twitter:description" content="今天终于学会在静态网站上安装插件了(其实也不算，是直接用的别人的主题)，原来也不难，昨天弄了老半天都没弄出来　　还是写一写方法吧　　(⊙o⊙)…还是以后在写吧，现在还不会用markdown写文档　　初学者什么都不会~~o(&amp;gt;_&amp;lt;)o ~~　　还是直接贴我参考的地方吧(在GitHub页面上使用Jekyll插件](http://ixti.net/software/2013/01/28/">
+    
+        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DoubleZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">先随便写写</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">先随便写写</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-08-11T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-08-12
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-wirte-something"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">先随便写写</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-08-12 00:00:00" datetime="2017-08-11T16:00:00.000Z"  itemprop="datePublished">2017-08-12</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>　　今天终于学会在静态网站上安装插件了(其实也不算，是直接用的别人的主题)，原来也不难，昨天弄了老半天都没弄出来<br>　　还是写一写方法吧<br>　　(⊙o⊙)…还是以后在写吧，现在还不会用markdown写文档<br>　　初学者什么都不会~~o(&gt;_&lt;)o ~~<br>　　还是直接贴我参考的地方吧(在GitHub页面上使用Jekyll插件](<a href="http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html" target="_blank" rel="noopener">http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html</a>)<br>　　把主题<a href="https://github.com/mmistakes/made-mistakes-jekyll" target="_blank" rel="noopener">作者的github项目主页</a>贴一下，表示感谢</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-06T14:55:53.489Z" itemprop="dateUpdated">2018-06-06 22:55:53</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2017/08/12/wirte-something/" target="_blank" rel="external">http://www.djangoz.com/2017/08/12/wirte-something/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DoubleZ">
+            DoubleZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闲言碎语/">闲言碎语</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.djangoz.com/2017/08/12/wirte-something/&title=《先随便写写》 — DoubleZ's blog&pic=http://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.djangoz.com/2017/08/12/wirte-something/&title=《先随便写写》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.djangoz.com/2017/08/12/wirte-something/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《先随便写写》 — DoubleZ's blog&url=http://www.djangoz.com/2017/08/12/wirte-something/&via=http://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.djangoz.com/2017/08/12/wirte-something/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/08/15/Depth-of-Binary-tree/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">求二叉树的最大深度和最小深度</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/11/first-time/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">创建博客成功</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DoubleZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.djangoz.com/2017/08/12/wirte-something/&title=《先随便写写》 — DoubleZ's blog&pic=http://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.djangoz.com/2017/08/12/wirte-something/&title=《先随便写写》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.djangoz.com/2017/08/12/wirte-something/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《先随便写写》 — DoubleZ's blog&url=http://www.djangoz.com/2017/08/12/wirte-something/&via=http://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.djangoz.com/2017/08/12/wirte-something/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aQU7EMAwFUO5/6bJFAtr/nYLU5mU1Ykrq14Wnsf3xEa/jy7r3+q/XtHepFwYGxmMZx+k6v+auEL9fmceGgYGxD2O2df5fCTXfAQMDA6NNgsk+5+H+diUGBgbGjLGSLs8DxcDAwDhnJIfY5IB6Hnry7Z+fxTEwMB7IyKvu///5T/obGBgYj2Ic5WoPq3m6PBYWBgbGuxlt+b59ZZzt08aDgYHxbkbSjEyal0VaLNsAUVMBAwNjS0ZbMst3awONWggYGBgbMOpmYVzQbwOaDZ9hYGDsybiLlBTgEvZF6sfAwNiAMRuzaAcgkpSa/+W2aREMDIxHMdYLausvi8kPwA+fMTAwNmDMBlKHpbG4qVkU4zAwMDZgzBqHeVLOWwjtgbnuLWBgYDycsYJpU3BxQE0GxTAwMDZg5IOns47hXa3KpWELDAyMhzPylJonxIsUGT+s6OFiYGBswJgdL2epduUu0cwIBgbG6xh54axtNK63KvODNAYGxj6MdhhrJVnn4xdFbQ0DA2MDRnuzWek/P8TWh2QMDIzNGO14xCzctiR3McyBgYHxUsZRrlmx7HyH5NuLx42BgfFqxnqyyw+3s4ZofujFwMB4NyNPsuv5LS+01TFgYGBswChK8MnoQzww0T6mi/dcDAwMjDJFrqTUus2AgYGBUY5QzALNk2zR38DAwHgR495SfhtuUsjDwMDYmdGmvJXS2F0lvOEOGBgYz2N8AsIn2xn2DU6lAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

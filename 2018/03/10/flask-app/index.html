@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="e">
+    
+    
+    
+    
+    <title>在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号 | DoubleZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="应用">
+    <meta name="description" content="突然想开发一个微信公众号，就算没人关注也可以平时自己拿来使用，于是想到了用Flask做公众号的后端，用nginx来反向代理，并启用SSL/TLS。下面分节介绍搭建过程。 安装python环境自己平时用的python3，于是就用python3来搭的，ubuntu默认安装了python3，首先安装包管理12sudo apt install python3-pippip3 install --upgra">
+<meta name="keywords" content="应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号">
+<meta property="og:url" content="http://www.djangoz.com/2018/03/10/flask-app/index.html">
+<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:description" content="突然想开发一个微信公众号，就算没人关注也可以平时自己拿来使用，于是想到了用Flask做公众号的后端，用nginx来反向代理，并启用SSL/TLS。下面分节介绍搭建过程。 安装python环境自己平时用的python3，于是就用python3来搭的，ubuntu默认安装了python3，首先安装包管理12sudo apt install python3-pippip3 install --upgra">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.djangoz.com/img/flask_app_1.jpg">
+<meta property="og:image" content="http://www.djangoz.com/img/flask_app_2.jpg">
+<meta property="og:image" content="http://www.djangoz.com/img/flask_app_3.jpg">
+<meta property="og:updated_time" content="2018-06-10T14:11:13.990Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号">
+<meta name="twitter:description" content="突然想开发一个微信公众号，就算没人关注也可以平时自己拿来使用，于是想到了用Flask做公众号的后端，用nginx来反向代理，并启用SSL/TLS。下面分节介绍搭建过程。 安装python环境自己平时用的python3，于是就用python3来搭的，ubuntu默认安装了python3，首先安装包管理12sudo apt install python3-pippip3 install --upgra">
+<meta name="twitter:image" content="http://www.djangoz.com/img/flask_app_1.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DoubleZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-09T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-03-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装python环境"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装python环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目文件"><span class="post-toc-number">2.</span> <span class="post-toc-text">项目文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装配置nginx"><span class="post-toc-number">3.</span> <span class="post-toc-text">安装配置nginx</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开启SSL"><span class="post-toc-number">4.</span> <span class="post-toc-text">开启SSL</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#flask接入微信公众号"><span class="post-toc-number">5.</span> <span class="post-toc-text">flask接入微信公众号</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-flask-app"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-10 00:00:00" datetime="2018-03-09T16:00:00.000Z"  itemprop="datePublished">2018-03-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>突然想开发一个微信公众号，就算没人关注也可以平时自己拿来使用，于是想到了用Flask做公众号的后端，用nginx来反向代理，并启用SSL/TLS。<br>下面分节介绍搭建过程。</p>
+<h2 id="安装python环境"><a href="#安装python环境" class="headerlink" title="安装python环境"></a>安装python环境</h2><p>自己平时用的python3，于是就用python3来搭的，ubuntu默认安装了python3，首先安装包管理<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3-pip</span><br><span class="line">pip3 install --upgrade pip</span><br></pre></td></tr></table></figure></p>
+<p>然后安装virtualenv与其他库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br><span class="line">mkdir flask_app</span><br><span class="line">cd flask_app</span><br><span class="line">virtualenv env</span><br><span class="line">source env/bin/activate</span><br></pre></td></tr></table></figure></p>
+<p>创建requirements.txt文件<br>如果想让Gunicorn支持异步 workers 的话需要安装一下三个python包(greenlet,eventlet,gevent),在清单文件中已给出，gunicorn还需要库函数 libevent(1.4.x or 2.0.4)<br>下面是Flask常用的库<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Flask==<span class="number">0.10</span><span class="number">.1</span></span><br><span class="line">Flask-Login==<span class="number">0.2</span><span class="number">.11</span></span><br><span class="line">Flask-Mail==<span class="number">0.9</span><span class="number">.1</span></span><br><span class="line">Flask-Moment==<span class="number">0.4</span><span class="number">.0</span></span><br><span class="line">Flask-PageDown==<span class="number">0.1</span><span class="number">.5</span></span><br><span class="line">Flask-SQLAlchemy==<span class="number">2.0</span></span><br><span class="line">Flask-Script==<span class="number">2.0</span><span class="number">.5</span></span><br><span class="line">Flask-WTF==<span class="number">0.10</span><span class="number">.2</span></span><br><span class="line">Flask-Cache==<span class="number">0.13</span><span class="number">.1</span></span><br><span class="line">Flask-Restless==<span class="number">0.15</span><span class="number">.0</span></span><br><span class="line">Flask-Uploads==<span class="number">0.1</span><span class="number">.3</span></span><br><span class="line">Jinja2==<span class="number">2.7</span><span class="number">.3</span></span><br><span class="line">Mako==<span class="number">1.0</span><span class="number">.0</span></span><br><span class="line">Markdown==<span class="number">2.5</span><span class="number">.1</span></span><br><span class="line">MarkupSafe==<span class="number">0.23</span></span><br><span class="line">SQLAlchemy==<span class="number">0.9</span><span class="number">.8</span></span><br><span class="line">WTForms==<span class="number">2.0</span><span class="number">.1</span></span><br><span class="line">Werkzeug==<span class="number">0.9</span><span class="number">.6</span></span><br><span class="line">html5lib==<span class="number">1.0</span>b3</span><br><span class="line">itsdangerous==<span class="number">0.24</span></span><br><span class="line">six==<span class="number">1.8</span><span class="number">.0</span></span><br><span class="line">awesome-slugify==<span class="number">1.6</span></span><br><span class="line">gevent==<span class="number">1.2</span><span class="number">.2</span></span><br><span class="line">eventlet==<span class="number">0.22</span><span class="number">.1</span></span><br><span class="line">greenlet==<span class="number">0.4</span><span class="number">.13</span></span><br><span class="line">gunicorn==<span class="number">19.7</span><span class="number">.0</span></span><br></pre></td></tr></table></figure></p>
+<p>这么多要安装的库，一个一个得装非常麻烦，运行</p>
+<blockquote>
+<p>(env) root@ubunt:~/flask_app# pip install -r requirements.txt</p>
+</blockquote>
+<p>即可全部安装完成</p>
+<h2 id="项目文件"><a href="#项目文件" class="headerlink" title="项目文件"></a>项目文件</h2><p>接下来就是上传 Flask的项目文件，这里先使用最简单的Flask应用</p>
+<blockquote>
+<p>(env) root@ubunt:~/flask_app# vim run.py</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"> </span><br><span class="line">app = Flask(__name__)</span><br><span class="line"> </span><br><span class="line"><span class="meta">@app.route("/")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello World!"</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(host=<span class="string">'127.0.0.1'</span>,port=<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
+<p>然后运行gunicorn<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(env) root@ubunt:~/flask_app# gunicorn -w 4 -b 127.0.1:5000 run:app</span><br><span class="line">[2018-03-11 03:24:02 +0000] [19339] [INFO] Starting gunicorn 19.7.0</span><br><span class="line">[2018-03-11 03:24:02 +0000] [19339] [INFO] Listening at: http://127.0.0.1:5000 (19339)</span><br><span class="line">[2018-03-11 03:24:02 +0000] [19339] [INFO] Using worker: sync</span><br><span class="line">[2018-03-11 03:24:02 +0000] [19342] [INFO] Booting worker with pid: 19342</span><br><span class="line">[2018-03-11 03:24:02 +0000] [19343] [INFO] Booting worker with pid: 19343</span><br><span class="line">[2018-03-11 03:24:02 +0000] [19344] [INFO] Booting worker with pid: 19344</span><br><span class="line">[2018-03-11 03:24:02 +0000] [19345] [INFO] Booting worker with pid: 19345</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装配置nginx"><a href="#安装配置nginx" class="headerlink" title="安装配置nginx"></a>安装配置nginx</h2><p>安装nginx</p>
+<blockquote>
+<p>(env) root@ubunt:~/flask_app# apt install nginx</p>
+</blockquote>
+<p>修改nginx配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(env) root@ubunt:~/flask_app# vim /etc/nginx/sites-available/default </span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">        listen 80 default_server;</span><br><span class="line">        listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                proxy_pass        http://localhost:5000;</span><br><span class="line">                proxy_set_header   Host $host;</span><br><span class="line">                proxy_set_header   X-Real-IP  $remote_addr;</span><br><span class="line">                proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">                proxy_redirect default;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>修改配置文件后，重启nginx服务</p>
+<blockquote>
+<p>(env) root@ubunt:~/flask_app# /etc/init.d/nginx restart</p>
+</blockquote>
+<p>此时打开浏览器，输入http://你的服务器ip就可以看到运行结果</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/flask_app_1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>现在基本配置就已经弄好了</p>
+<h2 id="开启SSL"><a href="#开启SSL" class="headerlink" title="开启SSL"></a>开启SSL</h2><p>nginx下配置ssl是很简单的，无论是去认证中心买SSL安全证书还是自签署证书,我自己是用的cloudflare的免费SSL证书,在cloudflare上的操作就不介绍了，在cloudflare上申请证书后会有一个公钥和密钥，把这两个保存到本地，接下来就直接介绍配置SSL<br>我自己的证书是放在/etc/ssl/private/目录里面的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 443 ssl default_server;</span><br><span class="line">	listen [::]:443 ssl default_server;</span><br><span class="line">	server_name ***; #你的域名;</span><br><span class="line"></span><br><span class="line">	ssl on;</span><br><span class="line">	ssl_certificate /etc/ssl/private/***.crt; #公钥地址</span><br><span class="line">	ssl_certificate_key /etc/ssl/private/***.key;   #私钥地址</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass        http://localhost:5000;</span><br><span class="line">        	proxy_set_header   Host $host;</span><br><span class="line">        	proxy_set_header   X-Real-IP  $remote_addr;</span><br><span class="line">        	proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">		proxy_redirect default;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改配置文件后，重启nginx服务</p>
+<blockquote>
+<p>(env) root@ubunt:~/flask_app# /etc/init.d/nginx restart</p>
+</blockquote>
+<h2 id="flask接入微信公众号"><a href="#flask接入微信公众号" class="headerlink" title="flask接入微信公众号"></a>flask接入微信公众号</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/flask_app_2.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>首先，需要写  flask 后台代码，以下以一个简单的后台做为示范。</p>
+<blockquote>
+<p>(env) root@ubunt:~/flask_app# vim run.py</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding=utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,g,request,make_response</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/',methods=['GET','POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wechat_auth</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        token=<span class="string">'Your token'</span> <span class="comment">#微信配置所需的token</span></span><br><span class="line">        data = request.args</span><br><span class="line">        signature = data.get(<span class="string">'signature'</span>,<span class="string">''</span>)</span><br><span class="line">        timestamp = data.get(<span class="string">'timestamp'</span>,<span class="string">''</span>)</span><br><span class="line">        nonce = data.get(<span class="string">'nonce'</span>,<span class="string">''</span>)</span><br><span class="line">        echostr = data.get(<span class="string">'echostr'</span>,<span class="string">''</span>)</span><br><span class="line">        s = [timestamp,nonce,token]</span><br><span class="line">        s.sort()</span><br><span class="line">        s = <span class="string">''</span>.join(s)</span><br><span class="line">        <span class="keyword">return</span> make_response(echostr)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        rec = request.stream.read()</span><br><span class="line">        xml_rec = ET.fromstring(rec)</span><br><span class="line">        tou = xml_rec.find(<span class="string">'ToUserName'</span>).text</span><br><span class="line">        fromu = xml_rec.find(<span class="string">'FromUserName'</span>).text</span><br><span class="line">        content = xml_rec.find(<span class="string">'Content'</span>).text</span><br><span class="line">        xml_rep = <span class="string">"&lt;xml&gt;&lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;&lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;&lt;CreateTime&gt;%s&lt;/CreateTime&gt;&lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;&lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt;&lt;FuncFlag&gt;0&lt;/FuncFlag&gt;&lt;/xml&gt;"</span></span><br><span class="line">        response = make_response(xml_rep % (fromu,tou,str(int(time.time())), content))</span><br><span class="line">        response.content_type=<span class="string">'application/xml'</span></span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello weixin!'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>然后运行gunicorn</p>
+<blockquote>
+<p>(env) root@ubunt:~/flask_app# gunicorn -w 4 -b 127.0.1:5000 run:app</p>
+</blockquote>
+<p><strong>注：</strong> 其中的<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = make_response(xml_rep % (fromu,tou,str(int(time.time())), content))<span class="comment"># 是将xml_rep 的值按顺序返回给微信</span></span><br></pre></td></tr></table></figure></p>
+<p>这个是返回值。所以如果要做什么微信自动回复就将内容添到content中，然后微信前端就会回复给用户。<br><strong>注：</strong> 如果要消息加解密方式设为安全模式的话，参考<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1434696670" target="_blank" rel="noopener">官方文档</a><br>部署完获得后台网址就可以进行下一步：开始填写微信接口。其他的都随意填，关键的两个值是下图的箭头所指。</p>
+<p>填好后会出现配置成功的标志。 这时就能在微信上使用这个公众号了。  本文所实现的功能是你向公众号发布一条信息，公众号返回同样的信息给你。</p>
+<p>微信上最后结果<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/flask_app_3.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>参考链接：</p>
+<p><a href="https://www.techbelife.com/post/Deploy-the-Flask-application-with-uWSGI-and-Nginx.html" target="_blank" rel="noopener">在Centos使用Nginx，uWSGI部署Flask应用</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/21262280" target="_blank" rel="noopener">centos下通过gunicorn+nginx+supervisor部署Flask项目</a></p>
+<p><a href="http://seanlook.com/2015/05/28/nginx-ssl/" target="_blank" rel="noopener">nginx配置ssl加密</a></p>
+<p><a href="https://www.cnblogs.com/Ray-liang/p/4173923.html" target="_blank" rel="noopener">阿里云部署 Flask + WSGI + Nginx 详解</a></p>
+<p><a href="http://www.cnblogs.com/ArtsCrafts/p/gunicorn.html" target="_blank" rel="noopener">Gunicorn快速入门</a></p>
+<p><a href="http://blog.csdn.net/qq_34963461/article/details/52984311" target="_blank" rel="noopener">微信公众号开发 flask后台的快速部署</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-10T14:11:13.990Z" itemprop="dateUpdated">2018-06-10 22:11:13</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2018/03/10/flask-app/" target="_blank" rel="external">http://www.djangoz.com/2018/03/10/flask-app/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DoubleZ">
+            DoubleZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/应用/">应用</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.djangoz.com/2018/03/10/flask-app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&pic=http://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.djangoz.com/2018/03/10/flask-app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.djangoz.com/2018/03/10/flask-app/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&url=http://www.djangoz.com/2018/03/10/flask-app/&via=http://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.djangoz.com/2018/03/10/flask-app/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/19/useful-in-python/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python实用小工具</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/02/02/awesome-adb/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ADB 用法大全</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DoubleZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.djangoz.com/2018/03/10/flask-app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&pic=http://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.djangoz.com/2018/03/10/flask-app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.djangoz.com/2018/03/10/flask-app/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&url=http://www.djangoz.com/2018/03/10/flask-app/&via=http://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.djangoz.com/2018/03/10/flask-app/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHElEQVR42u3aO47DMAwFwNz/0t52m8iPpF1EGlVBEDuchhA/n098rn9n8v36N8lTo4OBgfGzjGt58t98e/M66ORz9L8YGBgHMJIgvr06eaqaxPPYMDAwMJLfrJNv9cKHgYGB8UbCXV8oq4UrBgYGxqSIzZF5Un6seMbAwNiaMbmuvf35lfkGBgbGTzGu4um13vJ0ebUOBgbG3ow8wSVXt+owoFCgJi08DAyMTRl50ThJiNWFjOqYEwMDY29GftWrjjMngVbXxTAwME5g5G36dcrL/3KUWDEwMA5jTAaEk1Zd9ZubMhgDA+MYRrUenPf5krdFT2FgYGzNyEPJ02J18Dm5LN403TAwMLZgTJpo1VZds6pOkBgYGMcweml0XogmzbubGDAwMA5gJCHmg8zJ5a9ZJGNgYGzNyJcYeutf1YWzfGmssDOCgYHx44x5CdpblcgXwqLiFgMDY2vGpPk1Wad49naHgYFxAqO3bNFLxL3RZpTKMTAwDmDMG2S9lJqPAW4ixMDAOIBRLVAno8peuXvzvxgYGAcw5uPMPOHmg4FCgY2BgbEp4yqeXlt/UrhGVAwMjK0Z+Xmv3V9N69V/x8DA2INRbmwVm/690MsJFwMD4wBGtYmfP5UHnad+DAwMjN64MR9G9t4TNd0wMDAwiuk4b9U9UEJjYGAcwEiK2CTcSUN/jX9g2QIDA+NnGdXS8anQ56tgGBgYBzD+ADI6iYdtf9H1AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="e">
+    
+    
+    
+    
+    <title>湖北工业大学教务系统查分,查课小程序 | DoubleZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="小程序">
+    <meta name="description" content="首先贴下github项目地址 (如果觉得这个程序好，求个star) 运行该小程序需安装requests和bs4库,还需要安装能操作excel的xlwt库 123pip install requestspip install bs4pip install xlwt 现在该程序不能自动识别验证码，需手动在控制台输入验证码, 现可免输入验证码即可登陆（需先在github上获取该库，然后使用分支nocod">
+<meta name="keywords" content="小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="湖北工业大学教务系统查分,查课小程序">
+<meta property="og:url" content="http://www.djangoz.com/2017/10/27/Login-hbut/index.html">
+<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:description" content="首先贴下github项目地址 (如果觉得这个程序好，求个star) 运行该小程序需安装requests和bs4库,还需要安装能操作excel的xlwt库 123pip install requestspip install bs4pip install xlwt 现在该程序不能自动识别验证码，需手动在控制台输入验证码, 现可免输入验证码即可登陆（需先在github上获取该库，然后使用分支nocod">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-10T13:38:38.725Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="湖北工业大学教务系统查分,查课小程序">
+<meta name="twitter:description" content="首先贴下github项目地址 (如果觉得这个程序好，求个star) 运行该小程序需安装requests和bs4库,还需要安装能操作excel的xlwt库 123pip install requestspip install bs4pip install xlwt 现在该程序不能自动识别验证码，需手动在控制台输入验证码, 现可免输入验证码即可登陆（需先在github上获取该库，然后使用分支nocod">
+    
+        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DoubleZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">湖北工业大学教务系统查分,查课小程序</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">湖北工业大学教务系统查分,查课小程序</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-26T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-10-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">思路</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#源码"><span class="post-toc-number">2.</span> <span class="post-toc-text">源码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查分小程序"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">查分小程序</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查课小程序"><span class="post-toc-number">3.</span> <span class="post-toc-text">查课小程序</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Login-hbut"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">湖北工业大学教务系统查分,查课小程序</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-27 00:00:00" datetime="2017-10-26T16:00:00.000Z"  itemprop="datePublished">2017-10-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>首先贴下github<a href="https://github.com/onlyless/login_hbut" target="_blank" rel="noopener">项目地址</a> (如果觉得这个程序好，求个star)</p>
+<p>运行该小程序需安装requests和bs4库,还需要安装能操作excel的xlwt库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install bs4</span><br><span class="line">pip install xlwt</span><br></pre></td></tr></table></figure>
+<p><del>现在该程序不能自动识别验证码，需手动在控制台输入验证码,</del> 现可免输入验证码即可登陆（需先在github上获取该库，然后使用分支nocode）使用命令即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout nocode</span><br></pre></td></tr></table></figure>
+<p>然后输入学号和密码即可查询，作者本人大二，所以现在可支持查询大一两个学期和大二上的成绩，成绩会自动保存在本地。<br>由于课表不好格式化输出，如需查课表，程序会生成一个excel文件，然后直接查看即可</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>首先用requests库模拟登陆学校的教务系统，然后再进入成绩查询的页面，得到该页面的html源码，用BeatufulSoup来解析页面，提取出每门课的学分和成绩用列表来储存，最后格式化输出，并将输出写入文件。<br>我把直接用函数来表示每个步骤，自我感觉思路比较清晰</p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><h4 id="查分小程序"><a href="#查分小程序" class="headerlink" title="查分小程序"></a>查分小程序</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup,element</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">login_url = <span class="string">'http://run.hbut.edu.cn/Account/LogOn'</span></span><br><span class="line">checkimg = <span class="string">'http://run.hbut.edu.cn/Account/GetValidateCode'</span></span><br><span class="line">StuGrade = <span class="string">'http://run.hbut.edu.cn/StuGrade/Index'</span></span><br><span class="line">g_20171 = <span class="string">'?SemesterName=20171&amp;SemesterNameStr=2017学年%20第一学期'</span></span><br><span class="line">g_20162 = <span class="string">'?SemesterName=20162&amp;SemesterNameStr=2016学年%20第二学期'</span></span><br><span class="line">g_20161 = <span class="string">'?SemesterName=20161&amp;SemesterNameStr=2016学年%20第一学期'</span></span><br><span class="line"></span><br><span class="line">file = open(<span class="string">'grade.txt'</span>,<span class="string">'w+'</span>)</span><br><span class="line">session  = requests.Session()</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'Referer'</span> : <span class="string">'http://run.hbut.edu.cn/'</span>,</span><br><span class="line">    <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36"</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取登陆验证码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetValidateCode</span><span class="params">()</span>:</span></span><br><span class="line">    checkcodecontent = session.get(checkimg,headers=headers)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'checkcode.jpg'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(checkcodecontent.content)</span><br><span class="line">    print(<span class="string">'验证码已写入到本地！'</span>)</span><br><span class="line">    os.startfile(<span class="string">"checkcode.jpg"</span>)</span><br><span class="line">    checkcode = input(<span class="string">"请输入验证码："</span>)</span><br><span class="line">    payload = &#123;</span><br><span class="line">        <span class="string">'Role'</span>:<span class="string">'Student'</span>,</span><br><span class="line">        <span class="string">'UserName'</span>: input(<span class="string">'请输入账号：'</span>),</span><br><span class="line">        <span class="string">'Password'</span>: input(<span class="string">'请输入密码：'</span>),</span><br><span class="line">        <span class="string">'ValidateCode'</span>: checkcode</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取课程成绩页面</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHtmlText</span><span class="params">(SemesterName,payload)</span>:</span></span><br><span class="line">    respose = session.post(login_url,headers=headers,data=payload)</span><br><span class="line">    print(<span class="string">'服务器端返回码：'</span>,respose.status_code)</span><br><span class="line">    <span class="keyword">if</span> SemesterName <span class="keyword">is</span> <span class="string">'1'</span>:</span><br><span class="line">        SemesterName = g_20161</span><br><span class="line">    <span class="keyword">if</span> SemesterName <span class="keyword">is</span> <span class="string">'2'</span>:</span><br><span class="line">        SemesterName = g_20162</span><br><span class="line">    <span class="keyword">if</span> SemesterName <span class="keyword">is</span> <span class="string">'3'</span>:</span><br><span class="line">        SemesterName = g_20171</span><br><span class="line">    grade_url = StuGrade+SemesterName</span><br><span class="line">    stugrade = session.get(grade_url,headers=headers)</span><br><span class="line">    <span class="keyword">return</span> stugrade.text</span><br><span class="line">    </span><br><span class="line"><span class="comment">#提取各科成绩</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetFromText</span><span class="params">(txt)</span>:</span></span><br><span class="line">    form = []</span><br><span class="line">    soup = BeautifulSoup(txt,<span class="string">'html.parser'</span>)</span><br><span class="line">    <span class="keyword">for</span> tr <span class="keyword">in</span> soup.find(<span class="string">'table'</span>).children:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> isinstance(tr,element.Tag):</span><br><span class="line">                tds = tr(<span class="string">'td'</span>)</span><br><span class="line">                Class = tds[<span class="number">1</span>].string       <span class="comment">#课程</span></span><br><span class="line">                Credit = tds[<span class="number">4</span>].string      <span class="comment">#学分</span></span><br><span class="line">                Grade = tds[<span class="number">5</span>].string       <span class="comment">#成绩</span></span><br><span class="line">                form.append([<span class="string">''</span>.join(Class.split()),<span class="string">''</span>.join(Credit.split()),<span class="string">''</span>.join(Grade.split())])</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> form</span><br><span class="line"></span><br><span class="line"><span class="comment">#格式输出各科成绩</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printgrade</span><span class="params">(ulist,num)</span>:</span></span><br><span class="line">    tplt = <span class="string">"&#123;0:&#123;3&#125;^25&#125;\t&#123;1:^10&#125;\t&#123;2:^10&#125;\n"</span></span><br><span class="line">    print(tplt.format(<span class="string">"课程"</span>,<span class="string">"学分"</span>,<span class="string">"成绩"</span>,chr(<span class="number">12288</span>)))</span><br><span class="line">    file.write(tplt.format(<span class="string">"课程"</span>,<span class="string">"学分"</span>,<span class="string">"成绩"</span>,chr(<span class="number">12288</span>)))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num):</span><br><span class="line">        u = ulist[i]</span><br><span class="line">        print(tplt.format(u[<span class="number">0</span>],u[<span class="number">1</span>],u[<span class="number">2</span>],chr(<span class="number">12288</span>)))</span><br><span class="line">        file.write(tplt.format(u[<span class="number">0</span>],u[<span class="number">1</span>],u[<span class="number">2</span>],chr(<span class="number">12288</span>)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span> </span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        payload = GetValidateCode()</span><br><span class="line">        print(<span class="string">'16学年第一学期： 1'</span>)</span><br><span class="line">        print(<span class="string">'16学年第二学期： 2'</span>)</span><br><span class="line">        print(<span class="string">'17学年第一学期： 3'</span>)</span><br><span class="line">        SenesterName = input(<span class="string">'请输入查询的学期：'</span>)</span><br><span class="line">        txt = getHtmlText(SenesterName,payload)</span><br><span class="line">        form = GetFromText(txt)</span><br><span class="line">        printgrade(form,len(form));</span><br><span class="line">    <span class="keyword">except</span> :</span><br><span class="line">        print(<span class="string">"Error"</span>)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        file.close()</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h3 id="查课小程序"><a href="#查课小程序" class="headerlink" title="查课小程序"></a>查课小程序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> xlwt</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">login_url = <span class="string">'http://run.hbut.edu.cn/Account/LogOn'</span></span><br><span class="line">checkimg = <span class="string">'http://run.hbut.edu.cn/Account/GetValidateCode'</span></span><br><span class="line">Schedule = <span class="string">'http://run.hbut.edu.cn/ArrangeTask/MyselfSchedule'</span></span><br><span class="line">workbook = xlwt.Workbook(encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">worksheet = workbook.add_sheet(<span class="string">'MyselfSchedule'</span>)</span><br><span class="line">session  = requests.Session()</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'Referer'</span> : <span class="string">'http://run.hbut.edu.cn/'</span>,</span><br><span class="line">    <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36"</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取登陆验证码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetValidateCode</span><span class="params">()</span>:</span></span><br><span class="line">    checkcodecontent = session.get(checkimg,headers=headers)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'checkcode.jpg'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(checkcodecontent.content)</span><br><span class="line">    print(<span class="string">'验证码已写入到本地！'</span>)</span><br><span class="line">    os.startfile(<span class="string">"checkcode.jpg"</span>)</span><br><span class="line">    checkcode = input(<span class="string">"请输入验证码："</span>)</span><br><span class="line">    payload = &#123;</span><br><span class="line">        <span class="string">'Role'</span>:<span class="string">'Student'</span>,</span><br><span class="line">        <span class="string">'UserName'</span>: input(<span class="string">'请输入账号：'</span>),</span><br><span class="line">        <span class="string">'Password'</span>: input(<span class="string">'请输入密码：'</span>),</span><br><span class="line">        <span class="string">'ValidateCode'</span>: checkcode</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取课程表网页</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHtmlText</span><span class="params">(payload)</span>:</span></span><br><span class="line">    respose = session.post(login_url,headers=headers,data=payload)</span><br><span class="line">    print(<span class="string">'服务器端返回码：'</span>,respose.status_code)</span><br><span class="line">    work = session.get(Schedule,headers=headers)</span><br><span class="line">    <span class="keyword">return</span> work.text</span><br><span class="line"></span><br><span class="line"><span class="comment">#提取网页中的课程表</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getFormText</span><span class="params">(string)</span>:</span></span><br><span class="line">    soup = BeautifulSoup(string,<span class="string">'html.parser'</span>)</span><br><span class="line">    list = []</span><br><span class="line">    <span class="keyword">for</span> tr <span class="keyword">in</span> soup.find(<span class="string">'table'</span>).children:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            time = tr(<span class="string">'th'</span>)[<span class="number">0</span>].string</span><br><span class="line">            <span class="keyword">if</span> time==<span class="keyword">None</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            day1 = tr(<span class="string">'td'</span>)[<span class="number">0</span>].string</span><br><span class="line">            day2 = tr(<span class="string">'td'</span>)[<span class="number">1</span>].string</span><br><span class="line">            day3 = tr(<span class="string">'td'</span>)[<span class="number">2</span>].string</span><br><span class="line">            day4 = tr(<span class="string">'td'</span>)[<span class="number">3</span>].string</span><br><span class="line">            day5 = tr(<span class="string">'td'</span>)[<span class="number">4</span>].string</span><br><span class="line">            day6 = tr(<span class="string">'td'</span>)[<span class="number">5</span>].string</span><br><span class="line">            day7 = tr(<span class="string">'td'</span>)[<span class="number">6</span>].string</span><br><span class="line">            list.append([time,day1,day2,day3,day4,day5,day6,day7])</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">return</span> list</span><br><span class="line"></span><br><span class="line"><span class="comment">#将提取到的课程表写入excel表格中</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">WirteXls</span><span class="params">(list)</span>:</span></span><br><span class="line">    worksheet.write(<span class="number">0</span>,<span class="number">1</span>,<span class="string">"星期一"</span>)</span><br><span class="line">    worksheet.write(<span class="number">0</span>,<span class="number">2</span>,<span class="string">"星期二"</span>)</span><br><span class="line">    worksheet.write(<span class="number">0</span>,<span class="number">3</span>,<span class="string">"星期三"</span>)</span><br><span class="line">    worksheet.write(<span class="number">0</span>,<span class="number">4</span>,<span class="string">"星期四"</span>)</span><br><span class="line">    worksheet.write(<span class="number">0</span>,<span class="number">5</span>,<span class="string">"星期五"</span>)</span><br><span class="line">    worksheet.write(<span class="number">0</span>,<span class="number">6</span>,<span class="string">"星期六"</span>)</span><br><span class="line">    worksheet.write(<span class="number">0</span>,<span class="number">7</span>,<span class="string">"星期日"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(list)):</span><br><span class="line">        u = list[i]</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">            worksheet.write(i+<span class="number">1</span>,k,u[k])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        payload = GetValidateCode()</span><br><span class="line">        string = getHtmlText(payload)</span><br><span class="line">        string = string.replace(<span class="string">'&lt;br /&gt;'</span>,<span class="string">''</span>)</span><br><span class="line">        list = getFormText(string)</span><br><span class="line">        WirteXls(list)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        workbook.save(<span class="string">'MyselfSchedule.xls'</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-10T13:38:38.725Z" itemprop="dateUpdated">2018-06-10 21:38:38</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2017/10/27/Login-hbut/" target="_blank" rel="external">http://www.djangoz.com/2017/10/27/Login-hbut/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DoubleZ">
+            DoubleZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.djangoz.com/2017/10/27/Login-hbut/&title=《湖北工业大学教务系统查分,查课小程序》 — DoubleZ's blog&pic=http://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.djangoz.com/2017/10/27/Login-hbut/&title=《湖北工业大学教务系统查分,查课小程序》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.djangoz.com/2017/10/27/Login-hbut/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《湖北工业大学教务系统查分,查课小程序》 — DoubleZ's blog&url=http://www.djangoz.com/2017/10/27/Login-hbut/&via=http://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.djangoz.com/2017/10/27/Login-hbut/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/11/19/idea-uml/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">IDEA 查看类UML关系图</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/10/18/Vocabulary-Statistics/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">统计文本中单词频率</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DoubleZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.djangoz.com/2017/10/27/Login-hbut/&title=《湖北工业大学教务系统查分,查课小程序》 — DoubleZ's blog&pic=http://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.djangoz.com/2017/10/27/Login-hbut/&title=《湖北工业大学教务系统查分,查课小程序》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.djangoz.com/2017/10/27/Login-hbut/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《湖北工业大学教务系统查分,查课小程序》 — DoubleZ's blog&url=http://www.djangoz.com/2017/10/27/Login-hbut/&via=http://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.djangoz.com/2017/10/27/Login-hbut/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3ay27FMAhF0f7/T6dSp1dx9wG3ks32KMp9OCsDBIavL7yen0U+/bwmd94+3bxkyJBxLONZLvKdz43fHpTc4fvKkCFjGoOE0XVArAVK8vrQXjJkyJCBr9N/W78mGTJkyNjLWGN4+JYhQ4aMThFLkrk07avtJUOGjGmMtDHwn9d/2N+QIUPGIYwnXOsUsBYWSUH7y1PJkCHjakbtqIuMTaRDGzzIBhmuDBkyLmKkBS0PrzxMb2sPyJAhYwAjLWLT4LhuedYSUBkyZNzNSFsC/EF5S4C8ss2dDRkyZBzF6ARQziaMTnIpQ4aMaYxaLhlstqk5+toYkCFDxnWMdYBLK93O4Vqt8SBDhow5DHLon45BtBqQaUoqQ4aMMYzO0T95BXsTxNeAK0OGjKsZabDj2/AAXRv1kCFDxgRGGi53NSM7ZbAMGTLmMGqBkjQd08ZALVjHWaoMGTKOZfA/5S0EnkqSO/FoiAwZMq5jkDKSD0DUHrczeCFDhoy7GWnrMQ2maSFa3EWGDBljGGnpWLtPGg/8aE+GDBkTGLUf8PSRHP3zCjs+O5QhQ8YVjCdcewvdXYmjDBky7mbwxQ/o0/KVv4jOgKwMGTJOZ9RGK9J0kIdLXtaizFGGDBkXMUjo7Hy/U/oGAVeGDBnjGaQETfPQ9OgfzYzIkCFjPCMNjmlBW/s3GTJkTGB0mgGdlI6UqeQJZciQcTejEzp5spiOVuwK+jJkyDic8Q0BQVvR0r0LwwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
