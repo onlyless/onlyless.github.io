@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.djangoz.com/2018/06/11/blog-resurrection/</loc>
+    
+    <lastmod>2018-06-11T05:42:20.841Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.djangoz.com/2018/02/02/awesome-adb/</loc>
     
     <lastmod>2018-06-11T04:55:26.596Z</lastmod>

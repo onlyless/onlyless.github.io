@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.djangoz.com/"/>
-  <updated>2018-06-10T14:10:49.754Z</updated>
+  <updated>2018-06-11T05:42:20.841Z</updated>
   <id>http://www.djangoz.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客复活</title>
+    <link href="http://www.djangoz.com/2018/06/11/blog-resurrection/"/>
+    <id>http://www.djangoz.com/2018/06/11/blog-resurrection/</id>
+    <published>2018-06-10T16:00:00.000Z</published>
+    <updated>2018-06-11T05:42:20.841Z</updated>
+    
+    <content type="html"><![CDATA[<p>前几周手痒把电脑装上hackintosh系统，在安装系统的时候本来以为一个盘分出几十G空间就可以了，结果要把整个盘都格式化才行，当时就直接把盘格式化了。<br>装好系统后，才想起整个博客项目都在那个盘上面，以前想到md文件也没有备份，整个博客源文件都不见了。<br>最近才有时间慢慢恢复博客，才发现文章写得也有十来篇了，恢复用html转md也挺麻烦的，现在明白了数据备份的重要性。<br>现在博客终于成功复活，贴张装好hackintosh成功的图片<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/hack.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;前几周手痒把电脑装上hackintosh系统，在安装系统的时候本来以为一个盘分出几十G空间就可以了，结果要把整个盘都格式化才行，当时就直接把盘格式化了。&lt;br&gt;装好系统后，才想起整个博客项目都在那个盘上面，以前想到md文件也没有备份，整个博客源文件都不见了。
+      
+    
+    </summary>
+    
+    
+      <category term="闲言碎语" scheme="http://www.djangoz.com/tags/%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD/"/>
+    
+  </entry>
   
   <entry>
     <title>Python实用小工具</title>
@@ -296,31 +319,6 @@
   </entry>
   
   <entry>
-    <title>Java实现简易的queue</title>
-    <link href="http://www.djangoz.com/2017/09/09/queue-in-java/"/>
-    <id>http://www.djangoz.com/2017/09/09/queue-in-java/</id>
-    <published>2017-09-08T16:00:00.000Z</published>
-    <updated>2018-06-06T15:09:49.080Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="用java实现queue模板"><a href="#用java实现queue模板" class="headerlink" title="用java实现queue模板"></a>用java实现queue模板</h1><p>队列是一种基于先进先出（FIFO)策略的线性数据结构。<br>这就像在学校食堂买饭排队一样，排在前面的人先打饭，后面的人后打饭。<br>该模板只有6个方法，分别是isEmpty(),size(),front(),back(),pop(),push(T).<br>代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">queue</span>&lt;<span class="title">Item</span>&gt; </span>&#123;</span><br><span class="line"><span class="keyword">private</span> Node first;</span><br><span class="line"><span class="keyword">private</span> Node last;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">Item item;</span><br><span class="line">Node next;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;<span class="comment">//判断是否为空</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">this</span>.first==<span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;<span class="comment">//队列的大小</span></span><br><span class="line"><span class="keyword">return</span> N;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Item T)</span></span>&#123;<span class="comment">//向队列添加元素</span></span><br><span class="line">Node temp = last;</span><br><span class="line">last = <span class="keyword">new</span> Node();</span><br><span class="line">last.item = T;</span><br><span class="line">last.next = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span>(isEmpty())</span><br><span class="line">first = last;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">temp.next = last;</span><br><span class="line">N++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> Item <span class="title">pop</span><span class="params">()</span></span>&#123;<span class="comment">//弹出第一个元素，并返回第一个元素</span></span><br><span class="line">Node temp = first;</span><br><span class="line">first = first.next;</span><br><span class="line"><span class="keyword">if</span>(isEmpty()) </span><br><span class="line">last=<span class="keyword">null</span>;</span><br><span class="line">N--;</span><br><span class="line"><span class="keyword">return</span> temp.item;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> Item <span class="title">front</span><span class="params">()</span></span>&#123;<span class="comment">//访问队列第一个元素</span></span><br><span class="line"><span class="keyword">return</span> first.item;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> Item <span class="title">back</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//访问队列最后一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">queue&lt;String&gt; sb = <span class="keyword">new</span> queue&lt;String&gt;();</span><br><span class="line">sb.push(<span class="string">"hi"</span>);</span><br><span class="line"><span class="keyword">if</span>(sb.isEmpty())</span><br><span class="line">System.out.println(<span class="string">"isEmpty!"</span>);</span><br><span class="line"><span class="keyword">else</span> System.out.println(<span class="string">"NotEmpty!"</span>);</span><br><span class="line">sb.push(<span class="string">"hello"</span>);</span><br><span class="line">sb.push(<span class="string">"world"</span>);</span><br><span class="line">System.out.println(sb.front());</span><br><span class="line">System.out.println(sb.pop());</span><br><span class="line">System.out.println(sb.back());</span><br><span class="line">System.out.println(sb.pop());</span><br><span class="line">System.out.println(sb.pop());</span><br><span class="line"><span class="keyword">if</span>(sb.isEmpty())</span><br><span class="line">System.out.println(<span class="string">"isEmpty!"</span>);</span><br><span class="line"><span class="keyword">else</span> System.out.println(<span class="string">"NotEmpty!"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>该程序输入为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NotEmpty!</span><br><span class="line">hi</span><br><span class="line">hi</span><br><span class="line">world</span><br><span class="line">hello</span><br><span class="line">world</span><br><span class="line">NotEmpty!</span><br></pre></td></tr></table></figure></p><p>部分实现参考于<a href="https://book.douban.com/subject/19952400/" target="_blank" rel="noopener">算法(第四版)</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;用java实现queue模板&quot;&gt;&lt;a href=&quot;#用java实现queue模板&quot; class=&quot;headerlink&quot; title=&quot;用java实现queue模板&quot;&gt;&lt;/a&gt;用java实现queue模板&lt;/h1&gt;&lt;p&gt;队列是一种基于先进先出（FIFO)策略的线性
-      
-    
-    </summary>
-    
-      <category term="java" scheme="http://www.djangoz.com/categories/java/"/>
-    
-    
-      <category term="算法与数据结构" scheme="http://www.djangoz.com/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Java实现简易的stack</title>
     <link href="http://www.djangoz.com/2017/09/09/stack-in-java/"/>
     <id>http://www.djangoz.com/2017/09/09/stack-in-java/</id>
@@ -334,6 +332,31 @@
       
       
         &lt;h1 id=&quot;用java实现stack模板&quot;&gt;&lt;a href=&quot;#用java实现stack模板&quot; class=&quot;headerlink&quot; title=&quot;用java实现stack模板&quot;&gt;&lt;/a&gt;用java实现stack模板&lt;/h1&gt;&lt;p&gt;栈是一种基于后进先出（LIFO)策略的线性数
+      
+    
+    </summary>
+    
+      <category term="java" scheme="http://www.djangoz.com/categories/java/"/>
+    
+    
+      <category term="算法与数据结构" scheme="http://www.djangoz.com/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java实现简易的queue</title>
+    <link href="http://www.djangoz.com/2017/09/09/queue-in-java/"/>
+    <id>http://www.djangoz.com/2017/09/09/queue-in-java/</id>
+    <published>2017-09-08T16:00:00.000Z</published>
+    <updated>2018-06-06T15:09:49.080Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="用java实现queue模板"><a href="#用java实现queue模板" class="headerlink" title="用java实现queue模板"></a>用java实现queue模板</h1><p>队列是一种基于先进先出（FIFO)策略的线性数据结构。<br>这就像在学校食堂买饭排队一样，排在前面的人先打饭，后面的人后打饭。<br>该模板只有6个方法，分别是isEmpty(),size(),front(),back(),pop(),push(T).<br>代码如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">queue</span>&lt;<span class="title">Item</span>&gt; </span>&#123;</span><br><span class="line"><span class="keyword">private</span> Node first;</span><br><span class="line"><span class="keyword">private</span> Node last;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">Item item;</span><br><span class="line">Node next;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;<span class="comment">//判断是否为空</span></span><br><span class="line"><span class="keyword">return</span> <span class="keyword">this</span>.first==<span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;<span class="comment">//队列的大小</span></span><br><span class="line"><span class="keyword">return</span> N;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(Item T)</span></span>&#123;<span class="comment">//向队列添加元素</span></span><br><span class="line">Node temp = last;</span><br><span class="line">last = <span class="keyword">new</span> Node();</span><br><span class="line">last.item = T;</span><br><span class="line">last.next = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span>(isEmpty())</span><br><span class="line">first = last;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">temp.next = last;</span><br><span class="line">N++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> Item <span class="title">pop</span><span class="params">()</span></span>&#123;<span class="comment">//弹出第一个元素，并返回第一个元素</span></span><br><span class="line">Node temp = first;</span><br><span class="line">first = first.next;</span><br><span class="line"><span class="keyword">if</span>(isEmpty()) </span><br><span class="line">last=<span class="keyword">null</span>;</span><br><span class="line">N--;</span><br><span class="line"><span class="keyword">return</span> temp.item;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> Item <span class="title">front</span><span class="params">()</span></span>&#123;<span class="comment">//访问队列第一个元素</span></span><br><span class="line"><span class="keyword">return</span> first.item;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> Item <span class="title">back</span><span class="params">()</span></span>&#123;&#125;<span class="comment">//访问队列最后一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">queue&lt;String&gt; sb = <span class="keyword">new</span> queue&lt;String&gt;();</span><br><span class="line">sb.push(<span class="string">"hi"</span>);</span><br><span class="line"><span class="keyword">if</span>(sb.isEmpty())</span><br><span class="line">System.out.println(<span class="string">"isEmpty!"</span>);</span><br><span class="line"><span class="keyword">else</span> System.out.println(<span class="string">"NotEmpty!"</span>);</span><br><span class="line">sb.push(<span class="string">"hello"</span>);</span><br><span class="line">sb.push(<span class="string">"world"</span>);</span><br><span class="line">System.out.println(sb.front());</span><br><span class="line">System.out.println(sb.pop());</span><br><span class="line">System.out.println(sb.back());</span><br><span class="line">System.out.println(sb.pop());</span><br><span class="line">System.out.println(sb.pop());</span><br><span class="line"><span class="keyword">if</span>(sb.isEmpty())</span><br><span class="line">System.out.println(<span class="string">"isEmpty!"</span>);</span><br><span class="line"><span class="keyword">else</span> System.out.println(<span class="string">"NotEmpty!"</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>该程序输入为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NotEmpty!</span><br><span class="line">hi</span><br><span class="line">hi</span><br><span class="line">world</span><br><span class="line">hello</span><br><span class="line">world</span><br><span class="line">NotEmpty!</span><br></pre></td></tr></table></figure></p><p>部分实现参考于<a href="https://book.douban.com/subject/19952400/" target="_blank" rel="noopener">算法(第四版)</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;用java实现queue模板&quot;&gt;&lt;a href=&quot;#用java实现queue模板&quot; class=&quot;headerlink&quot; title=&quot;用java实现queue模板&quot;&gt;&lt;/a&gt;用java实现queue模板&lt;/h1&gt;&lt;p&gt;队列是一种基于先进先出（FIFO)策略的线性
       
     
     </summary>
