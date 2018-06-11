@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="FL_MZPo6bQlgQjKV6E2gTmZnMMSeZIZp4zNu3wzO-S4">
+    
+    
+    
+    
+    <title>IDEA 查看类UML关系图 | DoubleZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="小技巧">
+    <meta name="description" content="说明平时写java代码的时候，代码经常会显得很长，很不容易看出Java类之间的关系后来发现IDEA有一个很棒的功能，可以直接根据代码来查看改文件内的类UML关系图 先去设置里面打开查看UML功能setting-&amp;gt;plugins-&amp;gt;搜索UML即可把搜索出来这个插件选上">
+<meta name="keywords" content="小技巧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDEA 查看类UML关系图">
+<meta property="og:url" content="https://www.djangoz.com/2017/11/19/idea_uml/index.html">
+<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:description" content="说明平时写java代码的时候，代码经常会显得很长，很不容易看出Java类之间的关系后来发现IDEA有一个很棒的功能，可以直接根据代码来查看改文件内的类UML关系图 先去设置里面打开查看UML功能setting-&amp;gt;plugins-&amp;gt;搜索UML即可把搜索出来这个插件选上">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.djangoz.com/img/UML-1.png">
+<meta property="og:image" content="https://www.djangoz.com/img/UML-2.png">
+<meta property="og:image" content="https://www.djangoz.com/img/UML-3.png">
+<meta property="og:image" content="https://www.djangoz.com/img/UML-4.png">
+<meta property="og:image" content="https://www.djangoz.com/img/UML-5.png">
+<meta property="og:image" content="https://www.djangoz.com/img/UML-6.png">
+<meta property="og:updated_time" content="2018-06-10T13:44:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IDEA 查看类UML关系图">
+<meta name="twitter:description" content="说明平时写java代码的时候，代码经常会显得很长，很不容易看出Java类之间的关系后来发现IDEA有一个很棒的功能，可以直接根据代码来查看改文件内的类UML关系图 先去设置里面打开查看UML功能setting-&amp;gt;plugins-&amp;gt;搜索UML即可把搜索出来这个插件选上">
+<meta name="twitter:image" content="https://www.djangoz.com/img/UML-1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DoubleZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">IDEA 查看类UML关系图</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">IDEA 查看类UML关系图</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-18T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-11-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#先去设置里面打开查看UML功能"><span class="post-toc-number">2.</span> <span class="post-toc-text">先去设置里面打开查看UML功能</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查看java源代码内的类关系UML图"><span class="post-toc-number">3.</span> <span class="post-toc-text">查看java源代码内的类关系UML图</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查看类UML图可以放大"><span class="post-toc-number">4.</span> <span class="post-toc-text">查看类UML图可以放大</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查看整个文件夹下的所有java类UML关系图"><span class="post-toc-number">5.</span> <span class="post-toc-text">查看整个文件夹下的所有java类UML关系图</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-idea_uml"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">IDEA 查看类UML关系图</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-19 00:00:00" datetime="2017-11-18T16:00:00.000Z"  itemprop="datePublished">2017-11-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a><a href="#说明" title="说明"></a>说明</h4><p>平时写java代码的时候，代码经常会显得很长，很不容易看出Java类之间的关系<br>后来发现IDEA有一个很棒的功能，可以直接根据代码来查看改文件内的类UML关系图</p>
+<h4 id="先去设置里面打开查看UML功能"><a href="#先去设置里面打开查看UML功能" class="headerlink" title="先去设置里面打开查看UML功能"></a>先去设置里面打开查看UML功能</h4><p>setting-&gt;plugins-&gt;搜索UML即可<br>把搜索出来这个插件选上</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/UML-1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h4 id="查看java源代码内的类关系UML图"><a href="#查看java源代码内的类关系UML图" class="headerlink" title="查看java源代码内的类关系UML图"></a>查看java源代码内的类关系UML图</h4><p>双击shift键打开keymap，然后搜索UML,选择Show Local Changes as UML<br>直接按快捷键Ctrl+Alt+Shift+D也可以</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/UML-2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/UML-3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>在UML图内点击鼠标右键，Show Categories,可切换查看各个类的属性和概括图<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/UML-4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h4 id="查看类UML图可以放大"><a href="#查看类UML图可以放大" class="headerlink" title="查看类UML图可以放大"></a>查看类UML图可以放大</h4><p>觉得生成的UML图小？这都不是问题，按Alt键，即可放大查看UML图<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/UML-5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h4 id="查看整个文件夹下的所有java类UML关系图"><a href="#查看整个文件夹下的所有java类UML关系图" class="headerlink" title="查看整个文件夹下的所有java类UML关系图"></a>查看整个文件夹下的所有java类UML关系图</h4><p></p><p>写java的时候通常不会把所有类放在一个源文件里面，这时候就需要查看整个文件夹内的Java类关系图了<br>而IDEA一样能做到，在左边的Project视图里面鼠标右键将要查看的文件夹，选择Diagrams-&gt;Show Diagrams-&gt;Java Class Diagrams即可<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/UML-6.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-10T13:44:31.000Z" itemprop="dateUpdated">2018-06-10 21:44:31</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2017/11/19/idea_uml/" target="_blank" rel="external">https://www.djangoz.com/2017/11/19/idea_uml/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DoubleZ">
+            DoubleZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2017/11/19/idea_uml/&title=《IDEA 查看类UML关系图》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2017/11/19/idea_uml/&title=《IDEA 查看类UML关系图》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2017/11/19/idea_uml/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《IDEA 查看类UML关系图》 — DoubleZ's blog&url=https://www.djangoz.com/2017/11/19/idea_uml/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2017/11/19/idea_uml/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/01/play/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">简单地用python玩了一下钓鱼网站</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/10/27/Login_hbut/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">湖北工业大学教务系统查分,查课小程序</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
+            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DoubleZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2017/11/19/idea_uml/&title=《IDEA 查看类UML关系图》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2017/11/19/idea_uml/&title=《IDEA 查看类UML关系图》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2017/11/19/idea_uml/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《IDEA 查看类UML关系图》 — DoubleZ's blog&url=https://www.djangoz.com/2017/11/19/idea_uml/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2017/11/19/idea_uml/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOklEQVR42u3awY7CMAxFUf7/pxlpViMB5b44HSn27QrRQHNYGMf244Gv5+9F1vxd+fqp6zWvdzdfMmTIOJbxvLwqaz79EPwuea4MGTLmMK6DbLpFDibPRX8AMmTIkIG3fr3Rte+RIUOGjM2BLzyOkmOtDBkyZPBkjm+0fky98SwuQ4aMAxlpY+A/X9/Y35AhQ8YhjGd48fQuXcmD7JtdyZAhozXjuuhPts7Lbbv+DYIMV4YMGS0YfGyLD3JxHv/sl33KkCFjACMtsVVK/KRIFw+fyZAhYwAjLdxXhi3SYy36oWXIkDGGkSaIfNiC49NxtHjiQ4YMGQcy0rEJfsTlpX8+qBE0BmTIkNGIwQthaUjlTYV0mAxluDJkyGjH4MkZP+imh1h+90vVUIYMGcMYvOjGBylS2IaAK0OGjEaMtQJ9vQnKn7g4bCFDhozDGXxUgg9MpIF7LQTLkCFjGoO3IdNmZNpOSEt7cT9WhgwZBzLWRijSY22aRMZBX4YMGa0ZaSqWFvR3pX0cKUOGjH6MtJjFm50kBVwbDnvzjgwZMkYy6qX8eiDmIx0yZMjozeAP2FV64yMX6R5kyJDRlbE2QpEeOO/45o+poQwZMtox0mDH2wZpUnhLY0CGDBmNGLzFSMpt6S9EWp5oREOGDBkDGPUgu9aMrBTg0A0ZMmQMY/ABiPSdtORXCrgyZMgYw0iDLC/DLfY3ZMiQMYCRHmL55taKdHFTQYYMGa0Z9fEs3lBM12wDyJAh41TGD/aMzFLqQKXtAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

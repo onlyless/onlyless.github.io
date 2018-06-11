@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="FL_MZPo6bQlgQjKV6E2gTmZnMMSeZIZp4zNu3wzO-S4">
+    
+    
+    
+    
+    <title>并查集(Union-Find)算法介绍 | DoubleZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法与数据结构">
+    <meta name="description" content="在看完algorithms-part1第一周的Union-Find视频和算法(第四版) 一书的Section 1.5后，本来也打算写一些笔记的，但是发现有篇文章写得很好，就转载过来了。先贴上自己学习过程中写的代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515">
+<meta name="keywords" content="算法与数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并查集(Union-Find)算法介绍">
+<meta property="og:url" content="https://www.djangoz.com/2017/09/12/union_find/index.html">
+<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:description" content="在看完algorithms-part1第一周的Union-Find视频和算法(第四版) 一书的Section 1.5后，本来也打算写一些笔记的，但是发现有篇文章写得很好，就转载过来了。先贴上自己学习过程中写的代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339478916_8193.png">
+<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479136_7058.png">
+<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479271_3352.png">
+<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479431_6633.png">
+<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479497_8053.png">
+<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479587_5986.png">
+<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479677_7171.png">
+<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/20170912215243.png">
+<meta property="og:updated_time" content="2018-06-10T14:21:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="并查集(Union-Find)算法介绍">
+<meta name="twitter:description" content="在看完algorithms-part1第一周的Union-Find视频和算法(第四版) 一书的Section 1.5后，本来也打算写一些笔记的，但是发现有篇文章写得很好，就转载过来了。先贴上自己学习过程中写的代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515">
+<meta name="twitter:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339478916_8193.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DoubleZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">并查集(Union-Find)算法介绍</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">并查集(Union-Find)算法介绍</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-11T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-09-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于动态连通性"><span class="post-toc-number">1.</span> <span class="post-toc-text">关于动态连通性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态连通性的应用场景："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">动态连通性的应用场景：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#对问题建模："><span class="post-toc-number">1.2.</span> <span class="post-toc-text">对问题建模：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建模思路："><span class="post-toc-number">1.3.</span> <span class="post-toc-text">建模思路：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#API"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">API</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quick-Find-算法："><span class="post-toc-number">2.</span> <span class="post-toc-text">Quick-Find 算法：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Quick-Union-算法："><span class="post-toc-number">3.</span> <span class="post-toc-text">Quick-Union 算法：</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-union_find"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">并查集(Union-Find)算法介绍</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-12 00:00:00" datetime="2017-09-11T16:00:00.000Z"  itemprop="datePublished">2017-09-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在看完<a href="https://www.coursera.org/learn/algorithms-part1" target="_blank" rel="noopener">algorithms-part1</a>第一周的Union-Find视频和<a href="https://book.douban.com/subject/19952400/" target="_blank" rel="noopener">算法(第四版)</a> 一书的Section 1.5后，本来也打算写一些笔记的，但是发现有篇文章写得很好，就转载过来了。<br>先贴上自己学习过程中写的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//import edu.princeton.cs.introcs.StdIn;</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] id;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span>[] sz;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">UnionFind</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">		count = <span class="number">0</span>;</span><br><span class="line">		id = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">		sz = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			id[i] = i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">			sz[i] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> count;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">while</span> (i != id[i]) &#123;</span><br><span class="line">			id[i] = id[id[i]];	<span class="comment">//路径压缩</span></span><br><span class="line">			i = id[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> i;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> find(p) == find(q);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> i = find(p);</span><br><span class="line">		<span class="keyword">int</span> j = find(q);</span><br><span class="line">		<span class="keyword">if</span> (i == j)</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">if</span> (sz[i] &lt; sz[j]) &#123;	<span class="comment">//对树的高度加权，总是选择讲小树连接到大树</span></span><br><span class="line">			id[i] = j;</span><br><span class="line">			sz[j] += sz[i];</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			id[j] = i;</span><br><span class="line">			sz[i] += sz[j];</span><br><span class="line">		&#125;</span><br><span class="line">		count++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		<span class="comment">// int N = StdIn.readInt();</span></span><br><span class="line">		<span class="keyword">int</span> N = in.nextInt();</span><br><span class="line">		UnionFind uFind = <span class="keyword">new</span> UnionFind(N);</span><br><span class="line">		<span class="keyword">while</span> (in.hasNext()) &#123;</span><br><span class="line">			<span class="comment">// int p = StdIn.readInt();</span></span><br><span class="line">			<span class="comment">// int q = StdIn.readInt();</span></span><br><span class="line">			<span class="keyword">int</span> p = in.nextInt();</span><br><span class="line">			<span class="keyword">int</span> q = in.nextInt();</span><br><span class="line">			<span class="keyword">if</span> (uFind.connected(p, q))</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			uFind.union(p, q);</span><br><span class="line">			System.out.println(p + <span class="string">" "</span> + q);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(uFind.count + <span class="string">"components"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>本文主要介绍解决动态连通性一类问题的一种算法，使用到了一种叫做并查集的数据结构，称为Union-Find。更多的信息可以参考<a href="https://book.douban.com/subject/19952400/" target="_blank" rel="noopener">算法(第四版)</a> 一书的Section 1.5，实际上本文也就是基于它的一篇读后感吧。原文中更多的是给出一些结论，我尝试给出一些思路上的过程，即为什么要使用这个方法，而不是别的什么方法。我觉得这个可能更加有意义一些，相比于记下一些结论。</p>
+<h2 id="关于动态连通性"><a href="#关于动态连通性" class="headerlink" title="关于动态连通性"></a>关于动态连通性</h2><p>我们看一张图来了解一下什么是动态连通性：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./images/1339478916_8193.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>假设我们输入了一组整数对，即上图中的(4, 3) (3, 8)等等，每对整数代表这两个points/sites是连通的。那么随着数据的不断输入，整个图的连通性也会发生变化，从上图中可以很清晰的发现这一点。同时，对于已经处于连通状态的points/sites，直接忽略，比如上图中的(8, 9)。</p>
+<h3 id="动态连通性的应用场景："><a href="#动态连通性的应用场景：" class="headerlink" title="动态连通性的应用场景："></a>动态连通性的应用场景：</h3><ul>
+<li>网络连接判断：<br>如果每个pair中的两个整数分别代表一个网络节点，那么该pair就是用来表示这两个节点是需要连通的。那么为所有的pairs建立了动态连通图后，就能够尽可能少的减少布线的需要，因为已经连通的两个节点会被直接忽略掉。</li>
+<li>变量名等同性(类似于指针的概念)：<br>在程序中，可以声明多个引用来指向同一对象，这个时候就可以通过为程序中声明的引用和实际对象建立动态连通图来判断哪些引用实际上是指向同一对象。</li>
+</ul>
+<h3 id="对问题建模："><a href="#对问题建模：" class="headerlink" title="对问题建模："></a>对问题建模：</h3><p>在对问题进行建模的时候，我们应该尽量想清楚需要解决的问题是什么。因为模型中选择的数据结构和算法显然会根据问题的不同而不同，就动态连通性这个场景而言，我们需要解决的问题可能是：</p>
+<ul>
+<li>给出两个节点，判断它们是否连通，如果连通，不需要给出具体的路径</li>
+<li>给出两个节点，判断它们是否连通，如果连通，需要给出具体的路径</li>
+</ul>
+<p>就上面两种问题而言，虽然只有是否能够给出具体路径的区别，但是这个区别导致了选择算法的不同，本文主要介绍的是第一种情况，即不需要给出具体路径的Union-Find算法，而第二种情况可以使用基于DFS的算法。</p>
+<h3 id="建模思路："><a href="#建模思路：" class="headerlink" title="建模思路："></a>建模思路：</h3><p>最简单而直观的假设是，对于连通的所有节点，我们可以认为它们属于一个组，因此不连通的节点必然就属于不同的组。随着Pair的输入，我们需要首先判断输入的两个节点是否连通。如何判断呢？按照上面的假设，我们可以通过判断它们属于的组，然后看看这两个组是否相同，如果相同，那么这两个节点连通，反之不连通。为简单起见，我们将所有的节点以整数表示，即对N个节点使用0到N-1的整数表示。而在处理输入的Pair之前，每个节点必然都是孤立的，即他们分属于不同的组，可以使用数组来表示这一层关系，数组的index是节点的整数表示，而相应的值就是该节点的组号了。该数组可以初始化为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)  </span><br><span class="line">    id[i] = i;</span><br></pre></td></tr></table></figure>
+<p>即对于节点i，它的组号也是i。</p>
+<p>初始化完毕之后，对该动态连通图有几种可能的操作：</p>
+<ul>
+<li>查询节点属于的组<br>数组对应位置的值即为组号</li>
+<li>判断两个节点是否属于同一个组<br>分别得到两个节点的组号，然后判断组号是否相等</li>
+<li>连接两个节点，使之属于同一个组<br>分别得到两个节点的组号，组号相同时操作结束，不同时，将其中的一个节点的组号换成另一个节点的组号<br>获取组的数目</li>
+</ul>
+<p>初始化为节点的数目，然后每次成功连接两个节点之后，递减1</p>
+<h4 id="API"><a href="#API" class="headerlink" title="API"></a>API</h4><p>我们可以设计相应的API：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./images/1339479136_7058.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>注意其中使用整数来表示节点，如果需要使用其他的数据类型表示节点，比如使用字符串，那么可以用哈希表来进行映射，即将String映射成这里需要的Integer类型。</p>
+<p>分析以上的API，方法connected和union都依赖于find，connected对两个参数调用两次find方法，而union在真正执行union之前也需要判断是否连通，这又是两次调用find方法。因此我们需要把find方法的实现设计的尽可能的高效。所以就有了下面的Quick-Find实现。</p>
+<h2 id="Quick-Find-算法："><a href="#Quick-Find-算法：" class="headerlink" title="Quick-Find 算法："></a>Quick-Find 算法：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UF</span>  </span></span><br><span class="line"><span class="class"></span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] id; <span class="comment">// access to component id (site indexed)  </span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count; <span class="comment">// number of components  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UF</span><span class="params">(<span class="keyword">int</span> N)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="comment">// Initialize component id array.  </span></span><br><span class="line">        count = N;  </span><br><span class="line">        id = <span class="keyword">new</span> <span class="keyword">int</span>[N];  </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)  </span><br><span class="line">            id[i] = i;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> count; &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> find(p) == find(q); &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123; <span class="keyword">return</span> id[p]; &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;   </span><br><span class="line">        <span class="comment">// 获得p和q的组号  </span></span><br><span class="line">        <span class="keyword">int</span> pID = find(p);  </span><br><span class="line">        <span class="keyword">int</span> qID = find(q);  </span><br><span class="line">        <span class="comment">// 如果两个组号相等，直接返回  </span></span><br><span class="line">        <span class="keyword">if</span> (pID == qID) <span class="keyword">return</span>;  </span><br><span class="line">        <span class="comment">// 遍历一次，改变组号使他们属于一个组  </span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; id.length; i++)  </span><br><span class="line">            <span class="keyword">if</span> (id[i] == pID) id[i] = qID;  </span><br><span class="line">        count--;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举个例子，比如输入的Pair是(5， 9)，那么首先通过find方法发现它们的组号并不相同，然后在union的时候通过一次遍历，将组号1都改成8。当然，由8改成1也是可以的，保证操作时都使用一种规则就行。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./images/1339479271_3352.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>上述代码的find方法十分高效，因为仅仅需要一次数组读取操作就能够找到该节点的组号，但是问题随之而来，对于需要添加新路径的情况，就涉及到对于组号的修改，因为并不能确定哪些节点的组号需要被修改，因此就必须对整个数组进行遍历，找到需要修改的节点，逐一修改，这一下每次添加新路径带来的复杂度就是线性关系了，如果要添加的新路径的数量是M，节点数量是N，那么最后的时间复杂度就是MN，显然是一个平方阶的复杂度，对于大规模的数据而言，平方阶的算法是存在问题的，这种情况下，每次添加新路径就是“牵一发而动全身”，想要解决这个问题，关键就是要提高union方法的效率，让它不再需要遍历整个数组。</p>
+<h2 id="Quick-Union-算法："><a href="#Quick-Union-算法：" class="headerlink" title="Quick-Union 算法："></a>Quick-Union 算法：</h2><p>考虑一下，为什么以上的解法会造成“牵一发而动全身”？因为每个节点所属的组号都是单独记录，各自为政的，没有将它们以更好的方式组织起来，当涉及到修改的时候，除了逐一通知、修改，别无他法。所以现在的问题就变成了，如何将节点以更好的方式组织起来，组织的方式有很多种，但是最直观的还是将组号相同的节点组织在一起，想想所学的数据结构，什么样子的数据结构能够将一些节点给组织起来？常见的就是链表，图，树，什么的了。但是哪种结构对于查找和修改的效率最高？毫无疑问是树，因此考虑如何将节点和组的关系以树的形式表现出来。</p>
+<p>如果不改变底层数据结构，即不改变使用数组的表示方法的话。可以采用parent-link的方式将节点组织起来，举例而言，id[p]的值就是p节点的父节点的序号，如果p是树根的话，id[p]的值就是p，因此最后经过若干次查找，一个节点总是能够找到它的根节点，即满足id[root] = root的节点也就是组的根节点了，然后就可以使用根节点的序号来表示组号。所以在处理一个pair的时候，将首先找到pair中每一个节点的组号(即它们所在树的根节点的序号)，如果属于不同的组的话，就将其中一个根节点的父节点设置为另外一个根节点，相当于将一颗独立的树编程另一颗独立的树的子树。直观的过程如下图所示。但是这个时候又引入了问题。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./images/1339479431_6633.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>在实现上，和之前的Quick-Find只有find和union两个方法有所不同：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="comment">// 寻找p节点所在组的根节点，根节点具有性质id[root] = root  </span></span><br><span class="line">    <span class="keyword">while</span> (p != id[p]) p = id[p];  </span><br><span class="line">    <span class="keyword">return</span> p;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="comment">// Give p and q the same root.  </span></span><br><span class="line">    <span class="keyword">int</span> pRoot = find(p);  </span><br><span class="line">    <span class="keyword">int</span> qRoot = find(q);  </span><br><span class="line">    <span class="keyword">if</span> (pRoot == qRoot)   </span><br><span class="line">        <span class="keyword">return</span>;  </span><br><span class="line">    id[pRoot] = qRoot;    <span class="comment">// 将一颗树(即一个组)变成另外一课树(即一个组)的子树  </span></span><br><span class="line">    count--;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>树这种数据结构容易出现极端情况，因为在建树的过程中，树的最终形态严重依赖于输入数据本身的性质，比如数据是否排序，是否随机分布等等。比如在输入数据是有序的情况下，构造的BST会退化成一个链表。在我们这个问题中，也是会出现的极端情况的，如下图所示。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./images/1339479497_8053.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>为了克服这个问题，BST可以演变成为红黑树或者AVL树等等。</p>
+<p>然而，在我们考虑的这个应用场景中，每对节点之间是不具备可比性的。因此需要想其它的办法。在没有什么思路的时候，多看看相应的代码可能会有一些启发，考虑一下Quick-Union算法中的union方法实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="comment">// Give p and q the same root.  </span></span><br><span class="line">    <span class="keyword">int</span> pRoot = find(p);  </span><br><span class="line">    <span class="keyword">int</span> qRoot = find(q);  </span><br><span class="line">    <span class="keyword">if</span> (pRoot == qRoot)   </span><br><span class="line">        <span class="keyword">return</span>;  </span><br><span class="line">    id[pRoot] = qRoot;  <span class="comment">// 将一颗树(即一个组)变成另外一课树(即一个组)的子树  </span></span><br><span class="line">    count--;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面 id[pRoot] = qRoot 这行代码看上去似乎不太对劲。因为这也属于一种“硬编码”，这样实现是基于一个约定，即p所在的树总是会被作为q所在树的子树，从而实现两颗独立的树的融合。那么这样的约定是不是总是合理的呢？显然不是，比如p所在的树的规模比q所在的树的规模大的多时，p和q结合之后形成的树就是十分不和谐的一头轻一头重的”畸形树“了。<br>所以我们应该考虑树的大小，然后再来决定到底是调用：<br>id[pRoot] = qRoot 或者是 id[qRoot] = pRoot</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./images/1339479587_5986.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>即总是size小的树作为子树和size大的树进行合并。这样就能够尽量的保持整棵树的平衡。</p>
+<p>所以现在的问题就变成了：树的大小该如何确定？<br>我们回到最初的情形，即每个节点最一开始都是属于一个独立的组，通过下面的代码进行初始化：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)  </span><br><span class="line">    id[i] = i;    <span class="comment">// 每个节点的组号就是该节点的序号</span></span><br></pre></td></tr></table></figure>
+<p>以此类推，在初始情况下，每个组的大小都是1，因为只含有一个节点，所以我们可以使用额外的一个数组来维护每个组的大小，对该数组的初始化也很直观：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i = find(p);  </span><br><span class="line">    <span class="keyword">int</span> j = find(q);  </span><br><span class="line">    <span class="keyword">if</span> (i == j) <span class="keyword">return</span>;  </span><br><span class="line">    <span class="comment">// 将小树作为大树的子树  </span></span><br><span class="line">    <span class="keyword">if</span> (sz[i] &lt; sz[j]) &#123; id[i] = j; sz[j] += sz[i]; &#125;  </span><br><span class="line">    <span class="keyword">else</span> &#123; id[j] = i; sz[i] += sz[j]; &#125;  </span><br><span class="line">    count--;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Quick-Union 和 Weighted Quick-Union 的比较：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./images/1339479677_7171.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>可以发现，通过sz数组决定如何对两棵树进行合并之后，最后得到的树的高度大幅度减小了。这是十分有意义的，因为在Quick-Union算法中的任何操作，都不可避免的需要调用find方法，而该方法的执行效率依赖于树的高度。树的高度减小了，find方法的效率就增加了，从而也就增加了整个Quick-Union算法的效率。</p>
+<p>上图其实还可以给我们一些启示，即对于Quick-Union算法而言，节点组织的理想情况应该是一颗十分扁平的树，所有的孩子节点应该都在height为1的地方，即所有的孩子都直接连接到根节点。这样的组织结构能够保证find操作的最高效率。</p>
+<p>那么如何构造这种理想结构呢？<br>在find方法的执行过程中，不是需要进行一个while循环找到根节点嘛？如果保存所有路过的中间节点到一个数组中，然后在while循环结束之后，将这些中间节点的父节点指向根节点，不就行了么？但是这个方法也有问题，因为find操作的频繁性，会造成频繁生成中间节点数组，相应的分配销毁的时间自然就上升了。那么有没有更好的方法呢？还是有的，即将节点的父节点指向该节点的爷爷节点，这一点很巧妙，十分方便且有效，相当于在寻找根节点的同时，对路径进行了压缩，使整个树结构扁平化。相应的实现如下，实际上只需要添加一行代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">while</span> (p != id[p])  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="comment">// 将p节点的父节点设置为它的爷爷节点  </span></span><br><span class="line">        id[p] = id[id[p]];  </span><br><span class="line">        p = id[p];  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> p;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，动态连通性相关的Union-Find算法基本上就介绍完了，从容易想到的Quick-Find到相对复杂但是更加高效的Quick-Union，然后到对Quick-Union的几项改进，让我们的算法的效率不断的提高。<br>这几种算法的时间复杂度如下所示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./images/20170912215243.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>对大规模数据进行处理，使用平方阶的算法是不合适的，比如简单直观的Quick-Find算法，通过发现问题的更多特点，找到合适的数据结构，然后有针对性的进行改进，得到了Quick-Union算法及其多种改进算法，最终使得算法的复杂度降低到了近乎线性复杂度。</p>
+<p>如果需要的功能不仅仅是检测两个节点是否连通，还需要在连通时得到具体的路径，那么就需要用到别的算法了，比如DFS或者BFS。</p>
+<p>该文章转载于<a href="http://blog.csdn.net/dm_vincent/article/details/7655764" target="_blank" rel="noopener">dm_vincent</a>的专栏</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-10T14:21:02.000Z" itemprop="dateUpdated">2018-06-10 22:21:02</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2017/09/12/union_find/" target="_blank" rel="external">https://www.djangoz.com/2017/09/12/union_find/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DoubleZ">
+            DoubleZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法与数据结构/">算法与数据结构</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2017/09/12/union_find/&title=《并查集(Union-Find)算法介绍》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2017/09/12/union_find/&title=《并查集(Union-Find)算法介绍》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2017/09/12/union_find/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《并查集(Union-Find)算法介绍》 — DoubleZ's blog&url=https://www.djangoz.com/2017/09/12/union_find/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2017/09/12/union_find/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/28/windows_use_bash/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Windows cmd使用常用bash命令</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/09/queue_in-java/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">java实现简易的queue</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
+            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DoubleZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2017/09/12/union_find/&title=《并查集(Union-Find)算法介绍》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2017/09/12/union_find/&title=《并查集(Union-Find)算法介绍》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2017/09/12/union_find/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《并查集(Union-Find)算法介绍》 — DoubleZ's blog&url=https://www.djangoz.com/2017/09/12/union_find/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2017/09/12/union_find/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACPUlEQVR42u3a0Y7bMAwEwPv/n3aBPl2Rxt6lfUUjjZ6CIFE8DkBTJL++4nX8Xt9ff3/n9f3Xz8+++/DCwMD4WMZxul4vJd8nvxEJ+4KKgYGxASMJssllJZhZsL64ZgwMDIw44bvDS24fBgYGRr51ezSdhWkMDAyMdrs8sSsOn3Ggf+wsjoGB8YGMWWPg37z+8f4GBgbGf884bq/zYlxbehteAwYGxtKM8yPondSt/dZ5FI0CMQYGxqKMZIs8gUuK/u3vnt/cP54bGBgYizLa0a66WF8OcOSPgeIZgoGBsQQjaQa04xdtgG7TxL/siYGBsSjjzjDWrJXYDnZEjwEMDIztGbMQnATf/JB88TDAwMDYgHGnrN+eImffvdgHAwNjG8b9C/pp2NvfwsDA2IAxazTOXs+aBBe3BgMDY2lGG9ryA2o7bPEAFQMDY1FGkt7lBfq2oJ+kjPX/gIGBsQ1jNgbRhua2GfD2yjEwMJZmtANY9wNuG3aHQx4YGBjLMY5gzcr9+VhYXnSry20YGBgLMWbHyNkQRhT7Z+kgBgbG0owkactD5Gx4Ij+yXqSGGBgYyzHytO/ZlmcbdouQjYGBsRDjKFc7x9Hu3KanGBgYOzDaA2Q7fjH7sfyWYWBg7MNog2x+7EyalE8ljhgYGDsw8sB3v50wC8cXaSUGBgbG7UJ/Enbzst3b/gYGBsb2jPw0nBxE23Zm1LbEwMBYmjEbhmjLbcn+s6ExDAyMtRnPFutbdhvEH/jHMDAwPonxCw71N/WgW5btAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
