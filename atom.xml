@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.djangoz.com/"/>
-  <updated>2018-06-11T05:42:20.000Z</updated>
+  <updated>2018-06-23T03:32:42.436Z</updated>
   <id>https://www.djangoz.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>单例模式下多线程的同步问题</title>
+    <link href="https://www.djangoz.com/2018/06/23/Singleton_sync/"/>
+    <id>https://www.djangoz.com/2018/06/23/Singleton_sync/</id>
+    <published>2018-06-22T16:00:00.000Z</published>
+    <updated>2018-06-23T03:32:42.436Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在看<a href="https://book.douban.com/subject/2243615/" target="_blank" rel="noopener">head first 设计模式</a>,学习了单例模式的使用，自己在实际编程中也经常使用这种设计模式。<br>在用swing练习编写贪吃蛇的小游戏的时候，打算将平时学习的东西运用到实际中去，发现了使用多线程很容易出错，对Java的多线程还是不熟悉啊。<br>贪吃蛇中玩家控制的蛇是唯一的，于是就把蛇这个类弄成了单例模式那样，然后再开一个线程控制蛇的移动。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Snake</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Snake snake;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Snake</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Game()).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Snake <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(snake==<span class="keyword">null</span>)&#123;</span><br><span class="line">            snake = <span class="keyword">new</span> Snake();</span><br><span class="line">            System.out.println(<span class="string">"test"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> snake;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Game</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Snake snake = Snake.getInstance();</span><br><span class="line">        <span class="keyword">if</span>(snake.isrunning)</span><br><span class="line">            snake.update();</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>结果运行后控制台输出了多个test<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/Sing-1.jpg" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><br>出现这个现象我想到了多线程中snake不同步的问题，在Game这个线程中snake还没有被实例化，于是也new了一个对象出来，就有了两个Snake的对象，从而引发了问题，在<a href="https://book.douban.com/subject/2243615/" target="_blank" rel="noopener">head first 设计模式</a>中说过，单例模式处理多线程的方法，利用双重检查加锁，首先检查是否实例已经创建了，如果尚未创建，“才”进行同步。这样一来，只有第一次会同步，减少使用同步，增加程序性能<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Snake</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Snake snake;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Snake <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(snake==<span class="keyword">null</span>)&#123;        <span class="comment">//检查实例，如果不存在，就进入同步区块。</span></span><br><span class="line">        <span class="comment">/*只有第一次才彻底执行这里的代码*/</span></span><br><span class="line">            <span class="keyword">synchronized</span> (Snake.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(snake==<span class="keyword">null</span>) &#123;       <span class="comment">//进入区块后，再检查一次，如果仍是null，才创建实例</span></span><br><span class="line">                    snake = <span class="keyword">new</span> Snake();</span><br><span class="line">                    System.out.println(<span class="string">"test"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> snake;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>修改后正常运行<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/Sing-2.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近在看&lt;a href=&quot;https://book.douban.com/subject/2243615/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;head first 设计模式&lt;/a&gt;,学习了单例模式的使用，自己在实际编程中也经常使用这种设计模式。
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://www.djangoz.com/categories/java/"/>
+    
+    
+      <category term="设计模式" scheme="https://www.djangoz.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>博客复活</title>
@@ -478,30 +503,6 @@
       
       
         &lt;p&gt;　　今天终于学会在静态网站上安装插件了(其实也不算，是直接用的别人的主题)，原来也不难，昨天弄了老半天都没弄出来&lt;br&gt;　　还是写一写方法吧&lt;br&gt;　　(⊙o⊙)…还是以后在写吧，现在还不会用markdown写文档&lt;br&gt;　　初学者什么都不会~~o(&amp;gt;_&amp;lt;)o 
-      
-    
-    </summary>
-    
-    
-      <category term="闲言碎语" scheme="https://www.djangoz.com/tags/%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>创建博客成功</title>
-    <link href="https://www.djangoz.com/2017/08/11/first_time/"/>
-    <id>https://www.djangoz.com/2017/08/11/first_time/</id>
-    <published>2017-08-10T16:00:00.000Z</published>
-    <updated>2018-06-06T14:51:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>创建时间2017-08-11 23:17:37<br>弄了一天终于弄成个样子了，准备装插件，但是一直没有成功<br>更新时间2017-08-12 00:04:57</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;创建时间2017-08-11 23:17:37&lt;br&gt;弄了一天终于弄成个样子了，准备装插件，但是一直没有成功&lt;br&gt;更新时间2017-08-12 00:04:57&lt;/p&gt;
-
       
     
     </summary>
