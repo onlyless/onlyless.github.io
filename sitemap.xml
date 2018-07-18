@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.djangoz.com/2017/08/16/linux_setup_ssr/</loc>
+    
+    <lastmod>2018-07-17T03:58:42.454Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.djangoz.com/2018/06/23/Singleton_sync/</loc>
     
     <lastmod>2018-06-24T03:02:05.295Z</lastmod>
@@ -124,13 +131,6 @@
     <loc>https://www.djangoz.com/2017/08/15/Depth_of_Binary_tree/</loc>
     
     <lastmod>2018-06-06T15:07:28.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/08/16/linux_setup_ssr/</loc>
-    
-    <lastmod>2018-06-06T15:05:42.000Z</lastmod>
     
   </url>
   
