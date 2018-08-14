@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="FL_MZPo6bQlgQjKV6E2gTmZnMMSeZIZp4zNu3wzO-S4">
+    
+    
+    
+    
+    <title>ACM图论常用模板（自用） | DoubleZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="算法与数据结构,ACM,图论">
+    <meta name="description" content="一直想找个时间整理一下自己常用的模板，方便自己查找。图论还有很多算法，后期待完善。 最小生成树kruskal hdu1233也可以用贪心的方法，先定义一个数组，排序后并查集。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include&amp;lt;bits/stdc+">
+<meta name="keywords" content="算法与数据结构,ACM,图论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACM图论常用模板（自用）">
+<meta property="og:url" content="https://www.djangoz.com/2018/08/14/useful-model/index.html">
+<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:description" content="一直想找个时间整理一下自己常用的模板，方便自己查找。图论还有很多算法，后期待完善。 最小生成树kruskal hdu1233也可以用贪心的方法，先定义一个数组，排序后并查集。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include&amp;lt;bits/stdc+">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-14T03:05:59.116Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ACM图论常用模板（自用）">
+<meta name="twitter:description" content="一直想找个时间整理一下自己常用的模板，方便自己查找。图论还有很多算法，后期待完善。 最小生成树kruskal hdu1233也可以用贪心的方法，先定义一个数组，排序后并查集。1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include&amp;lt;bits/stdc+">
+    
+        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DoubleZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ACM图论常用模板（自用）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">ACM图论常用模板（自用）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-13T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-08-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/c/">c++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最小生成树"><span class="post-toc-number">1.</span> <span class="post-toc-text">最小生成树</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#kruskal"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">kruskal</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最短路"><span class="post-toc-number">2.</span> <span class="post-toc-text">最短路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dijkstra算法"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">dijkstra算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SPFA算法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">SPFA算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Flody算法"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Flody算法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络流"><span class="post-toc-number">3.</span> <span class="post-toc-text">网络流</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#增广路算法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">增广路算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最小费用最大流"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">最小费用最大流</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-useful-model"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ACM图论常用模板（自用）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-14 00:00:00" datetime="2018-08-13T16:00:00.000Z"  itemprop="datePublished">2018-08-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/c/">c++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>一直想找个时间整理一下自己常用的模板，方便自己查找。<br>图论还有很多算法，后期待完善。</p>
+<h2 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h2><h3 id="kruskal"><a href="#kruskal" class="headerlink" title="kruskal"></a>kruskal</h3><ul>
+<li>hdu1233<br>也可以用贪心的方法，先定义一个数组，排序后并查集。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">20005</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x,y,val;</span><br><span class="line">    Node()&#123;&#125;</span><br><span class="line">    Node(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> c):x(a),y(b),val(c)&#123;&#125;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Node&amp; a)<span class="keyword">const</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> val &gt; a.val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> B[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n == B[n] ? n:B[n]=Find(B[n]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// ios::sync_with_stdio(false);</span></span><br><span class="line">    <span class="comment">// cin.tie(0);</span></span><br><span class="line">    <span class="keyword">int</span> N = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N)&amp;&amp;N)&#123;</span><br><span class="line">        priority_queue&lt;Node&gt; Q;</span><br><span class="line">        <span class="keyword">int</span> a,b,c;</span><br><span class="line">        <span class="keyword">int</span> T = N*(N<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=T;i++)&#123;</span><br><span class="line">            B[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=T;i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;c);</span><br><span class="line">            Q.push(Node(a,b,c));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!Q.empty()&amp;&amp;cnt&lt;N<span class="number">-1</span>)&#123;</span><br><span class="line">            Node t = Q.top();Q.pop();</span><br><span class="line">            <span class="keyword">int</span> t1 = Find(t.x);</span><br><span class="line">            <span class="keyword">int</span> t2 = Find(t.y);</span><br><span class="line">            <span class="keyword">if</span>(t1!=t2)&#123;</span><br><span class="line">                B[t2] = t1;</span><br><span class="line">                ans += t.val;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h2><h3 id="dijkstra算法"><a href="#dijkstra算法" class="headerlink" title="dijkstra算法"></a>dijkstra算法</h3><ul>
+<li>poj2387<br>用vecotr邻接表来表示图，适用于稀疏图<br>优先队列版本的dijkstra算法。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">10005</span>;</span><br><span class="line"><span class="keyword">int</span> T,N;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; D[maxn];</span><br><span class="line"><span class="keyword">int</span> dis[maxn];</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">1</span>&lt;&lt;<span class="number">31</span>;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dijkstra</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dis,<span class="number">10</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">    priority_queue&lt;pii&gt; Q;</span><br><span class="line">    Q.push(pii(<span class="number">0</span>,<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">        pii t = Q.top();</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="keyword">int</span> d = t.first;</span><br><span class="line">        <span class="keyword">int</span> a = t.second;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[a].size();i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> j = G[a][i];</span><br><span class="line">            <span class="keyword">int</span> di = D[a][i];</span><br><span class="line">            <span class="keyword">if</span>(dis[j] &gt; di + d)&#123;</span><br><span class="line">                dis[j] = di + d;</span><br><span class="line">                Q.push(pii(dis[j],j));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[N];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T &gt;&gt; N;</span><br><span class="line">    <span class="keyword">int</span> a,b,c;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;T;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">        G[a].push_back(b);</span><br><span class="line">        G[b].push_back(a);</span><br><span class="line">        D[a].push_back(c);</span><br><span class="line">        D[b].push_back(c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; dijkstra() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="SPFA算法"><a href="#SPFA算法" class="headerlink" title="SPFA算法"></a>SPFA算法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span><span class="keyword">int</span> x;</span><br><span class="line"> <span class="keyword">int</span> value;</span><br><span class="line"> <span class="keyword">int</span> next;</span><br><span class="line">&#125;;</span><br><span class="line">node e[<span class="number">60000</span>];</span><br><span class="line"><span class="keyword">int</span> visited[<span class="number">1505</span>],dis[<span class="number">1505</span>],st[<span class="number">1505</span>],<span class="built_in">queue</span>[<span class="number">1000</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n,m,u,v,w,start,h,r,cur;</span><br><span class="line">  freopen(<span class="string">"c.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">  freopen(<span class="string">"c.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>); </span><br><span class="line">  <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m)!=EOF)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">1500</span>;i++)</span><br><span class="line">      &#123;visited[i]=<span class="number">0</span>;</span><br><span class="line">       dis[i]=<span class="number">-1</span>;</span><br><span class="line">       st[i]=<span class="number">-1</span>;  <span class="comment">//这个初始化给下边那个while循环带来影响</span></span><br><span class="line">      &#125;</span><br><span class="line"> </span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">      &#123;</span><br><span class="line">       <span class="built_in">scanf</span>(<span class="string">"%d%d%d\n"</span>,&amp;u,&amp;v,&amp;w);     </span><br><span class="line">       e[i].x=v;            <span class="comment">//记录后继节点    相当于链表中的创建一个节点，并使得数据域先记录</span></span><br><span class="line">       e[i].value=w;</span><br><span class="line">       e[i].next=st[u];     <span class="comment">//记录顶点节点的某一个边表节点的下标，相当于在链表中吧该边表节点的next指针先指向他的后继边表节点</span></span><br><span class="line">       st[u]=i;                <span class="comment">//把该顶点的指针指向边表节点，相当于链表中的插入中，头结点的指针改变</span></span><br><span class="line">      &#125;</span><br><span class="line">    start=<span class="number">1</span>;</span><br><span class="line">    visited[start]=<span class="number">1</span>;</span><br><span class="line">    dis[start]=<span class="number">0</span>;</span><br><span class="line">    h=<span class="number">0</span>;</span><br><span class="line">    r=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">queue</span>[r]=start;</span><br><span class="line">    <span class="keyword">while</span>(h!=r)</span><br><span class="line">     &#123;</span><br><span class="line"></span><br><span class="line">      h=(h+<span class="number">1</span>)%<span class="number">1000</span>;</span><br><span class="line">      cur=<span class="built_in">queue</span>[h];</span><br><span class="line">      <span class="keyword">int</span> tmp=st[cur];</span><br><span class="line">      visited[cur]=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">     <span class="keyword">while</span>(tmp!=<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (dis[e[tmp].x]&lt;dis[cur]+e[tmp].value)            <span class="comment">//改成大于号才对</span></span><br><span class="line">            &#123;</span><br><span class="line">                   dis[e[tmp].x]=dis[cur]+e[tmp].value;</span><br><span class="line">                    <span class="keyword">if</span>(visited[e[tmp].x]==<span class="number">0</span>)</span><br><span class="line">                      &#123;</span><br><span class="line"></span><br><span class="line">                           visited[e[tmp].x]=<span class="number">1</span>;</span><br><span class="line">                           r=(r+<span class="number">1</span>)%<span class="number">1000</span>;</span><br><span class="line">                            <span class="built_in">queue</span>[r]=e[tmp].x;</span><br><span class="line">                       &#125;</span><br><span class="line">            &#125;</span><br><span class="line">         tmp=e[tmp].next;      </span><br><span class="line">        &#125;</span><br><span class="line">     &#125; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,dis[n]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Flody算法"><a href="#Flody算法" class="headerlink" title="Flody算法"></a>Flody算法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;   <span class="comment">//  初始化为0  </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)  </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lf"</span>, &amp;dis[i][j]);  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++) &#123;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;  </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;  </span><br><span class="line">            dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="网络流"><a href="#网络流" class="headerlink" title="网络流"></a>网络流</h2><h3 id="增广路算法"><a href="#增广路算法" class="headerlink" title="增广路算法"></a>增广路算法</h3><ul>
+<li>计蒜课排涝<br>模板题<br>EdmondsKarp也可用于二分图的最大基数匹配，在二分图的左边后右边都添加一个结点，然后分别和二分图两边的结点相连即可。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">205</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> from,to,cap,flow;</span><br><span class="line">    Edge(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> c,<span class="keyword">int</span> f):from(u),to(v),cap(c),flow(f)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EdmondsKarp</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Edge&gt; edges;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line">    <span class="keyword">int</span> a[maxn];</span><br><span class="line">    <span class="keyword">int</span> p[maxn];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) G[i].clear();</span><br><span class="line">        edges.clear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> cap)</span></span>&#123;</span><br><span class="line">        edges.push_back(Edge(from,to,cap,<span class="number">0</span>));</span><br><span class="line">        edges.push_back(Edge(to,from,<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line">        m = edges.size();</span><br><span class="line">        G[from].push_back(m<span class="number">-2</span>);</span><br><span class="line">        G[to].push_back(m<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Maxflow</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> flow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">            <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</span><br><span class="line">            Q.push(s);</span><br><span class="line">            a[s] = INF;</span><br><span class="line">            <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">                <span class="keyword">int</span> x = Q.front();Q.pop();</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[x].size();i++)&#123;</span><br><span class="line">                    Edge&amp; e = edges[G[x][i]];</span><br><span class="line">                    <span class="keyword">if</span>(!a[e.to]&amp;&amp;e.cap&gt;e.flow)&#123;</span><br><span class="line">                        p[e.to] = G[x][i];</span><br><span class="line">                        a[e.to] = min(a[x],e.cap-e.flow);</span><br><span class="line">                        Q.push(e.to);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(a[t]) <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!a[t])<span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> u=t;u!=s;u=edges[p[u]].from)&#123;</span><br><span class="line">                edges[p[u]].flow += a[t];</span><br><span class="line">                edges[p[u]^<span class="number">1</span>].flow -= a[t];</span><br><span class="line">            &#125;</span><br><span class="line">            flow += a[t];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    EdmondsKarp s;</span><br><span class="line">    <span class="keyword">int</span> a,b,c;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt;c;</span><br><span class="line">        s.AddEdge(a,b,c);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s.Maxflow(<span class="number">1</span>,m) &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="最小费用最大流"><a href="#最小费用最大流" class="headerlink" title="最小费用最大流"></a>最小费用最大流</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">10005</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> from ,to,cap,flow,cost;</span><br><span class="line">    Edge(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> c,<span class="keyword">int</span> f,<span class="keyword">int</span> w):from(u),to(v),cap(c),flow(f),cost(w)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MCMF</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Edge&gt; edges;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line">    <span class="keyword">int</span> inq[maxn];  <span class="comment">//是否在队列中</span></span><br><span class="line">    <span class="keyword">int</span> d[maxn];    <span class="comment">//Bellman-Ford</span></span><br><span class="line">    <span class="keyword">int</span> p[maxn];    <span class="comment">//上一条弧</span></span><br><span class="line">    <span class="keyword">int</span> a[maxn];    <span class="comment">//可改进量</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt; n = n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            G[i].clear();</span><br><span class="line">        &#125;</span><br><span class="line">        edges.clear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> cap,<span class="keyword">int</span> cost)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        edges.push_back(Edge(from,to,cap,<span class="number">0</span>,cost));</span><br><span class="line">        edges.push_back(Edge(to,from,<span class="number">0</span>,<span class="number">0</span>,-cost));</span><br><span class="line">        m = edges.size();</span><br><span class="line">        G[from].push_back(m<span class="number">-2</span>);</span><br><span class="line">        G[to].push_back(m<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">BellmanFord</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t,<span class="keyword">int</span>&amp; flow,ll&amp; cost)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) d[i] = INF;</span><br><span class="line">        <span class="built_in">memset</span>(inq,<span class="number">0</span>,<span class="keyword">sizeof</span>(inq));</span><br><span class="line">        d[s] = <span class="number">0</span>;inq[s]  = <span class="number">1</span>;p[s] = <span class="number">0</span>;a[s] = INF;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</span><br><span class="line">        Q.push(s);</span><br><span class="line">        <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">            <span class="keyword">int</span> u = Q.front();Q.pop();</span><br><span class="line">            inq[u] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[u].size();i++)&#123;</span><br><span class="line">                Edge&amp; e = edges[G[u][i]];</span><br><span class="line">                <span class="keyword">if</span>(e.cap &gt; e.flow &amp;&amp; d[e.to] &gt; d[u] + e.cost)&#123;</span><br><span class="line">                    d[e.to] = d[u] + e.cost;</span><br><span class="line">                    p[e.to] = G[u][i];</span><br><span class="line">                    a[e.to] = min(a[u],e.cap - e.flow);</span><br><span class="line">                    <span class="keyword">if</span>(!inq[e.to])&#123;</span><br><span class="line">                        Q.push(e.to);</span><br><span class="line">                        inq[e.to] = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(d[t] == INF) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            flow += a[t];</span><br><span class="line">            cost += (ll)d[t] + a[t];</span><br><span class="line">            edges[p[u]].flow += a[t];</span><br><span class="line">            edges[p[u]^<span class="number">1</span>].flow -= a[t];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">MincostMaxflow</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t,ll&amp; cost)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> flow = <span class="number">0</span>;cost = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(BellmanFord(s,t,flow,cost));</span><br><span class="line">        <span class="keyword">return</span> flow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-14T03:05:59.116Z" itemprop="dateUpdated">2018-08-14 11:05:59</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2018/08/14/useful-model/" target="_blank" rel="external">https://www.djangoz.com/2018/08/14/useful-model/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DoubleZ">
+            DoubleZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图论/">图论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法与数据结构/">算法与数据结构</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/08/14/useful-model/&title=《ACM图论常用模板（自用）》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/08/14/useful-model/&title=《ACM图论常用模板（自用）》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/08/14/useful-model/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ACM图论常用模板（自用）》 — DoubleZ's blog&url=https://www.djangoz.com/2018/08/14/useful-model/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/08/14/useful-model/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/23/Singleton_sync/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">单例模式下多线程的同步问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DoubleZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/08/14/useful-model/&title=《ACM图论常用模板（自用）》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/08/14/useful-model/&title=《ACM图论常用模板（自用）》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/08/14/useful-model/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ACM图论常用模板（自用）》 — DoubleZ's blog&url=https://www.djangoz.com/2018/08/14/useful-model/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/08/14/useful-model/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIElEQVR42u3awW7rMAwEwPz/T+ddCwR1dynnAZZGp6BNZY0PLCny9YrX+2Nd//bndz4/Jzu8vrEwMDAey3hfrs+j/LZD8pNr3jX7DyoGBsYBjOvDJce6/vn1zu3rw8DAwEgY+SHy77TPxcDAwGgfloTLFRIGBgbG7AEJpr1o+3otjoGB8UBGfuv+/z9/pb+BgYHxKMa7XEkiOFsrO2BgYOzNWG9hto3JNr27/iYGBsZpjHbQIS8v7ypoMTAwTmbMGpYrF/0zarIPBgbGfoy26bh+oT8LxH8EXAwMjK0ZK9sV5WU8upqPaER5IgYGxhaMdqwhLzLzVC9PSYv+KgYGxkaMlZGL9dfRDpMlySUGBsZ+jPaSa8ZrhyquQ/awfMXAwHgsIwmas7C4UgDfVpFjYGBsymiv75O0L3llK2AMDIy9GXclgnkK2Ab64tYQAwNjU8YMtjKikTcv6/8YGBgYBzBmm947WNY2ITAwMM5htI9ZbxUkr7IN1hgYGKcxZkEzb2e2rYiiH4uBgbE1IxlxmF29tWv2+jAwMPZmtMdNBrzapDNPN6NaHAMDYyPGLBTOxr/ysrYe48DAwNiaMesM5lvfOzR2c4MTAwPjUYw2yLYNyNnftmEaAwPjBEYS+NpoPUMulbIYGBgYZSGapJW3lakYGBgY8VV+frhZOwEDA+NkRtsMaJO5lYAeJYgYGBhbM9qj5Fdp+SFmKSMGBsYBjH+ORzziDwQw7QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
