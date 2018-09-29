@@ -152,9 +152,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="算法与数据结构" scheme="https://www.djangoz.com/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="算法与数据结构" scheme="https://www.djangoz.com/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
