@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.djangoz.com/"/>
-  <updated>2018-10-02T10:44:27.998Z</updated>
+  <updated>2018-10-03T03:33:35.995Z</updated>
   <id>https://www.djangoz.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LightOJ1074Extended Traffic(bellman_ford最短路+负环标记)</title>
+    <link href="https://www.djangoz.com/2018/10/03/LightOJ1074/"/>
+    <id>https://www.djangoz.com/2018/10/03/LightOJ1074/</id>
+    <published>2018-10-03T03:19:42.000Z</published>
+    <updated>2018-10-03T03:33:35.995Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>T组样例，N个地点，每个地点有个繁忙度，地点间有M条街道，每条街道要收过路费(目的地繁忙度-起点繁忙度)^3 （3次方），有Q个查询，包含Q个目的地，求从起点1到每个目的地的最小花费。如果花费小于3或者无法到达目的地，则输出”?”</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>由于目的地繁忙度不一定大于起点繁忙度，所以图中有负环（一开始没想到，直接用dijkstra一直WA），所以要用bellman_ford来求最短路，当某些地点位于负环内，就肯定最终花费小于3。</p><h3 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e3</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x2f3f3f3f</span>;         <span class="comment">//这里给值小于初始dis数组赋值，原因可能是在跑bellman_ford的时候，负环和目的地的值相加变小了，直接判断目的地的值等于初始值的话，会wa</span></span><br><span class="line"><span class="keyword">int</span> N,M;</span><br><span class="line"><span class="keyword">int</span> A[maxn];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> from,to,cost;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> dis[maxn];</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line">Edge G[maxm];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bellman_ford</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dis,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">    dis[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;M;j++)&#123;</span><br><span class="line">            Edge e = G[j];</span><br><span class="line">            <span class="keyword">if</span>(dis[e.from] + e.cost &lt; dis[e.to])&#123;</span><br><span class="line">                dis[e.to] = e.cost + dis[e.from];</span><br><span class="line">                <span class="keyword">if</span>(i==N)&#123;</span><br><span class="line">                    vis[e.from] = <span class="number">1</span>;    <span class="comment">//</span></span><br><span class="line">                    vis[e.to] = <span class="number">1</span>;      <span class="comment">//标记负环内结点</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">int</span> Case = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; N;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; A[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; M;</span><br><span class="line">        <span class="keyword">int</span> a,b;</span><br><span class="line">        Edge e;</span><br><span class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            e.from = a;</span><br><span class="line">            e.to = b;</span><br><span class="line">            e.cost = <span class="built_in">pow</span>(A[b]-A[a],<span class="number">3</span>);</span><br><span class="line">            G[i] = e;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> Q = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; Q;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span> &lt;&lt; Case++ &lt;&lt; <span class="string">":"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        bellman_ford();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;Q;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">            <span class="keyword">if</span>(dis[t] &lt; <span class="number">3</span> || dis[t]&gt;=inf || vis[t])&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"?"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; dis[t] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;T组样例，N个地点，每个地点有个繁忙度，地点间有M条街道，每条街道要收过路费(目的地繁忙度-起点繁忙度)^3 （3次方），有Q个查询，包含Q
+      
+    
+    </summary>
+    
+      <category term="c++" scheme="https://www.djangoz.com/categories/c/"/>
+    
+    
+      <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>搞ACM的你伤不起(转载)</title>
@@ -64,9 +93,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -94,9 +123,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -124,9 +153,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -154,9 +183,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -184,9 +213,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -214,9 +243,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -244,9 +273,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -303,9 +332,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -532,31 +561,6 @@
     </summary>
     
       <category term="python" scheme="https://www.djangoz.com/categories/python/"/>
-    
-    
-      <category term="小技巧" scheme="https://www.djangoz.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>IDEA 查看类UML关系图</title>
-    <link href="https://www.djangoz.com/2017/11/19/idea_uml/"/>
-    <id>https://www.djangoz.com/2017/11/19/idea_uml/</id>
-    <published>2017-11-18T16:00:00.000Z</published>
-    <updated>2018-06-10T13:44:31.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a><a href="#说明" title="说明"></a>说明</h4><p>平时写java代码的时候，代码经常会显得很长，很不容易看出Java类之间的关系<br>后来发现IDEA有一个很棒的功能，可以直接根据代码来查看改文件内的类UML关系图</p><h4 id="先去设置里面打开查看UML功能"><a href="#先去设置里面打开查看UML功能" class="headerlink" title="先去设置里面打开查看UML功能"></a>先去设置里面打开查看UML功能</h4><p>setting-&gt;plugins-&gt;搜索UML即可<br>把搜索出来这个插件选上</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/UML-1.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><h4 id="查看java源代码内的类关系UML图"><a href="#查看java源代码内的类关系UML图" class="headerlink" title="查看java源代码内的类关系UML图"></a>查看java源代码内的类关系UML图</h4><p>双击shift键打开keymap，然后搜索UML,选择Show Local Changes as UML<br>直接按快捷键Ctrl+Alt+Shift+D也可以</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/UML-2.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/UML-3.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>在UML图内点击鼠标右键，Show Categories,可切换查看各个类的属性和概括图<br> <figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/UML-4.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p><h4 id="查看类UML图可以放大"><a href="#查看类UML图可以放大" class="headerlink" title="查看类UML图可以放大"></a>查看类UML图可以放大</h4><p>觉得生成的UML图小？这都不是问题，按Alt键，即可放大查看UML图<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/UML-5.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p><h4 id="查看整个文件夹下的所有java类UML关系图"><a href="#查看整个文件夹下的所有java类UML关系图" class="headerlink" title="查看整个文件夹下的所有java类UML关系图"></a>查看整个文件夹下的所有java类UML关系图</h4><p></p><p>写java的时候通常不会把所有类放在一个源文件里面，这时候就需要查看整个文件夹内的Java类关系图了<br>而IDEA一样能做到，在左边的Project视图里面鼠标右键将要查看的文件夹，选择Diagrams-&gt;Show Diagrams-&gt;Java Class Diagrams即可<br> <figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/UML-6.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;&lt;a href=&quot;#说明&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h4&gt;&lt;p&gt;平时写java代码的时候，代码经常会显得很长，很不容易看出Java类之间的关系&lt;b
-      
-    
-    </summary>
-    
-      <category term="java" scheme="https://www.djangoz.com/categories/java/"/>
     
     
       <category term="小技巧" scheme="https://www.djangoz.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
