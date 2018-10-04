@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.djangoz.com/"/>
-  <updated>2018-10-03T03:33:35.995Z</updated>
+  <updated>2018-10-04T03:46:41.815Z</updated>
   <id>https://www.djangoz.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hdu3416Marriage Match IV (网络流+最短路)</title>
+    <link href="https://www.djangoz.com/2018/10/04/hdu3416/"/>
+    <id>https://www.djangoz.com/2018/10/04/hdu3416/</id>
+    <published>2018-10-04T03:34:30.000Z</published>
+    <updated>2018-10-04T03:46:41.815Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3416" target="_blank" rel="noopener">题目链接</a></p><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>N个城市M条路径，给定起点A，终点B，求有几条从A到B的最短路（其中每经过的路径不能重复）</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>先用最短路求出A到B的最短路Min,也求出A到每个城市的距离dis[N],然后反向求B到A的最短路，得到B到每个城市的最短距离dis2[N]，然后遍历每条路径edge，如果dis[edge.from] + edge.len + dis2[edge.to]== Min,就说明这条路径一定是A到B的最短路中会经过的路径，，每条路径的容量为1，把每条符合条件的路径加入到最大流的图中，建完图后，以A为源点，B为汇点跑最大流即可（用EdmondsKarp会超时，跑Dinic即可）</p><h3 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> from,to,cap,flow;</span><br><span class="line">    Edge()&#123;&#125;</span><br><span class="line">    Edge(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> c,<span class="keyword">int</span> f):from(u),to(v),cap(c),flow(f)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Dinic</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> n,m,s,t;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Edge&gt; edges;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line">    <span class="keyword">bool</span> vis[maxn];</span><br><span class="line">    <span class="keyword">int</span> d[maxn];</span><br><span class="line">    <span class="keyword">int</span> cur[maxn];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) G[i].clear();</span><br><span class="line">        edges.clear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> cap)</span></span>&#123;</span><br><span class="line">        edges.push_back(Edge(from,to,cap,<span class="number">0</span>));</span><br><span class="line">        edges.push_back(Edge(to,from,<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line">        m = edges.size();</span><br><span class="line">        G[from].push_back(m<span class="number">-2</span>);</span><br><span class="line">        G[to].push_back(m<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</span><br><span class="line">        Q.push(s);</span><br><span class="line">        d[s] = <span class="number">0</span>;</span><br><span class="line">        vis[s] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">            <span class="keyword">int</span> x = Q.front();</span><br><span class="line">            Q.pop();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[x].size();i++)&#123;</span><br><span class="line">                Edge&amp; e = edges[G[x][i]];</span><br><span class="line">                <span class="keyword">if</span>(!vis[e.to]&amp;&amp;e.cap &gt; e.flow)&#123;</span><br><span class="line">                    vis[e.to] = <span class="number">1</span>;</span><br><span class="line">                    d[e.to] = d[x]+<span class="number">1</span>;</span><br><span class="line">                    Q.push(e.to);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vis[t];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x==t || a==<span class="number">0</span>)<span class="keyword">return</span> a;</span><br><span class="line">        <span class="keyword">int</span> flow = <span class="number">0</span>,f;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> &amp;i=cur[x];i&lt;G[x].size();i++)&#123;</span><br><span class="line">            Edge&amp; e = edges[G[x][i]];</span><br><span class="line">            <span class="keyword">if</span>(d[x]+<span class="number">1</span>==d[e.to] &amp;&amp; (f=DFS(e.to,min(a,e.cap-e.flow)))&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                e.flow += f;</span><br><span class="line">                edges[G[x][i]^<span class="number">1</span>].flow -= f;</span><br><span class="line">                flow += f;</span><br><span class="line">                a -= f;</span><br><span class="line">                <span class="keyword">if</span>(a==<span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flow;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Maxflow</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;s = s,<span class="keyword">this</span>-&gt;t = t;</span><br><span class="line">        <span class="keyword">int</span> flow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(BFS())&#123;</span><br><span class="line">            <span class="built_in">memset</span>(cur,<span class="number">0</span>,<span class="keyword">sizeof</span>(cur));</span><br><span class="line">            flow += DFS(s,INF);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flow;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; G1[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; G2[maxn];</span><br><span class="line"><span class="keyword">int</span> N,M;</span><br><span class="line"><span class="keyword">int</span> dis[maxn],dis2[maxn];</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> A,<span class="built_in">vector</span>&lt;Edge&gt; G[maxn],<span class="keyword">int</span> dis[maxn])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    priority_queue&lt;pii,<span class="built_in">vector</span>&lt;pii&gt;,greater&lt;pii&gt; &gt; Q;</span><br><span class="line">    dis[A] = <span class="number">0</span>;</span><br><span class="line">    Q.push(pii(dis[A],A));</span><br><span class="line">    <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">        pii t = Q.top();</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="keyword">int</span> d = t.first;</span><br><span class="line">        <span class="keyword">int</span> u = t.second;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[u].size();i++)&#123;</span><br><span class="line">            Edge e = G[u][i];</span><br><span class="line">            <span class="keyword">if</span>(e.cap + d &lt; dis[e.to])&#123;</span><br><span class="line">                dis[e.to] = e.cap + d;</span><br><span class="line">                Q.push(pii(dis[e.to],e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> T = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    Dinic ek;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M;</span><br><span class="line">        ek.init(N);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            G1[i].clear();</span><br><span class="line">            G2[i].clear();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> a,b,c;</span><br><span class="line">        Edge e;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">            e.from = a;</span><br><span class="line">            e.to = b;</span><br><span class="line">            e.cap = c;</span><br><span class="line">            G1[e.from].push_back(e);</span><br><span class="line">            swap(e.to,e.from);</span><br><span class="line">            G2[e.from].push_back(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> A,B;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B;</span><br><span class="line">        <span class="built_in">memset</span>(dis,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">        dijkstra(A,G1,dis);             <span class="comment">//正向跑最短路</span></span><br><span class="line">        <span class="built_in">memset</span>(dis2,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(dis2));</span><br><span class="line">        <span class="keyword">int</span> Min = dis[B];               </span><br><span class="line">        dijkstra(B,G2,dis2);            <span class="comment">//反向跑最短路</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;G1[i].size();j++)&#123;</span><br><span class="line">                e = G1[i][j];</span><br><span class="line">                <span class="keyword">if</span>(dis[e.from] + e.cap + dis2[e.to]==Min)&#123;</span><br><span class="line">                    ek.AddEdge(e.from,e.to,<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ek.Maxflow(A,B) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;http://acm.hdu.edu.cn/showproblem.php?pid=3416&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;hea
+      
+    
+    </summary>
+    
+      <category term="c++" scheme="https://www.djangoz.com/categories/c/"/>
+    
+    
+      <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>LightOJ1074Extended Traffic(bellman_ford最短路+负环标记)</title>
@@ -39,9 +69,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -93,9 +123,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -123,9 +153,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -153,9 +183,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -183,9 +213,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -213,9 +243,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -243,9 +273,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -273,9 +303,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -332,9 +362,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -531,31 +561,6 @@
       
       
         &lt;p&gt;最近看&lt;a href=&quot;https://book.douban.com/subject/19952400/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;算法(第四版)&lt;/a&gt; 一书中图这一章的时候，发现网页也是图，网页之间的超链接就是图节点的连线，由此想
-      
-    
-    </summary>
-    
-      <category term="python" scheme="https://www.djangoz.com/categories/python/"/>
-    
-    
-      <category term="小技巧" scheme="https://www.djangoz.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>简单地用python玩了一下钓鱼网站</title>
-    <link href="https://www.djangoz.com/2017/12/01/play/"/>
-    <id>https://www.djangoz.com/2017/12/01/play/</id>
-    <published>2017-11-30T16:00:00.000Z</published>
-    <updated>2018-06-10T13:49:58.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="最近在空间里好友发了个遇到钓鱼网站的说说"><a href="#最近在空间里好友发了个遇到钓鱼网站的说说" class="headerlink" title="最近在空间里好友发了个遇到钓鱼网站的说说"></a>最近在空间里好友发了个遇到钓鱼网站的说说</h4><p>然后闲得无聊用python玩了一下这个网站。(本人水平比较渣，勿喷)<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/play_1.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p><h4 id="打开这个网站显示的是登陆QQ邮箱的钓鱼网站"><a href="#打开这个网站显示的是登陆QQ邮箱的钓鱼网站" class="headerlink" title="打开这个网站显示的是登陆QQ邮箱的钓鱼网站"></a>打开这个网站显示的是登陆QQ邮箱的钓鱼网站</h4><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/play_2.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><h4 id="然后打开浏览器的开发者工具"><a href="#然后打开浏览器的开发者工具" class="headerlink" title="然后打开浏览器的开发者工具"></a>然后打开浏览器的开发者工具</h4><p>先随便输入一个账号密码，然后抓包，查到post的数据格式和目标网页<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/play_3.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/play_4.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p><h4 id="在图中可以看到post上去的网址"><a href="#在图中可以看到post上去的网址" class="headerlink" title="在图中可以看到post上去的网址"></a>在图中可以看到post上去的网址</h4><p>data的格式也知道了，就可以用python模拟post数据了，给网站提交点垃圾信息，以假乱真，这个还可以用IP代理和多线程来搞，博主现在还没达到那种级别，现在就是练练手</p><h4 id="贴一下代码"><a href="#贴一下代码" class="headerlink" title="贴一下代码"></a>贴一下代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests,random</span><br><span class="line"></span><br><span class="line">times = <span class="number">100</span>     <span class="comment">#设置提交次数，我这里就做一下测试，提交的比较少</span></span><br><span class="line">url = <span class="string">'http://jiayaun.plshw.cn/mail/save.asp'</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">"User-Agent"</span>:<span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"</span>,</span><br><span class="line">    <span class="string">"Referer"</span>:<span class="string">"http://jiayaun.plshw.cn/mail"</span>,</span><br><span class="line">&#125;</span><br><span class="line">passwd = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._-=!@#$%^&amp;*()"</span></span><br><span class="line">id = <span class="string">"0123456789"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">passwd_generator</span><span class="params">()</span>:</span>     <span class="comment">#随机生成10-20位的密码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(random.choice(passwd) <span class="keyword">for</span> _ <span class="keyword">in</span> range(random.randint(<span class="number">10</span>,<span class="number">20</span>)))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">id_generator</span><span class="params">()</span>:</span>     <span class="comment">#随机生成9位的QQ号码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(random.choice(id) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">9</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    time = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(times):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = &#123;</span><br><span class="line">                <span class="string">"u"</span>:id_generator(),</span><br><span class="line">                <span class="string">"p"</span>:passwd_generator(),</span><br><span class="line">                <span class="string">"verifycode"</span>:<span class="string">""</span></span><br><span class="line">            &#125;</span><br><span class="line">            request = requests.post(url,headers = headers,data=data)</span><br><span class="line">            <span class="keyword">if</span> request.status_code == <span class="number">200</span>:</span><br><span class="line">                print(<span class="string">"已成功发送"</span>+str(time)+<span class="string">"次"</span>)</span><br><span class="line">                time += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">"ERROR"</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure><h4 id="跑完代码又去查了一下这个域名的信息"><a href="#跑完代码又去查了一下这个域名的信息" class="headerlink" title="跑完代码又去查了一下这个域名的信息"></a>跑完代码又去查了一下这个域名的信息</h4><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/play_6.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><h4 id="通过域名信息留下的邮箱反查"><a href="#通过域名信息留下的邮箱反查" class="headerlink" title="通过域名信息留下的邮箱反查"></a>通过域名信息留下的邮箱反查</h4><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/play_7.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure><p>这里面域名比较多，就没一个一个去尝试了，这里面应该还有其他的钓鱼网站</p><h4 id="ping了一下这个域名得到IP地址"><a href="#ping了一下这个域名得到IP地址" class="headerlink" title="ping了一下这个域名得到IP地址"></a>ping了一下这个域名得到IP地址</h4><p>然后用nmap扫了一下该ip服务器的端口<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/play_8.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p><h4 id="最后用DOS玩了一下-第一次用这个"><a href="#最后用DOS玩了一下-第一次用这个" class="headerlink" title="最后用DOS玩了一下(第一次用这个)"></a>最后用DOS玩了一下(第一次用这个)</h4><p>弄的是钓鱼网站，应该不算违法吧,我可是遵纪守法的好公民，不会干坏事的(￣y▽,￣)╭<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/play_9.png" alt="" title="">                </div>                <div class="image-caption"></div>            </figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;最近在空间里好友发了个遇到钓鱼网站的说说&quot;&gt;&lt;a href=&quot;#最近在空间里好友发了个遇到钓鱼网站的说说&quot; class=&quot;headerlink&quot; title=&quot;最近在空间里好友发了个遇到钓鱼网站的说说&quot;&gt;&lt;/a&gt;最近在空间里好友发了个遇到钓鱼网站的说说&lt;/h4&gt;&lt;
       
     
     </summary>

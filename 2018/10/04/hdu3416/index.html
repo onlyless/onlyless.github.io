@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="FL_MZPo6bQlgQjKV6E2gTmZnMMSeZIZp4zNu3wzO-S4">
+    
+    
+    
+    
+    <title>hdu3416Marriage Match IV (网络流+最短路) | DoubleZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="ACM,题解,图论">
+    <meta name="description" content="题目链接 题意N个城市M条路径，给定起点A，终点B，求有几条从A到B的最短路（其中每经过的路径不能重复） 解题思路先用最短路求出A到B的最短路Min,也求出A到每个城市的距离dis[N],然后反向求B到A的最短路，得到B到每个城市的最短距离dis2[N]，然后遍历每条路径edge，如果dis[edge.from] + edge.len + dis2[edge.to]== Min,就说明这条路径一定">
+<meta name="keywords" content="ACM,题解,图论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hdu3416Marriage Match IV (网络流+最短路)">
+<meta property="og:url" content="https://www.djangoz.com/2018/10/04/hdu3416/index.html">
+<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:description" content="题目链接 题意N个城市M条路径，给定起点A，终点B，求有几条从A到B的最短路（其中每经过的路径不能重复） 解题思路先用最短路求出A到B的最短路Min,也求出A到每个城市的距离dis[N],然后反向求B到A的最短路，得到B到每个城市的最短距离dis2[N]，然后遍历每条路径edge，如果dis[edge.from] + edge.len + dis2[edge.to]== Min,就说明这条路径一定">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-04T03:46:41.815Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hdu3416Marriage Match IV (网络流+最短路)">
+<meta name="twitter:description" content="题目链接 题意N个城市M条路径，给定起点A，终点B，求有几条从A到B的最短路（其中每经过的路径不能重复） 解题思路先用最短路求出A到B的最短路Min,也求出A到每个城市的距离dis[N],然后反向求B到A的最短路，得到B到每个城市的最短距离dis2[N]，然后遍历每条路径edge，如果dis[edge.from] + edge.len + dis2[edge.to]== Min,就说明这条路径一定">
+    
+        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DoubleZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">hdu3416Marriage Match IV (网络流+最短路)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">hdu3416Marriage Match IV (网络流+最短路)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-10-04T03:34:30.000Z" itemprop="datePublished" class="page-time">
+  2018-10-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/c/">c++</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题意"><span class="post-toc-number">1.</span> <span class="post-toc-text">题意</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解题思路"><span class="post-toc-number">2.</span> <span class="post-toc-text">解题思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#AC代码"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">AC代码</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-hdu3416"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">hdu3416Marriage Match IV (网络流+最短路)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-10-04 11:34:30" datetime="2018-10-04T03:34:30.000Z"  itemprop="datePublished">2018-10-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/c/">c++</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3416" target="_blank" rel="noopener">题目链接</a></p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>N个城市M条路径，给定起点A，终点B，求有几条从A到B的最短路（其中每经过的路径不能重复）</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>先用最短路求出A到B的最短路Min,也求出A到每个城市的距离dis[N],然后反向求B到A的最短路，得到B到每个城市的最短距离dis2[N]，然后遍历每条路径edge，如果dis[edge.from] + edge.len + dis2[edge.to]== Min,就说明这条路径一定是A到B的最短路中会经过的路径，，每条路径的容量为1，把每条符合条件的路径加入到最大流的图中，建完图后，以A为源点，B为汇点跑最大流即可（用EdmondsKarp会超时，跑Dinic即可）</p>
+<h3 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> from,to,cap,flow;</span><br><span class="line">    Edge()&#123;&#125;</span><br><span class="line">    Edge(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> c,<span class="keyword">int</span> f):from(u),to(v),cap(c),flow(f)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Dinic</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> n,m,s,t;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Edge&gt; edges;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line">    <span class="keyword">bool</span> vis[maxn];</span><br><span class="line">    <span class="keyword">int</span> d[maxn];</span><br><span class="line">    <span class="keyword">int</span> cur[maxn];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) G[i].clear();</span><br><span class="line">        edges.clear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">AddEdge</span><span class="params">(<span class="keyword">int</span> from,<span class="keyword">int</span> to,<span class="keyword">int</span> cap)</span></span>&#123;</span><br><span class="line">        edges.push_back(Edge(from,to,cap,<span class="number">0</span>));</span><br><span class="line">        edges.push_back(Edge(to,from,<span class="number">0</span>,<span class="number">0</span>));</span><br><span class="line">        m = edges.size();</span><br><span class="line">        G[from].push_back(m<span class="number">-2</span>);</span><br><span class="line">        G[to].push_back(m<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">BFS</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</span><br><span class="line">        Q.push(s);</span><br><span class="line">        d[s] = <span class="number">0</span>;</span><br><span class="line">        vis[s] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">            <span class="keyword">int</span> x = Q.front();</span><br><span class="line">            Q.pop();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[x].size();i++)&#123;</span><br><span class="line">                Edge&amp; e = edges[G[x][i]];</span><br><span class="line">                <span class="keyword">if</span>(!vis[e.to]&amp;&amp;e.cap &gt; e.flow)&#123;</span><br><span class="line">                    vis[e.to] = <span class="number">1</span>;</span><br><span class="line">                    d[e.to] = d[x]+<span class="number">1</span>;</span><br><span class="line">                    Q.push(e.to);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> vis[t];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x==t || a==<span class="number">0</span>)<span class="keyword">return</span> a;</span><br><span class="line">        <span class="keyword">int</span> flow = <span class="number">0</span>,f;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> &amp;i=cur[x];i&lt;G[x].size();i++)&#123;</span><br><span class="line">            Edge&amp; e = edges[G[x][i]];</span><br><span class="line">            <span class="keyword">if</span>(d[x]+<span class="number">1</span>==d[e.to] &amp;&amp; (f=DFS(e.to,min(a,e.cap-e.flow)))&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                e.flow += f;</span><br><span class="line">                edges[G[x][i]^<span class="number">1</span>].flow -= f;</span><br><span class="line">                flow += f;</span><br><span class="line">                a -= f;</span><br><span class="line">                <span class="keyword">if</span>(a==<span class="number">0</span>)<span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flow;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Maxflow</span><span class="params">(<span class="keyword">int</span> s,<span class="keyword">int</span> t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;s = s,<span class="keyword">this</span>-&gt;t = t;</span><br><span class="line">        <span class="keyword">int</span> flow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(BFS())&#123;</span><br><span class="line">            <span class="built_in">memset</span>(cur,<span class="number">0</span>,<span class="keyword">sizeof</span>(cur));</span><br><span class="line">            flow += DFS(s,INF);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flow;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; G1[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; G2[maxn];</span><br><span class="line"><span class="keyword">int</span> N,M;</span><br><span class="line"><span class="keyword">int</span> dis[maxn],dis2[maxn];</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> A,<span class="built_in">vector</span>&lt;Edge&gt; G[maxn],<span class="keyword">int</span> dis[maxn])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">    priority_queue&lt;pii,<span class="built_in">vector</span>&lt;pii&gt;,greater&lt;pii&gt; &gt; Q;</span><br><span class="line">    dis[A] = <span class="number">0</span>;</span><br><span class="line">    Q.push(pii(dis[A],A));</span><br><span class="line">    <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">        pii t = Q.top();</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="keyword">int</span> d = t.first;</span><br><span class="line">        <span class="keyword">int</span> u = t.second;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[u].size();i++)&#123;</span><br><span class="line">            Edge e = G[u][i];</span><br><span class="line">            <span class="keyword">if</span>(e.cap + d &lt; dis[e.to])&#123;</span><br><span class="line">                dis[e.to] = e.cap + d;</span><br><span class="line">                Q.push(pii(dis[e.to],e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> T = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    Dinic ek;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M;</span><br><span class="line">        ek.init(N);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            G1[i].clear();</span><br><span class="line">            G2[i].clear();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> a,b,c;</span><br><span class="line">        Edge e;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">            e.from = a;</span><br><span class="line">            e.to = b;</span><br><span class="line">            e.cap = c;</span><br><span class="line">            G1[e.from].push_back(e);</span><br><span class="line">            swap(e.to,e.from);</span><br><span class="line">            G2[e.from].push_back(e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> A,B;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; A &gt;&gt; B;</span><br><span class="line">        <span class="built_in">memset</span>(dis,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">        dijkstra(A,G1,dis);             <span class="comment">//正向跑最短路</span></span><br><span class="line">        <span class="built_in">memset</span>(dis2,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(dis2));</span><br><span class="line">        <span class="keyword">int</span> Min = dis[B];               </span><br><span class="line">        dijkstra(B,G2,dis2);            <span class="comment">//反向跑最短路</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;G1[i].size();j++)&#123;</span><br><span class="line">                e = G1[i][j];</span><br><span class="line">                <span class="keyword">if</span>(dis[e.from] + e.cap + dis2[e.to]==Min)&#123;</span><br><span class="line">                    ek.AddEdge(e.from,e.to,<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ek.Maxflow(A,B) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-10-04T03:46:41.815Z" itemprop="dateUpdated">2018-10-04 11:46:41</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2018/10/04/hdu3416/" target="_blank" rel="external">https://www.djangoz.com/2018/10/04/hdu3416/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DoubleZ">
+            DoubleZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图论/">图论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/题解/">题解</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/10/04/hdu3416/&title=《hdu3416Marriage Match IV (网络流+最短路)》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/10/04/hdu3416/&title=《hdu3416Marriage Match IV (网络流+最短路)》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/10/04/hdu3416/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hdu3416Marriage Match IV (网络流+最短路)》 — DoubleZ's blog&url=https://www.djangoz.com/2018/10/04/hdu3416/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/10/04/hdu3416/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/10/03/LightOJ1074/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LightOJ1074Extended Traffic(bellman_ford最短路+负环标记)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DoubleZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/10/04/hdu3416/&title=《hdu3416Marriage Match IV (网络流+最短路)》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/10/04/hdu3416/&title=《hdu3416Marriage Match IV (网络流+最短路)》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/10/04/hdu3416/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《hdu3416Marriage Match IV (网络流+最短路)》 — DoubleZ's blog&url=https://www.djangoz.com/2018/10/04/hdu3416/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/10/04/hdu3416/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aSw7bMAwFwNz/0um2QGHhkVQKyBqvgsCxPVnQ/H0+8fH96/j3+6fPT79aX2F9/ujAwMA4lvFdHsk564d+oj49en5fDAyM2xhJKFwH0+T8BLM+8/F7DAwMjODG1cCdB1wMDAyMecDNi9VJEMfAwMBIAmWv31Vtxv28FsfAwDiQkXfd///nn8w3MDAwjmJMCtFq6y1PQMtPhYGB8WpGL+1bF5N7YYXnwcDAeCkjuVwvmZs04JI/65PfDAMD43BGvgyRJHO9tG9buomBgfFqRq/RX23M9SJk/jLAwMC4jdFL0TYEx3jAiYGBcRtjEvKqATcvXJtFLAYGxpWMamm69z2QL5BhYGDcwJgsmObjzOrwct16w8DAuIHRKzXz0WY1+PZIGBgYNzCqg8beyumuerO8tYGBgXE4o8dLwmK+nJGsVjRfDxgYGC9l5Lfc+4jlKWuvI4iBgXEgIy9Hq0lhHqYnzT4MDIwbGHl7qze8zK82T1IxMDDezZi36fOhY07KXwMYGBj3MDaMElutsXxdo1B/Y2BgvJRRXYPo8eaDzCg1xMDAeBHjWzwSfHUkOUkuMTAwbmDs2rDaVbhWy9cyBgMD41hGL1xOHnSeYmJgYNzJ6AW+vKFWbeo1S1kMDAyMYus/WZWYLKJF/wQGBsaVjGara3CdaDkMAwPjAkZSxCbg8u1bw1QMDIzbGNVA+YuFiTz1HIV+DAyM8xh/AB8wk2F/o52wAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
