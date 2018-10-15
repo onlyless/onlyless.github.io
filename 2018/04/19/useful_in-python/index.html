@@ -32,19 +32,19 @@ ga('send', 'pageview');
     
     
     <meta name="keywords" content="小程序">
-    <meta name="description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:">
+    <meta name="description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:  点击文件即可进行下载。 也可直接对文件进行wget: 1wget &amp;lt;your ip address&amp;gt;:/8000/f">
 <meta name="keywords" content="小程序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python实用小工具">
 <meta property="og:url" content="https://www.djangoz.com/2018/04/19/useful_in-python/index.html">
 <meta property="og:site_name" content="DoubleZ&#39;s blog">
-<meta property="og:description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:">
+<meta property="og:description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:  点击文件即可进行下载。 也可直接对文件进行wget: 1wget &amp;lt;your ip address&amp;gt;:/8000/f">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.djangoz.com/img/useful-py.png">
 <meta property="og:updated_time" content="2018-06-10T14:10:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python实用小工具">
-<meta name="twitter:description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:">
+<meta name="twitter:description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:  点击文件即可进行下载。 也可直接对文件进行wget: 1wget &amp;lt;your ip address&amp;gt;:/8000/f">
 <meta name="twitter:image" content="https://www.djangoz.com/img/useful-py.png">
     
         <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
@@ -209,13 +209,7 @@ ga('send', 'pageview');
             <h2 id="1-简单下载服务器"><a href="#1-简单下载服务器" class="headerlink" title="1. 简单下载服务器"></a>1. 简单下载服务器</h2><p> 在需要下载的路径中执行如下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#python2</span><br><span class="line">python -m SimpleHTTPServer</span><br><span class="line"></span><br><span class="line">#python3</span><br><span class="line">python -m http.server</span><br></pre></td></tr></table></figure>
 
-<p>此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:<br> <figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/img/useful-py.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure><br> 点击文件即可进行下载。<br> 也可直接对文件进行wget:</p>
+<p>此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:<br> <img src="/img/useful-py.png" alt=""><br> 点击文件即可进行下载。<br> 也可直接对文件进行wget:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget &lt;your ip address&gt;:/8000/filename</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-JSON解析小工具"><a href="#2-JSON解析小工具" class="headerlink" title="2. JSON解析小工具"></a>2. JSON解析小工具</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># echo &apos;&#123;&quot;age&quot;:10, &quot;name&quot;:&quot;name1&quot;&#125;&apos; | python -m json.tool</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;age&quot;: 10,</span><br><span class="line">    &quot;name&quot;: &quot;name1&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
