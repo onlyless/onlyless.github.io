@@ -233,7 +233,13 @@ ga('send', 'pageview');
 <p>(env) root@ubunt:~/flask_app# /etc/init.d/nginx restart</p>
 </blockquote>
 <p>此时打开浏览器，输入http://你的服务器ip就可以看到运行结果</p>
-<p><img src="/img/flask_app_1.jpg" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/flask_app_1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>现在基本配置就已经弄好了</p>
 <h2 id="开启SSL"><a href="#开启SSL" class="headerlink" title="开启SSL"></a>开启SSL</h2><p>nginx下配置ssl是很简单的，无论是去认证中心买SSL安全证书还是自签署证书,我自己是用的cloudflare的免费SSL证书,在cloudflare上的操作就不介绍了，在cloudflare上申请证书后会有一个公钥和密钥，把这两个保存到本地，接下来就直接介绍配置SSL<br>我自己的证书是放在/etc/ssl/private/目录里面的</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 443 ssl default_server;</span><br><span class="line">	listen [::]:443 ssl default_server;</span><br><span class="line">	server_name ***; #你的域名;</span><br><span class="line"></span><br><span class="line">	ssl on;</span><br><span class="line">	ssl_certificate /etc/ssl/private/***.crt; #公钥地址</span><br><span class="line">	ssl_certificate_key /etc/ssl/private/***.key;   #私钥地址</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass        http://localhost:5000;</span><br><span class="line">        	proxy_set_header   Host $host;</span><br><span class="line">        	proxy_set_header   X-Real-IP  $remote_addr;</span><br><span class="line">        	proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">		proxy_redirect default;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -241,7 +247,13 @@ ga('send', 'pageview');
 <blockquote>
 <p>(env) root@ubunt:~/flask_app# /etc/init.d/nginx restart</p>
 </blockquote>
-<h2 id="flask接入微信公众号"><a href="#flask接入微信公众号" class="headerlink" title="flask接入微信公众号"></a>flask接入微信公众号</h2><p><img src="/img/flask_app_2.jpg" alt=""></p>
+<h2 id="flask接入微信公众号"><a href="#flask接入微信公众号" class="headerlink" title="flask接入微信公众号"></a>flask接入微信公众号</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/flask_app_2.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>首先，需要写  flask 后台代码，以下以一个简单的后台做为示范。</p>
 <blockquote>
 <p>(env) root@ubunt:~/flask_app# vim run.py</p>
@@ -254,7 +266,13 @@ ga('send', 'pageview');
 <p><strong>注：</strong> 其中的<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response = make_response(xml_rep % (fromu,tou,str(int(time.time())), content))<span class="comment"># 是将xml_rep 的值按顺序返回给微信</span></span><br></pre></td></tr></table></figure></p>
 <p>这个是返回值。所以如果要做什么微信自动回复就将内容添到content中，然后微信前端就会回复给用户。<br><strong>注：</strong> 如果要消息加解密方式设为安全模式的话，参考<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1434696670" target="_blank" rel="noopener">官方文档</a><br>部署完获得后台网址就可以进行下一步：开始填写微信接口。其他的都随意填，关键的两个值是下图的箭头所指。</p>
 <p>填好后会出现配置成功的标志。 这时就能在微信上使用这个公众号了。  本文所实现的功能是你向公众号发布一条信息，公众号返回同样的信息给你。</p>
-<p>微信上最后结果<br><img src="/img/flask_app_3.jpg" alt=""></p>
+<p>微信上最后结果<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/flask_app_3.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p>参考链接：</p>
 <p><a href="https://www.techbelife.com/post/Deploy-the-Flask-application-with-uWSGI-and-Nginx.html" target="_blank" rel="noopener">在Centos使用Nginx，uWSGI部署Flask应用</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/21262280" target="_blank" rel="noopener">centos下通过gunicorn+nginx+supervisor部署Flask项目</a></p>
