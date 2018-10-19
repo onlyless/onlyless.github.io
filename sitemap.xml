@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.djangoz.com/2018/08/14/useful-model/</loc>
+    
+    <lastmod>2018-10-19T02:19:17.315Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2018/10/18/hdu2102/</loc>
+    
+    <lastmod>2018-10-18T08:19:04.726Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.djangoz.com/2018/10/16/hdu1560/</loc>
     
     <lastmod>2018-10-16T09:00:15.349Z</lastmod>
@@ -40,13 +54,6 @@
     <loc>https://www.djangoz.com/2018/10/09/hdu3533/</loc>
     
     <lastmod>2018-10-09T12:46:39.309Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/08/14/useful-model/</loc>
-    
-    <lastmod>2018-10-04T03:50:20.243Z</lastmod>
     
   </url>
   
