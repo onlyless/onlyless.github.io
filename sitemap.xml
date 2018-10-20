@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.djangoz.com/2018/08/14/useful-model/</loc>
+    
+    <lastmod>2018-10-20T03:30:57.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.djangoz.com/2018/10/16/hdu1560/</loc>
     
     <lastmod>2018-10-20T02:38:29.000Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://www.djangoz.com/2017/08/16/linux_setup_ssr/</loc>
     
     <lastmod>2018-10-19T15:18:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/08/14/useful-model/</loc>
-    
-    <lastmod>2018-10-19T02:19:17.000Z</lastmod>
     
   </url>
   
