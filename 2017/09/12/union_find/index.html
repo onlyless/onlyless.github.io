@@ -414,9 +414,9 @@ ga('send', 'pageview');
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/09/09/queue_in-java/" id="post-next" class="post-nav-link">
+      <a href="/2017/09/09/stack_in_java/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">java实现简易的queue</h4>
+        <h4 class="title">java实现简易的stack</h4>
       </a>
     </div>
   
@@ -433,25 +433,32 @@ ga('send', 'pageview');
 
 
 
-<section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
     <script>
-        var gitment = new Gitment({
-            owner: 'onlyless',
-            repo: 'onlyless.github.io',
-            oauth: {
-                client_id: 'fac1f3ce813d9c9888d7',
-                client_secret: 'c5d21eb642bc64a557a8b93eeda4acaebb58d7a3',
-            },
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
+            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
         })
-        gitment.render('comments')
     </script>
-</section>
-
-
-
+    <!-- Valine Comments end -->
 
 
 
