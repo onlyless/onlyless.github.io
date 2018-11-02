@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.djangoz.com/"/>
-  <updated>2018-10-19T15:18:44.000Z</updated>
+  <updated>2018-11-02T11:15:27.000Z</updated>
   <id>https://www.djangoz.com/</id>
   
   <author>
@@ -17,19 +17,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>UEFI+GPT修复win10EFI开机启动</title>
-    <link href="https://www.djangoz.com/2018/10/19/win10uefi/"/>
-    <id>https://www.djangoz.com/2018/10/19/win10uefi/</id>
-    <published>2018-10-19T15:00:50.000Z</published>
-    <updated>2018-10-19T15:18:44.000Z</updated>
+    <title>职业的乐趣</title>
+    <link href="https://www.djangoz.com/2018/11/02/funnywork/"/>
+    <id>https://www.djangoz.com/2018/11/02/funnywork/</id>
+    <published>2018-11-02T11:03:48.000Z</published>
+    <updated>2018-11-02T11:15:27.000Z</updated>
     
-    <content type="html"><![CDATA[<p>最近买入手了三星sm951-SSD，把黑苹果和win10一起迁移到这个盘上来，结果只记起备份CLOVER，没有备份win10的启动项了，然后迁移过后EFI引导只有CLOVER了，由于已经把win10的整个分区移过来了，不想重装系统，想试试修复一下win10d EFI文件，理论上应该可行</p><p>EFI文件都在磁盘的ESP分区，先挂载ESP分区，然后用ms-dos自带的修复工具即可修复</p><p>准备工作：一个有原装winPE的u盘</p><ol><li>开机进入u盘后，在含有现在安装和修复计算机界面那里，按shift+F10,进入命令行界面。</li><li>运行以下命令行</li></ol><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diskpart        #进入diskpart</span><br><span class="line">list disk       # 查看磁盘</span><br><span class="line">select disk n   # n-&gt;代表ESP分区所在的磁盘(<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>...n)</span><br><span class="line">list partition  #查看选择的磁盘含有的分区</span><br><span class="line">select partition n   # n-&gt;选择ESP分区</span><br><span class="line">assign letter=b         #将ESP分区挂载为B盘</span><br><span class="line"><span class="keyword">exit</span>        #退出diskpart</span><br><span class="line">bcdboot C:\windows /s B: /f uefi /l zh-cn       #C:\windows代表windows所在的分区在C盘，不同的情况可能会改变，找到系统所在的盘符即可</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>今天在<a href="https://book.douban.com/subject/2230248/" target="_blank" rel="noopener">人月神话</a>里看到的，觉得说得挺好的，就摘抄下来</p><blockquote><p>&emsp;首先,这种快乐是一种创建事物的纯粹快乐。如同小孩在玩泥巴时感到快乐一样,成年人喜欢创建事物,特别是自己进行设计。我想这种快乐是上帝创造世界的折射,一种呈现在每片独特的、崭新的树叶和雪花上的喜悦。<br>&emsp;其次,这种快乐来自于开发对他人有用的东西。内心深处,我们期望我们的劳动成果能够被他人使用,并能对他们有所帮助。从这一角度而言,这同小孩用粘土为“爸爸的办公室”捏制铅笔盒没有任何本质的区别。<br>&emsp;第三,快乐来自于整个过程体现出的一股强大的魅力—将相互啮合的零部件组装在一起,看到它们以精妙的方式运行着,并收到了预期的效果。比起弹球游戏机或自动电唱机所具有的迷人魅力,程序化的计算机毫不逊色。<br>&emsp;第四,这种快乐是持续学习的快乐,它来自于这项工作的非重复特性。人们所面临的问题总有这样那样的不同,因而解决问题的人可以从中学习新的事物,有时是实践上的,有时是理论上的,或者兼而有之。<br>&emsp;最后,这种快乐还来自于在易于驾驭的介质上工作。程序员,就像诗人一样,几乎仅仅在单纯的思考中工作。程序员凭空地运用自己的想象,来建造自己的“城堡”。很少有创造介质如此灵活,如此易于精炼和重建,如此容易实现概念上的设想(不过我们将会看到,容易驾驭的特性也有它自己的问题)<br>&emsp;然而程序毕竟同诗歌不同,它是实实在在的东西;它可以移动和运行,能独立产生可见的输出;它能打印结果,绘制图形,发出声音,移动支架。神话和传说中的魔术在我们的时代已变成现实。在键盘上键入正确的咒语,屏幕会活动、变幻,显示出前所未有的也不可能存在的事物。</p></blockquote>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;最近买入手了三星sm951-SSD，把黑苹果和win10一起迁移到这个盘上来，结果只记起备份CLOVER，没有备份win10的启动项了，然后迁移过后EFI引导只有CLOVER了，由于已经把win10的整个分区移过来了，不想重装系统，想试试修复一下win10d EFI文件，理
+        &lt;p&gt;今天在&lt;a href=&quot;https://book.douban.com/subject/2230248/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;人月神话&lt;/a&gt;里看到的，觉得说得挺好的，就摘抄下来&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;emsp
+      
+    
+    </summary>
+    
+    
+      <category term="闲言碎语" scheme="https://www.djangoz.com/tags/%E9%97%B2%E8%A8%80%E7%A2%8E%E8%AF%AD/"/>
+    
+      <category term="读书笔记" scheme="https://www.djangoz.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>UEFI+GPT修复win10EFI开机启动</title>
+    <link href="https://www.djangoz.com/2018/10/19/win10uefi/"/>
+    <id>https://www.djangoz.com/2018/10/19/win10uefi/</id>
+    <published>2018-10-19T15:00:50.000Z</published>
+    <updated>2018-10-23T02:39:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近入手了三星sm951-SSD，把黑苹果和win10一起迁移到这个盘上来，结果只记起备份CLOVER，没有备份win10的启动项了，然后迁移过后EFI引导只有CLOVER了，由于已经把win10的整个分区移过来了，不想重装系统，想试试修复一下win10d EFI文件，理论上应该可行</p><p>EFI文件都在磁盘的ESP分区，先挂载ESP分区，然后用ms-dos自带的修复工具即可修复</p><p>准备工作：一个有原装winPE的u盘</p><ol><li>开机进入u盘后，在含有现在安装和修复计算机界面那里，按shift+F10,进入命令行界面。</li><li>运行以下命令行</li></ol><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diskpart        #进入diskpart</span><br><span class="line">list disk       # 查看磁盘</span><br><span class="line">select disk n   # n-&gt;代表ESP分区所在的磁盘(<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>...n)</span><br><span class="line">list partition  #查看选择的磁盘含有的分区</span><br><span class="line">select partition n   # n-&gt;选择ESP分区</span><br><span class="line">assign letter=b         #将ESP分区挂载为B盘</span><br><span class="line"><span class="keyword">exit</span>        #退出diskpart</span><br><span class="line">bcdboot C:\windows /s B: /f uefi /l zh-cn       #C:\windows代表windows所在的分区在C盘，不同的情况可能会改变，找到系统所在的盘符即可</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近入手了三星sm951-SSD，把黑苹果和win10一起迁移到这个盘上来，结果只记起备份CLOVER，没有备份win10的启动项了，然后迁移过后EFI引导只有CLOVER了，由于已经把win10的整个分区移过来了，不想重装系统，想试试修复一下win10d EFI文件，理论
       
     
     </summary>
@@ -275,9 +302,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -304,9 +331,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -358,9 +385,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -388,9 +415,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -418,9 +445,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -448,9 +475,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -478,9 +505,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -508,9 +535,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -538,9 +565,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -567,37 +594,6 @@
     
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
-    
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>poj1797题解（最大生成树||最短路）</title>
-    <link href="https://www.djangoz.com/2018/09/28/poj1797/"/>
-    <id>https://www.djangoz.com/2018/09/28/poj1797/</id>
-    <published>2018-09-28T01:42:05.000Z</published>
-    <updated>2018-09-29T08:36:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<p></p><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>起点1到终点n有m条桥，每座桥都有允许最大的重量通过，现在求运输车能从1到n运输的最大重量是多少</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>相当于让选择的那条路最大，然后求这条路里的最小值，而且这个值比其他路的值都大。<br>可用变形的dijkstra来求解，也可以用最大生成树来求解。</p><h3 id="dijkstra解法"><a href="#dijkstra解法" class="headerlink" title="dijkstra解法"></a>dijkstra解法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,pii&gt; PII;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to,val;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Node&amp; a)<span class="keyword">const</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> val &lt; a.val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;Node&gt; G[maxn];</span><br><span class="line"><span class="keyword">int</span> dis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dis,<span class="number">-1</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">    <span class="keyword">int</span> ans = inf;</span><br><span class="line">    priority_queue&lt;pii&gt; Q;</span><br><span class="line">    Q.push(pii(inf,<span class="number">1</span>));</span><br><span class="line">    dis[<span class="number">1</span>] = inf;</span><br><span class="line">    <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">        pii t = Q.top();</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="keyword">int</span> d = t.first;</span><br><span class="line">        <span class="keyword">int</span> u = t.second;</span><br><span class="line">        <span class="keyword">if</span>(u==n)<span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(dis[u] &gt; d) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[u].size();i++)&#123;</span><br><span class="line">            Node e = G[u][i];</span><br><span class="line">            <span class="keyword">if</span>(dis[e.to] &lt; min(dis[u],e.val))&#123;</span><br><span class="line">                dis[e.to] = min(dis[u],e.val);</span><br><span class="line">                Q.push(pii(dis[e.to],e.to));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> Case = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> n,m;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++)G[i].clear();</span><br><span class="line">        <span class="keyword">int</span> x,y,val;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;x,&amp;y,&amp;val);</span><br><span class="line">            Node t;</span><br><span class="line">            t.to = y;</span><br><span class="line">            t.val = val;</span><br><span class="line">            G[x].push_back(t);</span><br><span class="line">            t.to = x;</span><br><span class="line">            G[y].push_back(t);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = dijkstra(n);</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Scenario #%d:\n"</span>,Case++);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="最大生成树解法"><a href="#最大生成树解法" class="headerlink" title="最大生成树解法"></a>最大生成树解法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,pii&gt; PII;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x,y,val;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Node&amp; a)<span class="keyword">const</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> val &gt; a.val;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Node G[maxn];</span><br><span class="line"><span class="keyword">int</span> A[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n==A[n]?n:A[n]=Find(A[n]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> Case = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="keyword">int</span> n,m;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            A[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;G[i].x,&amp;G[i].y,&amp;G[i].val);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(G,G+m);</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> t1 = Find(G[i].x);</span><br><span class="line">            <span class="keyword">int</span> t2 = Find(G[i].y);</span><br><span class="line">            <span class="keyword">if</span>(t1!=t2)&#123;</span><br><span class="line">                <span class="keyword">if</span>(t1&gt;t2)swap(t1,t2);</span><br><span class="line">                A[t2] = t1;</span><br><span class="line">                <span class="keyword">if</span>(Find(<span class="number">1</span>)==Find(n))&#123;   <span class="comment">//最先找到让1和n连通的路径就是答案</span></span><br><span class="line">                    ans = G[i].val;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Scenario #%d:\n"</span>,Case++);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;/p&gt;
-&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;起点1到终点n有m条桥，每座桥都有允许最大的重量通过，现在求运输车能从1到n运输的最大重量是多少&lt;/p&gt;
-&lt;h2 id
-      
-    
-    </summary>
-    
-      <category term="c++" scheme="https://www.djangoz.com/categories/c/"/>
-    
-    
-      <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
-    
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
