@@ -40,19 +40,19 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="DoubleZ&#39;s blog">
 <meta property="og:description" content="在看完algorithms-part1第一周的Union-Find视频和算法(第四版) 一书的Section 1.5后，本来也打算写一些笔记的，但是发现有篇文章写得很好，就转载过来了。先贴上自己学习过程中写的代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339478916_8193.png">
-<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479136_7058.png">
-<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479271_3352.png">
-<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479431_6633.png">
-<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479497_8053.png">
-<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479587_5986.png">
-<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339479677_7171.png">
-<meta property="og:image" content="https://www.djangoz.com/2017/09/12/union_find/images/20170912215243.png">
-<meta property="og:updated_time" content="2018-06-10T14:21:02.000Z">
+<meta property="og:image" content="https://www.djangoz.com/img/1339478916_8193.png">
+<meta property="og:image" content="https://www.djangoz.com/img/1339479136_7058.png">
+<meta property="og:image" content="https://www.djangoz.com/img/1339479271_3352.png">
+<meta property="og:image" content="https://www.djangoz.com/img/1339479431_6633.png">
+<meta property="og:image" content="https://www.djangoz.com/img/1339479497_8053.png">
+<meta property="og:image" content="https://www.djangoz.com/img/1339479587_5986.png">
+<meta property="og:image" content="https://www.djangoz.com/img/1339479677_7171.png">
+<meta property="og:image" content="https://www.djangoz.com/img/20170912215243.png">
+<meta property="og:updated_time" content="2018-11-17T04:54:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并查集(Union-Find)算法介绍">
 <meta name="twitter:description" content="在看完algorithms-part1第一周的Union-Find视频和算法(第四版) 一书的Section 1.5后，本来也打算写一些笔记的，但是发现有篇文章写得很好，就转载过来了。先贴上自己学习过程中写的代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515">
-<meta name="twitter:image" content="https://www.djangoz.com/2017/09/12/union_find/images/1339478916_8193.png">
+<meta name="twitter:image" content="https://www.djangoz.com/img/1339478916_8193.png">
     
         <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
     
@@ -218,7 +218,7 @@ ga('send', 'pageview');
 <h2 id="关于动态连通性"><a href="#关于动态连通性" class="headerlink" title="关于动态连通性"></a>关于动态连通性</h2><p>我们看一张图来了解一下什么是动态连通性：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="./images/1339478916_8193.png" alt="" title="">
+                    <img src="/img/1339478916_8193.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -246,7 +246,7 @@ ga('send', 'pageview');
 <h4 id="API"><a href="#API" class="headerlink" title="API"></a>API</h4><p>我们可以设计相应的API：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="./images/1339479136_7058.png" alt="" title="">
+                    <img src="/img/1339479136_7058.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -256,7 +256,7 @@ ga('send', 'pageview');
 <p>举个例子，比如输入的Pair是(5， 9)，那么首先通过find方法发现它们的组号并不相同，然后在union的时候通过一次遍历，将组号1都改成8。当然，由8改成1也是可以的，保证操作时都使用一种规则就行。<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="./images/1339479271_3352.png" alt="" title="">
+                    <img src="/img/1339479271_3352.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -266,7 +266,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="./images/1339479431_6633.png" alt="" title="">
+                    <img src="/img/1339479431_6633.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
@@ -275,7 +275,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="./images/1339479497_8053.png" alt="" title="">
+                    <img src="/img/1339479497_8053.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
@@ -286,7 +286,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="./images/1339479587_5986.png" alt="" title="">
+                    <img src="/img/1339479587_5986.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
@@ -298,7 +298,7 @@ ga('send', 'pageview');
 <p>Quick-Union 和 Weighted Quick-Union 的比较：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="./images/1339479677_7171.png" alt="" title="">
+                    <img src="/img/1339479677_7171.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -310,7 +310,7 @@ ga('send', 'pageview');
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="./images/20170912215243.png" alt="" title="">
+                    <img src="/img/20170912215243.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
@@ -325,7 +325,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-10T14:21:02.000Z" itemprop="dateUpdated">2018-06-10 22:21:02</time>
+    最后更新时间：<time datetime="2018-11-17T04:54:13.000Z" itemprop="dateUpdated">2018-11-17 12:54:13</time>
 </span><br>
 
 

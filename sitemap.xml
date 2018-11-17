@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.djangoz.com/2018/11/17/verifycode/</loc>
+    
+    <lastmod>2018-11-17T05:00:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2017/09/28/windows_use_bash/</loc>
+    
+    <lastmod>2018-11-17T04:54:23.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2017/09/30/simple_calculator/</loc>
+    
+    <lastmod>2018-11-17T04:54:13.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2017/09/12/union_find/</loc>
+    
+    <lastmod>2018-11-17T04:54:13.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.djangoz.com/2018/11/02/funnywork/</loc>
     
     <lastmod>2018-11-02T11:15:27.000Z</lastmod>
@@ -191,13 +219,6 @@
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/2017/09/30/simple_calculator/</loc>
-    
-    <lastmod>2018-06-17T04:26:05.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.djangoz.com/2018/06/11/blog_resurrection/</loc>
     
     <lastmod>2018-06-11T05:42:20.000Z</lastmod>
@@ -208,13 +229,6 @@
     <loc>https://www.djangoz.com/2018/02/02/awesome_adb/</loc>
     
     <lastmod>2018-06-11T04:55:26.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/09/12/union_find/</loc>
-    
-    <lastmod>2018-06-10T14:21:02.000Z</lastmod>
     
   </url>
   
@@ -264,13 +278,6 @@
     <loc>https://www.djangoz.com/2017/10/18/Vocabulary_Statistics/</loc>
     
     <lastmod>2018-06-10T13:37:38.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/09/28/windows_use_bash/</loc>
-    
-    <lastmod>2018-06-10T13:20:09.000Z</lastmod>
     
   </url>
   
