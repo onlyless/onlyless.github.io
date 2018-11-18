@@ -42,7 +42,12 @@ ga('send', 'pageview');
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.djangoz.com/img/20181117-124805.png">
 <meta property="og:image" content="https://www.djangoz.com/img/20181117-124831.png">
-<meta property="og:updated_time" content="2018-11-17T05:00:38.000Z">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-1446082.jpg">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-144626.jpg">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-1448252.jpg">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-144846.jpg">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-150944.jpg">
+<meta property="og:updated_time" content="2018-11-18T07:45:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet&#x2F;JSP简单生成图片验证码并后台验证功能">
 <meta name="twitter:description" content="最近在学用JAVA Servlet/JSP来开发web应用，于是练手来做一个通过Servlet后台来生成图片验证码，并实现验证功能。 实现思路先用单例模式写一个生成验证码图片的GenerateCode类，该类的createImage()方法返回BufferImage类，然后用Servlet来读取图片，GenerateCode对象在生成图片的同时也会生成一个验证码的字符串，可供后台验证的Servle">
@@ -181,7 +186,7 @@ ga('send', 'pageview');
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">实现思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Servlet类"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Servlet类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Utils"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Utils</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jsp"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">jsp</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#不足"><span class="post-toc-number">3.</span> <span class="post-toc-text">不足</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">实现思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Servlet类"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Servlet类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Utils"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Utils</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jsp"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">jsp</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#不足"><span class="post-toc-number">3.</span> <span class="post-toc-text">不足</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后续"><span class="post-toc-number">4.</span> <span class="post-toc-text">后续</span></a></li></ol>
         </nav>
     </aside>
 
@@ -243,7 +248,48 @@ ga('send', 'pageview');
 <li>success.jsp<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;%--</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: onlyless</span><br><span class="line">  Date: <span class="number">11</span>/<span class="number">16</span>/<span class="number">18</span></span><br><span class="line">  Time: <span class="number">16</span>:<span class="number">46</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">--%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;success&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;success&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><p>思路很简单，最终也实现出来了，但是我发现了一个BUG，在多个窗口同时请求验证时，由于后台很简单的读取GenerateCode的验证码，因此这多个窗口post上来的验证码就算全部都是正确的，但是只能验证最后生成验证码图片的那个post，要解决这个问题，我想应该要用到Cookie的知识，现在还在学习，待以后再解决这个问题。</p>
+<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h2><p>思路很简单，最终也实现出来了，但是我发现了一个BUG，在多个窗口同时请求验证时，由于后台很简单的读取GenerateCode的验证码，因此这多个窗口post上来的验证码就算全部都是正确的，但是只能验证最后生成验证码图片的那个post，要解决这个问题，我想应该要用到Cookie的知识，现在还在学习，待以后再解决这个问题。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/20181118-1446082.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>后台查看验证码不一致，后台正确的验证码是最后生成的验证码，导致之前的生成的验证码提交上去不匹配<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/20181118-144626.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>第二天学到了Cookie和Session的运用，发现用Session很简单就能解决上面的那个不足。</p>
+<ul>
+<li><p>VerifyCode.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(outputStream);</span><br><span class="line">encoder.encode(generateCode.createImage());</span><br><span class="line">req.getSession().setAttribute(<span class="string">"verify"</span>,generateCode.getCode());     <span class="comment">//添加的代码</span></span><br><span class="line">outputStream.close();</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Verify.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        ...</span><br><span class="line">        resp.setContentType(<span class="string">"text/html;charset=UTF-8"</span>);</span><br><span class="line"><span class="comment">//        String reallycode = GenerateCode.getInstance().getCode();</span></span><br><span class="line">        String reallycode = (String) req.getSession().getAttribute(<span class="string">"verify"</span>);      <span class="comment">//修改的代码</span></span><br><span class="line">        String postcode = req.getParameter(<span class="string">"verifycode"</span>);</span><br><span class="line">        System.out.println(reallycode + <span class="string">"---"</span> + postcode);</span><br><span class="line">        ....</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>两个浏览器同时登陆都成功登陆，后台查看验证码一致<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/20181118-1448252.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/20181118-144846.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img/20181118-150944.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>不过我发现这个问题在同一个浏览器上还是存在，原因很简单，用一个浏览器不同窗口的Session都是一样的，这样就导致新生成的验证码覆盖掉以前Session绑定的验证码，导致问题产生，这个问题我测试了一下学校的教务系统和12306的登录验证码，都存在这样的问题。不过这个一般谁也不会同时开多个窗口登录，登录失败一个，换以前的窗口登录，这样导致一直匹配到的不是产生最新的验证码。</p>
 
         </div>
 
@@ -252,7 +298,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-11-17T05:00:38.000Z" itemprop="dateUpdated">2018-11-17 13:00:38</time>
+    最后更新时间：<time datetime="2018-11-18T07:45:15.000Z" itemprop="dateUpdated">2018-11-18 15:45:15</time>
 </span><br>
 
 
