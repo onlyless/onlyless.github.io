@@ -25,7 +25,7 @@ ga('send', 'pageview');
     
     
     
-    <title>在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号 | DoubleZ&#39;s blog | Just for fun</title>
+    <title>在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号 | DjangoZ&#39;s blog | Just for fun</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -37,7 +37,7 @@ ga('send', 'pageview');
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号">
 <meta property="og:url" content="https://www.djangoz.com/2018/03/10/flask_app/index.html">
-<meta property="og:site_name" content="DoubleZ&#39;s blog">
+<meta property="og:site_name" content="DjangoZ&#39;s blog">
 <meta property="og:description" content="突然想开发一个微信公众号，就算没人关注也可以平时自己拿来使用，于是想到了用Flask做公众号的后端，用nginx来反向代理，并启用SSL/TLS。下面分节介绍搭建过程。 安装python环境自己平时用的python3，于是就用python3来搭的，ubuntu默认安装了python3，首先安装包管理12sudo apt install python3-pippip3 install --upgra">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.djangoz.com/img/flask_app_1.jpg">
@@ -49,7 +49,7 @@ ga('send', 'pageview');
 <meta name="twitter:description" content="突然想开发一个微信公众号，就算没人关注也可以平时自己拿来使用，于是想到了用Flask做公众号的后端，用nginx来反向代理，并启用SSL/TLS。下面分节介绍搭建过程。 安装python环境自己平时用的python3，于是就用python3来搭的，ubuntu默认安装了python3，首先安装包管理12sudo apt install python3-pippip3 install --upgra">
 <meta name="twitter:image" content="https://www.djangoz.com/img/flask_app_1.jpg">
     
-        <link rel="alternate" type="application/atom+xml" title="DoubleZ&#39;s blog" href="/atom.xml">
+        <link rel="alternate" type="application/atom+xml" title="DjangoZ&#39;s blog" href="/atom.xml">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -74,7 +74,7 @@ ga('send', 'pageview');
           <img src="/img/avatar.jpg">
         </a>
         <hgroup class="introduce">
-          <h5 class="nickname">DoubleZ</h5>
+          <h5 class="nickname">DjangoZ</h5>
           <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
         </hgroup>
       </div>
@@ -299,8 +299,8 @@ ga('send', 'pageview');
     
     <footer>
         <a href="https://www.djangoz.com">
-            <img src="/img/avatar.jpg" alt="DoubleZ">
-            DoubleZ
+            <img src="/img/avatar.jpg" alt="DjangoZ">
+            DjangoZ
         </a>
     </footer>
 </blockquote>
@@ -320,7 +320,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/03/10/flask_app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/03/10/flask_app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DjangoZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -330,7 +330,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/03/10/flask_app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/03/10/flask_app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DjangoZ's blog&source=Just for fun" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -340,7 +340,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&url=https://www.djangoz.com/2018/03/10/flask_app/&via=https://www.djangoz.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DjangoZ's blog&url=https://www.djangoz.com/2018/03/10/flask_app/&via=https://www.djangoz.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -456,7 +456,7 @@ ga('send', 'pageview');
         </p>
     </div>
     <div class="bottom">
-        <p><span>DoubleZ &copy; 2017 - 2018</span>
+        <p><span>DjangoZ &copy; 2017 - 2018</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
@@ -474,7 +474,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/03/10/flask_app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/03/10/flask_app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DjangoZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -484,7 +484,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/03/10/flask_app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&source=Just for fun" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/03/10/flask_app/&title=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DjangoZ's blog&source=Just for fun" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -494,7 +494,7 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DoubleZ's blog&url=https://www.djangoz.com/2018/03/10/flask_app/&via=https://www.djangoz.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Ubuntu上通过nginx+gunicorn+https部署Flask应用接入微信公众号》 — DjangoZ's blog&url=https://www.djangoz.com/2018/03/10/flask_app/&via=https://www.djangoz.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
