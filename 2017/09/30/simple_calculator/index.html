@@ -342,16 +342,16 @@ ga('send', 'pageview');
     <!-- Valine Comments script -->
     <script>
         var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
           return GUEST_INFO.indexOf(item) > -1
         });
         new Valine({
             el: '#comments',
-            notify: 'true' == 'true',
+            notify: 'false' == 'true',
             verify: 'false' == 'true',
             appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
             appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
-            avatar: "mm",
+            avatar: "robohash",
             placeholder: "Just go go",
             guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
             pageSize: "10"

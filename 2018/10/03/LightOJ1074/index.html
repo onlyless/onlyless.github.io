@@ -31,9 +31,9 @@ ga('send', 'pageview');
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="ACM,题解,图论">
+    <meta name="keywords" content="ACM,图论,题解">
     <meta name="description" content="题意T组样例，N个地点，每个地点有个繁忙度，地点间有M条街道，每条街道要收过路费(目的地繁忙度-起点繁忙度)^3 （3次方），有Q个查询，包含Q个目的地，求从起点1到每个目的地的最小花费。如果花费小于3或者无法到达目的地，则输出”?” 解题思路由于目的地繁忙度不一定大于起点繁忙度，所以图中有负环（一开始没想到，直接用dijkstra一直WA），所以要用bellman_ford来求最短路，当某些地点">
-<meta name="keywords" content="ACM,题解,图论">
+<meta name="keywords" content="ACM,图论,题解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LightOJ1074Extended Traffic(bellman_ford最短路+负环标记)">
 <meta property="og:url" content="https://www.djangoz.com/2018/10/03/LightOJ1074/index.html">
@@ -332,16 +332,16 @@ ga('send', 'pageview');
     <!-- Valine Comments script -->
     <script>
         var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
           return GUEST_INFO.indexOf(item) > -1
         });
         new Valine({
             el: '#comments',
-            notify: 'true' == 'true',
+            notify: 'false' == 'true',
             verify: 'false' == 'true',
             appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
             appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
-            avatar: "mm",
+            avatar: "robohash",
             placeholder: "Just go go",
             guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
             pageSize: "10"

@@ -31,9 +31,9 @@ ga('send', 'pageview');
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="ACM,题解,图论">
+    <meta name="keywords" content="ACM,图论,题解">
     <meta name="description" content="题目链接 题意给互相平行的直线L1,L2,和N个圆，角色在直线上、圆上、园内行走不消耗体力。在其他位置上由S点走到T点消耗的体力为S和T的欧几里得距离。求最少需要多少体力。 解题思路这题和poj2502那题很相似，关键在建图，这里考察了圆到圆的最短距离和线到圆的最短距离，一开始写的代码以为圆内要消耗体力，然后计算了一下内含情况的最短距离，结果也AC了，后来发现不需要，可能是题目数据没这种情况吧。">
-<meta name="keywords" content="ACM,题解,图论">
+<meta name="keywords" content="ACM,图论,题解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="牛客国庆集训派对Day1-New Game!(几何+最短路)">
 <meta property="og:url" content="https://www.djangoz.com/2018/10/01/nowcoderDay1L/index.html">
@@ -333,16 +333,16 @@ ga('send', 'pageview');
     <!-- Valine Comments script -->
     <script>
         var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
           return GUEST_INFO.indexOf(item) > -1
         });
         new Valine({
             el: '#comments',
-            notify: 'true' == 'true',
+            notify: 'false' == 'true',
             verify: 'false' == 'true',
             appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
             appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
-            avatar: "mm",
+            avatar: "robohash",
             placeholder: "Just go go",
             guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
             pageSize: "10"

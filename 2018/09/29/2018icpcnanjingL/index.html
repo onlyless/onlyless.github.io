@@ -31,9 +31,9 @@ ga('send', 'pageview');
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="ACM,题解,图论">
+    <meta name="keywords" content="ACM,图论,题解">
     <meta name="description" content="题目链接 题意有N个城市M条路径，可以使K条路径长度变为0，求1到N最短路 解题思路求最短路很好求，但是题目多了一个限制条件，可以使K条路径长度变为0，这就有点麻烦了，后来想到，这也有点像01背包选与不选的感觉，求最短路的时候加个状态就可以求解了 代码12345678910111213141516171819202122232425262728293031323334353637383940414">
-<meta name="keywords" content="ACM,题解,图论">
+<meta name="keywords" content="ACM,图论,题解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2018icpc南京网络赛L题Magical Girl Haz（dijkstra+dp)">
 <meta property="og:url" content="https://www.djangoz.com/2018/09/29/2018icpcnanjingL/index.html">
@@ -333,16 +333,16 @@ ga('send', 'pageview');
     <!-- Valine Comments script -->
     <script>
         var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
           return GUEST_INFO.indexOf(item) > -1
         });
         new Valine({
             el: '#comments',
-            notify: 'true' == 'true',
+            notify: 'false' == 'true',
             verify: 'false' == 'true',
             appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
             appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
-            avatar: "mm",
+            avatar: "robohash",
             placeholder: "Just go go",
             guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
             pageSize: "10"
