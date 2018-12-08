@@ -41,7 +41,7 @@ ga('send', 'pageview');
 <meta property="og:description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.djangoz.com/img/useful-py.png">
-<meta property="og:updated_time" content="2018-06-10T14:10:49.000Z">
+<meta property="og:updated_time" content="2018-06-10T14:10:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python实用小工具">
 <meta name="twitter:description" content="1. 简单下载服务器 在需要下载的路径中执行如下命令： 12345#python2python -m SimpleHTTPServer#python3python -m http.server  此进程会在端口8000监听，访问IP:8000即可浏览到当前目录的文件:">
@@ -271,7 +271,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-10T14:10:49.000Z" itemprop="dateUpdated">2018-06-10 22:10:49</time>
+    最后更新时间：<time datetime="2018-06-10T14:10:50.000Z" itemprop="dateUpdated">2018-06-10 22:10:50</time>
 </span><br>
 
 
@@ -379,25 +379,32 @@ ga('send', 'pageview');
 
 
 
-<section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
     <script>
-        var gitment = new Gitment({
-            owner: 'onlyless',
-            repo: 'onlyless.github.io',
-            oauth: {
-                client_id: '0438681ea73de5bc4be5',
-                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
-            },
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
+            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
         })
-        gitment.render('comments')
     </script>
-</section>
-
-
-
+    <!-- Valine Comments end -->
 
 
 

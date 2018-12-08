@@ -42,7 +42,7 @@ ga('send', 'pageview');
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.djangoz.com/img/Sing-1.jpg">
 <meta property="og:image" content="https://www.djangoz.com/img/Sing-2.png">
-<meta property="og:updated_time" content="2018-06-24T03:02:05.000Z">
+<meta property="og:updated_time" content="2018-06-24T03:02:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例模式下多线程的同步问题">
 <meta name="twitter:description" content="最近在看head first 设计模式,学习了单例模式的使用，自己在实际编程中也经常使用这种设计模式。在用swing练习编写贪吃蛇的小游戏的时候，打算将平时学习的东西运用到实际中去，发现了使用多线程很容易出错，对Java的多线程还是不熟悉啊。贪吃蛇中玩家控制的蛇是唯一的，于是就把蛇这个类弄成了单例模式那样，然后再开一个线程控制蛇的移动。1234567891011121314151617181920">
@@ -224,7 +224,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-24T03:02:05.000Z" itemprop="dateUpdated">2018-06-24 11:02:05</time>
+    最后更新时间：<time datetime="2018-06-24T03:02:06.000Z" itemprop="dateUpdated">2018-06-24 11:02:06</time>
 </span><br>
 
 
@@ -332,25 +332,32 @@ ga('send', 'pageview');
 
 
 
-<section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
     <script>
-        var gitment = new Gitment({
-            owner: 'onlyless',
-            repo: 'onlyless.github.io',
-            oauth: {
-                client_id: '0438681ea73de5bc4be5',
-                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
-            },
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
+            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
         })
-        gitment.render('comments')
     </script>
-</section>
-
-
-
+    <!-- Valine Comments end -->
 
 
 

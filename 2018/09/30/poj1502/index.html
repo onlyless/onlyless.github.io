@@ -31,9 +31,9 @@ ga('send', 'pageview');
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="ACM,图论,题解">
+    <meta name="keywords" content="ACM,题解,图论">
     <meta name="description" content="题意给定一个下三角矩阵，询问从1开始到其他点的最短路径中，最长的那个是多少？（其中x代表没路径） 解题思路水题，dijkstra即可AC，唯一不同的是多一个字符串处理 AC代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606">
-<meta name="keywords" content="ACM,图论,题解">
+<meta name="keywords" content="ACM,题解,图论">
 <meta property="og:type" content="article">
 <meta property="og:title" content="poj1502MPI Maelstrom(最短路)">
 <meta property="og:url" content="https://www.djangoz.com/2018/09/30/poj1502/index.html">
@@ -307,9 +307,9 @@ ga('send', 'pageview');
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/09/29/poj1797/" id="post-next" class="post-nav-link">
+      <a href="/2018/09/29/2018icpcnanjingL/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">poj1797题解（最大生成树||最短路）</h4>
+        <h4 class="title">2018icpc南京网络赛L题Magical Girl Haz（dijkstra+dp)</h4>
       </a>
     </div>
   
@@ -326,25 +326,32 @@ ga('send', 'pageview');
 
 
 
-<section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
     <script>
-        var gitment = new Gitment({
-            owner: 'onlyless',
-            repo: 'onlyless.github.io',
-            oauth: {
-                client_id: '0438681ea73de5bc4be5',
-                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
-            },
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
+            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
         })
-        gitment.render('comments')
     </script>
-</section>
-
-
-
+    <!-- Valine Comments end -->
 
 
 

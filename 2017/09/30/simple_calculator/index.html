@@ -41,7 +41,7 @@ ga('send', 'pageview');
 <meta property="og:description" content="github项目地址该计算器用java实现更新：现已支持多位数的输入（利用正则表达式提取输入的数值，再压入数值栈中）GUI用swing实现，可识别括号优先级是用了双栈，一个栈存取操作符，一个栈存取数据界面巨丑，待我学到更多后来更新此计算器。主要是拿来练手的（这是第一个自己用代码实现GUI的小程序！！！）主界面:">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.djangoz.com/2017/09/30/simple_calculator/images/1.png">
-<meta property="og:updated_time" content="2018-06-17T04:26:05.000Z">
+<meta property="og:updated_time" content="2018-06-17T04:26:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="识别括号优先级的简易计算器">
 <meta name="twitter:description" content="github项目地址该计算器用java实现更新：现已支持多位数的输入（利用正则表达式提取输入的数值，再压入数值栈中）GUI用swing实现，可识别括号优先级是用了双栈，一个栈存取操作符，一个栈存取数据界面巨丑，待我学到更多后来更新此计算器。主要是拿来练手的（这是第一个自己用代码实现GUI的小程序！！！）主界面:">
@@ -224,7 +224,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-17T04:26:05.000Z" itemprop="dateUpdated">2018-06-17 12:26:05</time>
+    最后更新时间：<time datetime="2018-06-17T04:26:06.000Z" itemprop="dateUpdated">2018-06-17 12:26:06</time>
 </span><br>
 
 
@@ -332,25 +332,32 @@ ga('send', 'pageview');
 
 
 
-<section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
     <script>
-        var gitment = new Gitment({
-            owner: 'onlyless',
-            repo: 'onlyless.github.io',
-            oauth: {
-                client_id: '0438681ea73de5bc4be5',
-                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
-            },
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
+            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
         })
-        gitment.render('comments')
     </script>
-</section>
-
-
-
+    <!-- Valine Comments end -->
 
 
 

@@ -46,7 +46,7 @@ ga('send', 'pageview');
 <meta property="og:image" content="https://www.djangoz.com/img/UML-4.png">
 <meta property="og:image" content="https://www.djangoz.com/img/UML-5.png">
 <meta property="og:image" content="https://www.djangoz.com/img/UML-6.png">
-<meta property="og:updated_time" content="2018-06-10T13:44:31.000Z">
+<meta property="og:updated_time" content="2018-06-10T13:44:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IDEA 查看类UML关系图">
 <meta name="twitter:description" content="说明平时写java代码的时候，代码经常会显得很长，很不容易看出Java类之间的关系后来发现IDEA有一个很棒的功能，可以直接根据代码来查看改文件内的类UML关系图 先去设置里面打开查看UML功能setting-&amp;gt;plugins-&amp;gt;搜索UML即可把搜索出来这个插件选上">
@@ -264,7 +264,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-10T13:44:31.000Z" itemprop="dateUpdated">2018-06-10 21:44:31</time>
+    最后更新时间：<time datetime="2018-06-10T13:44:32.000Z" itemprop="dateUpdated">2018-06-10 21:44:32</time>
 </span><br>
 
 
@@ -372,25 +372,32 @@ ga('send', 'pageview');
 
 
 
-<section class="comments" id="comments">
-    <div id="gitment_thread"></div>
-    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
     <script>
-        var gitment = new Gitment({
-            owner: 'onlyless',
-            repo: 'onlyless.github.io',
-            oauth: {
-                client_id: '0438681ea73de5bc4be5',
-                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
-            },
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
+            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
+            avatar: "mm",
+            placeholder: "Just go go",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
         })
-        gitment.render('comments')
     </script>
-</section>
-
-
-
+    <!-- Valine Comments end -->
 
 
 
