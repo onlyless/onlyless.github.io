@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-104464119-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="FL_MZPo6bQlgQjKV6E2gTmZnMMSeZIZp4zNu3wzO-S4">
+    
+    
+    
+    
+    <title>Servlet/JSP简单生成图片验证码并后台验证功能 | DjangoZ&#39;s blog | Just for fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="应用,web,Servlet/JSP">
+    <meta name="description" content="最近在学用JAVA Servlet/JSP来开发web应用，于是练手来做一个通过Servlet后台来生成图片验证码，并实现验证功能。 实现思路先用单例模式写一个生成验证码图片的GenerateCode类，该类的createImage()方法返回BufferImage类，然后用Servlet来读取图片，GenerateCode对象在生成图片的同时也会生成一个验证码的字符串，可供后台验证的Servle">
+<meta name="keywords" content="应用,web,Servlet&#x2F;JSP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet&#x2F;JSP简单生成图片验证码并后台验证功能">
+<meta property="og:url" content="https://www.djangoz.com/2018/11/18/verifycode/index.html">
+<meta property="og:site_name" content="DjangoZ&#39;s blog">
+<meta property="og:description" content="最近在学用JAVA Servlet/JSP来开发web应用，于是练手来做一个通过Servlet后台来生成图片验证码，并实现验证功能。 实现思路先用单例模式写一个生成验证码图片的GenerateCode类，该类的createImage()方法返回BufferImage类，然后用Servlet来读取图片，GenerateCode对象在生成图片的同时也会生成一个验证码的字符串，可供后台验证的Servle">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://www.djangoz.com/img/20181117-124805.png">
+<meta property="og:image" content="https://www.djangoz.com/img/20181117-124831.png">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-1446082.jpg">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-144626.jpg">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-1448252.jpg">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-144846.jpg">
+<meta property="og:image" content="https://www.djangoz.com/img/20181118-150944.jpg">
+<meta property="og:updated_time" content="2018-12-06T03:26:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Servlet&#x2F;JSP简单生成图片验证码并后台验证功能">
+<meta name="twitter:description" content="最近在学用JAVA Servlet/JSP来开发web应用，于是练手来做一个通过Servlet后台来生成图片验证码，并实现验证功能。 实现思路先用单例模式写一个生成验证码图片的GenerateCode类，该类的createImage()方法返回BufferImage类，然后用Servlet来读取图片，GenerateCode对象在生成图片的同时也会生成一个验证码的字符串，可供后台验证的Servle">
+<meta name="twitter:image" content="https://www.djangoz.com/img/20181117-124805.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="DjangoZ&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">DjangoZ</h5>
+          <a href="mailto:admin@djangoz.com" title="admin@djangoz.com" class="mail">admin@djangoz.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories/"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/onlyless" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/links/"  >
+                <i class="icon icon-lg icon-link"></i>
+                友情链接
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Servlet/JSP简单生成图片验证码并后台验证功能</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Servlet/JSP简单生成图片验证码并后台验证功能</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-11-18T07:45:15.000Z" itemprop="datePublished" class="page-time">
+  2018-11-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现思路"><span class="post-toc-number">1.</span> <span class="post-toc-text">实现思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现代码"><span class="post-toc-number">2.</span> <span class="post-toc-text">实现代码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Servlet类"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Servlet类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Utils"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Utils</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#jsp"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">jsp</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#不足"><span class="post-toc-number">3.</span> <span class="post-toc-text">不足</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后续"><span class="post-toc-number">4.</span> <span class="post-toc-text">后续</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-verifycode"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Servlet/JSP简单生成图片验证码并后台验证功能</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-11-18 15:45:15" datetime="2018-11-18T07:45:15.000Z"  itemprop="datePublished">2018-11-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/java/">java</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>最近在学用JAVA Servlet/JSP来开发web应用，于是练手来做一个通过Servlet后台来生成图片验证码，并实现验证功能。</p>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a><a href="#实现思路" title="实现思路"></a>实现思路</h2><p>先用单例模式写一个生成验证码图片的GenerateCode类，该类的createImage()方法返回BufferImage类，然后用Servlet来读取图片，GenerateCode对象在生成图片的同时也会生成一个验证码的字符串，可供后台验证的Servlet来验证前台post上去的验证码是否相同.</p>
+<figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/20181117-124805.png" alt="">                </div>                <div class="image-caption"></div>            </figure><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/20181117-124831.png" alt="">                </div>                <div class="image-caption"></div>            </figure>
+
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a><a href="#实现代码" title="实现代码"></a>实现代码</h2><h3 id="Servlet类"><a href="#Servlet类" class="headerlink" title="Servlet类"></a><a href="#Servlet类" title="Servlet类"></a>Servlet类</h3><ul>
+<li>VerifyCode.java(显示验证码图片)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Utils.GenerateCode;</span><br><span class="line"><span class="keyword">import</span> com.sun.image.codec.jpeg.JPEGCodec;</span><br><span class="line"><span class="keyword">import</span> com.sun.image.codec.jpeg.JPEGImageEncoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">“/VerifyCode.do”</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VerifyCode</span>  <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processRequest</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> </span>&#123;</span><br><span class="line">        resp.setContentType(<span class="string">“image/jpg”</span>);</span><br><span class="line">        GenerateCode generateCode = GenerateCode.getInstance();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            OutputStream outputStream = resp.getOutputStream();</span><br><span class="line">            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(outputStream);</span><br><span class="line">            encoder.encode(generateCode.createImage());</span><br><span class="line">            outputStream.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        processRequest(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        processRequest(req, resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>Verify.java(验证post上来的验证码)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Utils.GenerateCode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">“/Verify.do”</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Verify</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">        resp.setContentType(<span class="string">“text/html;charset=UTF-8”</span>);</span><br><span class="line">        String reallycode = GenerateCode.getInstance().getCode();</span><br><span class="line">        String postcode = req.getParameter(<span class="string">“verifycode”</span>);</span><br><span class="line">        <span class="keyword">if</span>(reallycode.equalsIgnoreCase(postcode))&#123;</span><br><span class="line">            req.getRequestDispatcher(<span class="string">“success.jsp”</span>).forward(req,resp);</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">            resp.sendRedirect(<span class="string">“index.jsp”</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="Utils"><a href="#Utils" class="headerlink" title="Utils"></a><a href="#Utils" title="Utils"></a>Utils</h3><ul>
+<li>GenerateCode.java(生成验证码图片和字符串)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"><span class="keyword">import</span> java.awt.image.BufferedImage;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenerateCode</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PW = <span class="number">70</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PH = <span class="number">35</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Random random = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String[] fontnames = &#123;<span class="string">“Chalkboard”</span>,<span class="string">“Cochin”</span>,<span class="string">“Skia”</span>,<span class="string">“Apple Symbols”</span>&#125;;</span><br><span class="line">    <span class="keyword">private</span> String codes=<span class="string">“012345678901234567890123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ”</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Color bgColor = Color.BLACK;</span><br><span class="line">    <span class="keyword">private</span> String code;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> GenerateCode generateCode;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GenerateCode <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(generateCode ==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (GenerateCode.class)&#123;</span><br><span class="line">                <span class="keyword">if</span>(generateCode ==<span class="keyword">null</span>)&#123;</span><br><span class="line">                    generateCode = <span class="keyword">new</span> GenerateCode();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> generateCode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCode</span><span class="params">(String code)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Color <span class="title">randomColor</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Color(random.nextInt(<span class="number">150</span>),random.nextInt(<span class="number">150</span>),random.nextInt(<span class="number">150</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Font <span class="title">randomFont</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index = random.nextInt(fontnames.length);</span><br><span class="line">        String fontname = fontnames[index];</span><br><span class="line">        <span class="keyword">int</span> style = random.nextInt(<span class="number">4</span>);</span><br><span class="line">        <span class="keyword">int</span> size = random.nextInt(<span class="number">5</span>) + <span class="number">25</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Font(fontname,style,size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">randomCode</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = codes.length();</span><br><span class="line">        String code = <span class="string">“”</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> a = random.nextInt(len);</span><br><span class="line">            code += codes.charAt(a);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BufferedImage <span class="title">createImage</span><span class="params">()</span></span>&#123;</span><br><span class="line">        BufferedImage image = <span class="keyword">new</span> BufferedImage(PW,PH,BufferedImage.TYPE_INT_BGR);</span><br><span class="line">        Graphics g = image.getGraphics();</span><br><span class="line">        g.setColor(bgColor);</span><br><span class="line">        g.fillRect(<span class="number">0</span>,<span class="number">0</span>,PW,PH);</span><br><span class="line">        String num = randomCode();</span><br><span class="line">        <span class="keyword">this</span>.setCode(num);</span><br><span class="line">        g.setColor(randomColor());</span><br><span class="line">        g.setFont(randomFont());</span><br><span class="line">        g.drawString(num,<span class="number">0</span>,<span class="number">25</span>);</span><br><span class="line">        <span class="keyword">return</span> image;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="jsp"><a href="#jsp" class="headerlink" title="jsp"></a><a href="#jsp" title="jsp"></a>jsp</h3><ul>
+<li><p>index.jsp<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">“java.awt.image.BufferedImage”</span> %&gt;</span><br><span class="line">&lt;%@ page <span class="keyword">import</span>=<span class="string">“servlet.VerifyCode”</span> %&gt;&lt;%–</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: onlyless</span><br><span class="line">  Date: <span class="number">11</span>/<span class="number">17</span>/<span class="number">18</span></span><br><span class="line">  Time: <span class="number">11</span>:<span class="number">34</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">–%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">“text/html;charset=UTF-8”</span> language=<span class="string">“java”</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=<span class="string">“/Verify.do”</span> method=<span class="string">“post”</span>&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;</span><br><span class="line">                &lt;img src=<span class="string">“/VerifyCode.do”</span>&gt;</span><br><span class="line">                &lt;input type=<span class="string">“text”</span> name=<span class="string">“verifycode”</span> maxlength=<span class="string">“4”</span>&gt;</span><br><span class="line">                &lt;input type=<span class="string">“submit”</span> name=<span class="string">“submit”</span>&gt;</span><br><span class="line">            &lt;/td&gt;</span><br><span class="line">        &lt;/tr&gt;</span><br><span class="line">    &lt;/table&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>success.jsp<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;%–</span><br><span class="line">  Created by IntelliJ IDEA.</span><br><span class="line">  User: onlyless</span><br><span class="line">  Date: <span class="number">11</span>/<span class="number">16</span>/<span class="number">18</span></span><br><span class="line">  Time: <span class="number">16</span>:<span class="number">46</span></span><br><span class="line">  To change <span class="keyword">this</span> template use File | Settings | File Templates.</span><br><span class="line">–%&gt;</span><br><span class="line">&lt;%@ page contentType=<span class="string">“text/html;charset=UTF-8”</span> language=<span class="string">“java”</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;success&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;success&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<h2 id="不足"><a href="#不足" class="headerlink" title="不足"></a><a href="#不足" title="不足"></a>不足</h2><p>思路很简单，最终也实现出来了，但是我发现了一个BUG，在多个窗口同时请求验证时，由于后台很简单的读取GenerateCode的验证码，因此这多个窗口post上来的验证码就算全部都是正确的，但是只能验证最后生成验证码图片的那个post，要解决这个问题，我想应该要用到Cookie的知识，现在还在学习，待以后再解决这个问题。</p>
+<figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/20181118-1446082.jpg" alt="">                </div>                <div class="image-caption"></div>            </figure><br>后台查看验证码不一致，后台正确的验证码是最后生成的验证码，导致之前的生成的验证码提交上去不匹配<br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/20181118-144626.jpg" alt="">                </div>                <div class="image-caption"></div>            </figure>
+
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a><a href="#后续" title="后续"></a>后续</h2><p>第二天学到了Cookie和Session的运用，发现用Session很简单就能解决上面的那个不足。</p>
+<ul>
+<li>VerifyCode.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">…</span><br><span class="line">JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(outputStream);</span><br><span class="line">encoder.encode(generateCode.createImage());</span><br><span class="line">req.getSession().setAttribute(<span class="string">“verify”</span>,generateCode.getCode());     <span class="comment">//添加的代码</span></span><br><span class="line">outputStream.close();</span><br><span class="line">…</span><br></pre></td></tr></table></figure></li>
+<li>Verify.java<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">        …</span><br><span class="line">        resp.setContentType(<span class="string">“text/html;charset=UTF-8”</span>);</span><br><span class="line"><span class="comment">//        String reallycode = GenerateCode.getInstance().getCode();</span></span><br><span class="line">        String reallycode = (String) req.getSession().getAttribute(<span class="string">“verify”</span>);      <span class="comment">//修改的代码</span></span><br><span class="line">        String postcode = req.getParameter(<span class="string">“verifycode”</span>);</span><br><span class="line">        System.out.println(reallycode + <span class="string">“—“</span> + postcode);</span><br><span class="line">        ….</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>两个浏览器同时登陆都成功登陆，后台查看验证码一致</p>
+<figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/20181118-1448252.jpg" alt="">                </div>                <div class="image-caption"></div>            </figure><br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/20181118-144846.jpg" alt="">                </div>                <div class="image-caption"></div>            </figure><br><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="/img/20181118-150944.jpg" alt="">                </div>                <div class="image-caption"></div>            </figure>
+
+<p>不过我发现这个问题在同一个浏览器上还是存在，原因很简单，用一个浏览器不同窗口的Session都是一样的，这样就导致新生成的验证码覆盖掉以前Session绑定的验证码，导致问题产生，这个问题我测试了一下学校的教务系统和12306的登录验证码，都存在这样的问题。不过这个一般谁也不会同时开多个窗口登录，登录失败一个，换以前的窗口登录，这样导致一直匹配到的不是产生最新的验证码。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-06T03:26:52.000Z" itemprop="dateUpdated">2018-12-06 11:26:52</time>
+</span><br>
+
+
+        
+        转载请注明出处<a href="/2018/11/18/verifycode/" target="_blank" rel="external">https://www.djangoz.com/2018/11/18/verifycode/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://www.djangoz.com">
+            <img src="/img/avatar.jpg" alt="DjangoZ">
+            DjangoZ
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Servlet-JSP/">Servlet/JSP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/应用/">应用</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/11/18/verifycode/&title=《Servlet/JSP简单生成图片验证码并后台验证功能》 — DjangoZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/11/18/verifycode/&title=《Servlet/JSP简单生成图片验证码并后台验证功能》 — DjangoZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/11/18/verifycode/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Servlet/JSP简单生成图片验证码并后台验证功能》 — DjangoZ's blog&url=https://www.djangoz.com/2018/11/18/verifycode/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/11/18/verifycode/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/11/02/funnywork/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">职业的乐趣</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        蟹蟹资瓷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>DjangoZ &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/11/18/verifycode/&title=《Servlet/JSP简单生成图片验证码并后台验证功能》 — DjangoZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/11/18/verifycode/&title=《Servlet/JSP简单生成图片验证码并后台验证功能》 — DjangoZ's blog&source=Just for fun" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/11/18/verifycode/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Servlet/JSP简单生成图片验证码并后台验证功能》 — DjangoZ's blog&url=https://www.djangoz.com/2018/11/18/verifycode/&via=https://www.djangoz.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/11/18/verifycode/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aQXLDIAwF0Nz/0u42M23ol8CdGh6rTGJjnhcKkni94nG9jfdvvn/+dP145updzYGBgfFYxjUc42s+MZIXMcbka8PAwDiHUZ16JtSO70peEAYGBkaPkQfNfOkYGBgYdzDycDyGYWBgYPSS2Hx7lxfskoC7OBfHwMB4ICOvuv/951v6GxgYGI9iXMWRBNxVLYfCqjAwMLZmzDcg82JZvvVsrgcDA2NrxnySmTcD8icmBcFXdVIMDIwHMnpLzMttd7yaH2bGwMA4gLEqmUyS2GpRb3wXBgbGOYz59mS13dg8TvHp1WBgYBzAqCaQveMOOSkv0hXiNAYGxmMZ5bJ78Pi8bVndPi4ow2FgYDyWkZfV8u1aNR3N5486sRgYGIcx5o9czAf0KDRjYGAcwMiD3dpjFjOBGAMD4wTGHccpqm2DPGQXDltgYGBsxKguMdmu9ZLemZYDBgbG3oxeca0Q/halrL9sEzEwMLZmJKEzL7H1SmZ5QI+ei4GBsSljXDirbiurbchkudEKMTAwDmD0DlL0wuuqpmmzv4GBgfFYRq/QP39XL7jfuCAMDIx/xriKo3rCYVWYLmwKMTAwtmP0GpzzxbJec2JZsxMDA+OBjJlUs5oAryrelf89MDAwtmDkCWc1mCYhdQESAwMDY6Ic1gug1dQXAwMDo3rN/JHWagqNgYFxAiNJYpNfe8F6QfKMgYGxNaO64aseM+0tYv4pGBgYWzC+AL9yvCp4semXAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

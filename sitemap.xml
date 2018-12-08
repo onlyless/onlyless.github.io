@@ -2,114 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.djangoz.com/2018/11/17/verifycode/</loc>
+    <loc>https://www.djangoz.com/2018/10/23/win10uefi/</loc>
     
-    <lastmod>2018-11-18T07:45:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/09/28/windows_use_bash/</loc>
-    
-    <lastmod>2018-11-17T04:54:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/09/12/union_find/</loc>
-    
-    <lastmod>2018-11-17T04:54:13.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/09/30/simple_calculator/</loc>
-    
-    <lastmod>2018-11-17T04:54:13.000Z</lastmod>
+    <lastmod>2018-12-06T03:28:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://www.djangoz.com/2018/11/02/funnywork/</loc>
     
-    <lastmod>2018-11-02T11:15:27.000Z</lastmod>
+    <lastmod>2018-12-06T03:28:02.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/2018/10/19/win10uefi/</loc>
+    <loc>https://www.djangoz.com/2018/11/18/verifycode/</loc>
     
-    <lastmod>2018-10-23T02:39:32.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/08/14/useful-model/</loc>
-    
-    <lastmod>2018-10-22T11:39:51.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/10/16/hdu1560/</loc>
-    
-    <lastmod>2018-10-20T02:38:29.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/08/17/change_theme/</loc>
-    
-    <lastmod>2018-10-19T15:19:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/08/16/linux_setup_ssr/</loc>
-    
-    <lastmod>2018-10-19T15:18:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/10/18/hdu2102/</loc>
-    
-    <lastmod>2018-10-18T08:19:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/10/16/poj2248/</loc>
-    
-    <lastmod>2018-10-16T04:34:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/10/14/hdu3567/</loc>
-    
-    <lastmod>2018-10-14T07:52:03.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/10/14/hdu1043/</loc>
-    
-    <lastmod>2018-10-14T07:45:52.000Z</lastmod>
+    <lastmod>2018-12-06T03:26:52.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://www.djangoz.com/2018/10/09/poj2676/</loc>
     
-    <lastmod>2018-10-09T14:56:53.000Z</lastmod>
+    <lastmod>2018-12-06T03:26:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2018/10/16/poj2248/</loc>
+    
+    <lastmod>2018-12-06T03:26:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2018/10/14/hdu3567/</loc>
+    
+    <lastmod>2018-12-06T03:17:48.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://www.djangoz.com/2018/10/09/hdu3533/</loc>
     
-    <lastmod>2018-10-09T12:46:39.000Z</lastmod>
+    <lastmod>2018-12-06T03:17:40.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2018/10/20/hdu1560/</loc>
+    
+    <lastmod>2018-12-06T03:17:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2018/10/14/hdu1043/</loc>
+    
+    <lastmod>2018-12-06T03:16:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2018/10/18/hdu2102/</loc>
+    
+    <lastmod>2018-12-06T03:16:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2018/08/14/useful-model/</loc>
+    
+    <lastmod>2018-10-04T03:50:20.000Z</lastmod>
     
   </url>
   
@@ -191,7 +156,7 @@
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/2018/09/28/poj1797/</loc>
+    <loc>https://www.djangoz.com/2018/09/29/poj1797/</loc>
     
     <lastmod>2018-09-29T08:36:18.000Z</lastmod>
     
@@ -212,9 +177,30 @@
   </url>
   
   <url>
+    <loc>https://www.djangoz.com/2017/08/16/linux_setup_ssr/</loc>
+    
+    <lastmod>2018-07-17T03:58:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.djangoz.com/2018/06/23/Singleton_sync/</loc>
     
     <lastmod>2018-06-24T03:02:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2017/09/30/simple_calculator/</loc>
+    
+    <lastmod>2018-06-17T04:26:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2017/08/17/change_theme/</loc>
+    
+    <lastmod>2018-06-11T06:27:07.000Z</lastmod>
     
   </url>
   
@@ -229,6 +215,13 @@
     <loc>https://www.djangoz.com/2018/02/02/awesome_adb/</loc>
     
     <lastmod>2018-06-11T04:55:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2017/09/12/union_find/</loc>
+    
+    <lastmod>2018-06-10T14:21:02.000Z</lastmod>
     
   </url>
   
@@ -278,6 +271,13 @@
     <loc>https://www.djangoz.com/2017/10/18/Vocabulary_Statistics/</loc>
     
     <lastmod>2018-06-10T13:37:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2017/09/28/windows_use_bash/</loc>
+    
+    <lastmod>2018-06-10T13:20:09.000Z</lastmod>
     
   </url>
   

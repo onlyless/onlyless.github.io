@@ -31,16 +31,16 @@ ga('send', 'pageview');
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="折腾,系统">
+    <meta name="keywords" content="linux">
     <meta name="description" content="ssr相比于ss更加稳定，推荐安装ssr之前在网上找到很久没找到如何在Linux环境下运行ssr，后来通过这个脚本安装ssr，亲测可用安装以后可以通过ssr启动或者ssr配置命令运行ssr使用root用户登录，运行以下命令： 123456# wget --no-check-certificate https://www.djangoz.com/ssr wget https://onlyless.g">
-<meta name="keywords" content="折腾,系统">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Linux的环境安装shadowsocksR客户端">
 <meta property="og:url" content="https://www.djangoz.com/2017/08/16/linux_setup_ssr/index.html">
 <meta property="og:site_name" content="DjangoZ&#39;s blog">
 <meta property="og:description" content="ssr相比于ss更加稳定，推荐安装ssr之前在网上找到很久没找到如何在Linux环境下运行ssr，后来通过这个脚本安装ssr，亲测可用安装以后可以通过ssr启动或者ssr配置命令运行ssr使用root用户登录，运行以下命令： 123456# wget --no-check-certificate https://www.djangoz.com/ssr wget https://onlyless.g">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-19T15:18:37.000Z">
+<meta property="og:updated_time" content="2018-07-17T03:58:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Linux的环境安装shadowsocksR客户端">
 <meta name="twitter:description" content="ssr相比于ss更加稳定，推荐安装ssr之前在网上找到很久没找到如何在Linux环境下运行ssr，后来通过这个脚本安装ssr，亲测可用安装以后可以通过ssr启动或者ssr配置命令运行ssr使用root用户登录，运行以下命令： 123456# wget --no-check-certificate https://www.djangoz.com/ssr wget https://onlyless.g">
@@ -201,11 +201,11 @@ ga('send', 'pageview');
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>ssr相比于ss更加稳定，推荐安装ssr<br>之前在网上找到很久没找到如何在Linux环境下运行ssr，后来通过这个脚本安装ssr，亲测可用<br>安装以后可以通过ssr启动或者ssr配置命令运行ssr<br>使用root用户登录，运行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> wget --no-check-certificate https://www.djangoz.com/ssr </span><br><span class="line">wget https://onlyless.github.io/ssr</span><br><span class="line">sudo mv ssr /usr/local/bin</span><br><span class="line">sudo chmod 766 /usr/local/bin/ssr</span><br><span class="line">ssr install</span><br><span class="line">ssr config</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> wget --no-check-certificate https://www.djangoz.com/ssr </span></span><br><span class="line">wget https://onlyless.github.io/ssr</span><br><span class="line">sudo mv ssr /usr/local/bin</span><br><span class="line">sudo chmod 766 /usr/local/bin/ssr</span><br><span class="line">ssr install</span><br><span class="line">ssr config</span><br></pre></td></tr></table></figure>
 <p>SSR的配置就不说明了，很简单的</p>
 <h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><h2 id="该脚本会运行git的命令，所以前提先安装的git"><a href="#该脚本会运行git的命令，所以前提先安装的git" class="headerlink" title="该脚本会运行git的命令，所以前提先安装的git"></a>该脚本会运行git的命令，所以前提先安装的git</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
 <h2 id="设置开机自启动"><a href="#设置开机自启动" class="headerlink" title="设置开机自启动"></a>设置开机自启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
-<p>里面直接添加要运行的命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh -e</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> rc.local</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> This script is executed at the end of each multiuser runlevel.</span><br><span class="line"><span class="meta">#</span> Make sure that the script will "exit 0" on success or any other</span><br><span class="line"><span class="meta">#</span> value on error.</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> In order to enable or disable this script just change the execution</span><br><span class="line"><span class="meta">#</span> bits.</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> By default this script does nothing.</span><br><span class="line"></span><br><span class="line">sudo ssr start</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure></p>
+<p>里面直接添加要运行的命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh -e</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> rc.local</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> This script is executed at the end of each multiuser runlevel.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Make sure that the script will <span class="string">"exit 0"</span> on success or any other</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> value on error.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> In order to <span class="built_in">enable</span> or <span class="built_in">disable</span> this script just change the execution</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bits.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> By default this script does nothing.</span></span><br><span class="line"></span><br><span class="line">sudo ssr start</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure></p>
 <p>系统会默认启动，直接实测开机会自动运行<br>思想就是直接让系统开机启动一条sudo命令，如果这个不行的话，可以去网上参考自己linux版本的开机启动脚本或命令,然后添加一条命令就可以了</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ssr start</span><br></pre></td></tr></table></figure>
         </div>
@@ -215,7 +215,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-10-19T15:18:37.000Z" itemprop="dateUpdated">2018-10-19 23:18:37</time>
+    最后更新时间：<time datetime="2018-07-17T03:58:42.000Z" itemprop="dateUpdated">2018-07-17 11:58:42</time>
 </span><br>
 
 
@@ -237,7 +237,7 @@ ga('send', 'pageview');
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/折腾/">折腾</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统/">系统</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
 
 
             
@@ -323,32 +323,25 @@ ga('send', 'pageview');
 
 
 
-
-
-
-    <!-- Valine Comments -->
-    <div class="comments vcomment" id="comments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <!-- Valine Comments script -->
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <script>
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-          return GUEST_INFO.indexOf(item) > -1
-        });
-        new Valine({
-            el: '#comments',
-            notify: 'true' == 'true',
-            verify: 'false' == 'true',
-            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
-            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
-            avatar: "mm",
-            placeholder: "Just go go",
-            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
-            pageSize: "10"
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
         })
+        gitment.render('comments')
     </script>
-    <!-- Valine Comments end -->
+</section>
+
+
+
 
 
 
@@ -477,7 +470,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

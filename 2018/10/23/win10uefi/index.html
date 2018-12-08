@@ -36,11 +36,11 @@ ga('send', 'pageview');
 <meta name="keywords" content="折腾,系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UEFI+GPT修复win10EFI开机启动">
-<meta property="og:url" content="https://www.djangoz.com/2018/10/19/win10uefi/index.html">
+<meta property="og:url" content="https://www.djangoz.com/2018/10/23/win10uefi/index.html">
 <meta property="og:site_name" content="DjangoZ&#39;s blog">
 <meta property="og:description" content="最近入手了三星sm951-SSD，把黑苹果和win10一起迁移到这个盘上来，结果只记起备份CLOVER，没有备份win10的启动项了，然后迁移过后EFI引导只有CLOVER了，由于已经把win10的整个分区移过来了，不想重装系统，想试试修复一下win10d EFI文件，理论上应该可行 EFI文件都在磁盘的ESP分区，先挂载ESP分区，然后用ms-dos自带的修复工具即可修复 准备工作：一个有原装w">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-23T02:39:32.000Z">
+<meta property="og:updated_time" content="2018-12-06T03:28:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UEFI+GPT修复win10EFI开机启动">
 <meta name="twitter:description" content="最近入手了三星sm951-SSD，把黑苹果和win10一起迁移到这个盘上来，结果只记起备份CLOVER，没有备份win10的启动项了，然后迁移过后EFI引导只有CLOVER了，由于已经把win10的整个分区移过来了，不想重装系统，想试试修复一下win10d EFI文件，理论上应该可行 EFI文件都在磁盘的ESP分区，先挂载ESP分区，然后用ms-dos自带的修复工具即可修复 准备工作：一个有原装w">
@@ -156,8 +156,8 @@ ga('send', 'pageview');
         <h1 class="title">UEFI+GPT修复win10EFI开机启动</h1>
         <h5 class="subtitle">
             
-                <time datetime="2018-10-19T15:00:50.000Z" itemprop="datePublished" class="page-time">
-  2018-10-19
+                <time datetime="2018-10-23T02:39:32.000Z" itemprop="datePublished" class="page-time">
+  2018-10-23
 </time>
 
 
@@ -180,7 +180,7 @@ ga('send', 'pageview');
     <div class="post-card">
         <h1 class="post-card-title">UEFI+GPT修复win10EFI开机启动</h1>
         <div class="post-meta">
-            <time class="post-time" title="2018-10-19 23:00:50" datetime="2018-10-19T15:00:50.000Z"  itemprop="datePublished">2018-10-19</time>
+            <time class="post-time" title="2018-10-23 10:39:32" datetime="2018-10-23T02:39:32.000Z"  itemprop="datePublished">2018-10-23</time>
 
             
 
@@ -198,9 +198,9 @@ ga('send', 'pageview');
 <p>准备工作：一个有原装winPE的u盘</p>
 <ol>
 <li>开机进入u盘后，在含有现在安装和修复计算机界面那里，按shift+F10,进入命令行界面。</li>
-<li>运行以下命令行</li>
+<li>运行以下命令行<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diskpart        #进入diskpart</span><br><span class="line">list disk       # 查看磁盘</span><br><span class="line">select disk n   # n-&gt;代表ESP分区所在的磁盘(<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>…n)</span><br><span class="line">list partition  #查看选择的磁盘含有的分区</span><br><span class="line">select partition n   # n-&gt;选择ESP分区</span><br><span class="line">assign letter=b         #将ESP分区挂载为B盘</span><br><span class="line"><span class="keyword">exit</span>        #退出diskpart</span><br><span class="line">bcdboot C:\windows /s B: /f uefi /l zh-cn       #C:\windows代表windows所在的分区在C盘，不同的情况可能会改变，找到系统所在的盘符即可</span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diskpart        #进入diskpart</span><br><span class="line">list disk       # 查看磁盘</span><br><span class="line">select disk n   # n-&gt;代表ESP分区所在的磁盘(<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>...n)</span><br><span class="line">list partition  #查看选择的磁盘含有的分区</span><br><span class="line">select partition n   # n-&gt;选择ESP分区</span><br><span class="line">assign letter=b         #将ESP分区挂载为B盘</span><br><span class="line"><span class="keyword">exit</span>        #退出diskpart</span><br><span class="line">bcdboot C:\windows /s B: /f uefi /l zh-cn       #C:\windows代表windows所在的分区在C盘，不同的情况可能会改变，找到系统所在的盘符即可</span><br></pre></td></tr></table></figure>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -208,12 +208,12 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-10-23T02:39:32.000Z" itemprop="dateUpdated">2018-10-23 10:39:32</time>
+    最后更新时间：<time datetime="2018-12-06T03:28:26.000Z" itemprop="dateUpdated">2018-12-06 11:28:26</time>
 </span><br>
 
 
         
-        转载请注明出处<a href="/2018/10/19/win10uefi/" target="_blank" rel="external">https://www.djangoz.com/2018/10/19/win10uefi/</a>
+        转载请注明出处<a href="/2018/10/23/win10uefi/" target="_blank" rel="external">https://www.djangoz.com/2018/10/23/win10uefi/</a>
         
     </div>
     
@@ -226,6 +226,10 @@ ga('send', 'pageview');
 </blockquote>
 
         
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
 
 
         <div class="post-footer">
@@ -240,7 +244,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/10/19/win10uefi/&title=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/10/23/win10uefi/&title=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -250,22 +254,22 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/10/19/win10uefi/&title=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&source=Just for fun" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/10/23/win10uefi/&title=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&source=Just for fun" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/10/19/win10uefi/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/10/23/win10uefi/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&url=https://www.djangoz.com/2018/10/19/win10uefi/&via=https://www.djangoz.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&url=https://www.djangoz.com/2018/10/23/win10uefi/&via=https://www.djangoz.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/10/19/win10uefi/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/10/23/win10uefi/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -297,9 +301,9 @@ ga('send', 'pageview');
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2018/10/18/hdu2102/" id="post-next" class="post-nav-link">
+      <a href="/2018/10/20/hdu1560/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">hdu2102A计划(三维bfs)</h4>
+        <h4 class="title">hdu1560DNA sequence(IDA*搜索)</h4>
       </a>
     </div>
   
@@ -316,32 +320,25 @@ ga('send', 'pageview');
 
 
 
-
-
-
-    <!-- Valine Comments -->
-    <div class="comments vcomment" id="comments"></div>
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
-    <!-- Valine Comments script -->
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
     <script>
-        var GUEST_INFO = ['nick','mail','link'];
-        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-          return GUEST_INFO.indexOf(item) > -1
-        });
-        new Valine({
-            el: '#comments',
-            notify: 'true' == 'true',
-            verify: 'false' == 'true',
-            appId: "8Yi77nlnbV5RrilMtnCxDkeD-gzGzoHsz",
-            appKey: "3lMVINXFaYphUiD5Ii9jBHqF",
-            avatar: "mm",
-            placeholder: "Just go go",
-            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
-            pageSize: "10"
+        var gitment = new Gitment({
+            owner: 'onlyless',
+            repo: 'onlyless.github.io',
+            oauth: {
+                client_id: '0438681ea73de5bc4be5',
+                client_secret: '3a2f2dca12631ba6f42f862116020269f4ccafaa',
+            },
         })
+        gitment.render('comments')
     </script>
-    <!-- Valine Comments end -->
+</section>
+
+
+
 
 
 
@@ -350,6 +347,32 @@ ga('send', 'pageview');
 
 
 </article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        蟹蟹资瓷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
 
 
 
@@ -394,7 +417,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/10/19/win10uefi/&title=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://www.djangoz.com/2018/10/23/win10uefi/&title=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&pic=https://www.djangoz.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -404,22 +427,22 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/10/19/win10uefi/&title=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&source=Just for fun" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.djangoz.com/2018/10/23/win10uefi/&title=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&source=Just for fun" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/10/19/win10uefi/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.djangoz.com/2018/10/23/win10uefi/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&url=https://www.djangoz.com/2018/10/19/win10uefi/&via=https://www.djangoz.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《UEFI+GPT修复win10EFI开机启动》 — DjangoZ's blog&url=https://www.djangoz.com/2018/10/23/win10uefi/&via=https://www.djangoz.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/10/19/win10uefi/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://www.djangoz.com/2018/10/23/win10uefi/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -430,7 +453,7 @@ ga('send', 'pageview');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aQW7DMAwEwPz/0+m1RVplSToFLI1PAaraHh8WpKjHI76e3671mtf1f/3X61+Tp4wuDAyM2zKey2u9Jnnp15XV3+unY2BgnMNIAnT+Kn89cf2B1u+GgYGBUV2TR3OCxMDAwJgHbnKfasuKgYGBMWlikxeq3qHXPGNgYJzGyHfd///3R+YbGBgYt2I8i1e17EsGk9WQ/eWtMDAwtmbkATcp+3qw8uEPDAyMTRlJCK7HjclI8toNuEfuxsDA2I7Ru10enR+MbAwMjOMZefNZ3TiblI8/1mNgYBzAmBzVmresk8IUAwPjHEbv4EUvcPMPlMMwMDD2ZqwfNtmyn2ze9Y6AYGBgnMmoPrgX33lmvik3MTAwNmX0mtVeEOdNb/njYmBgbM2Yp3UypJwMDwqfCQMDY2tG3r7mcZkcuZjjC1tvGBgYt2XkA4A8mqsDzvIAoPeNMTAwbstICsE8s5MPUb1boUzEwMA4gDE54FUN094W25vaFgMD4xhGtRJL2tFqEZmXlW+mHBgYGMcwrm1lr21cMTAwTmP0Wsq8yMub5+Y4EwMDY1PGs3jle1x5TOfHv6KiEAMDYztGr2WtHiPLS8z5cAIDA2NXRjUue6PKpD3O21oMDIwzGdUms7ehVu6w8+jHwMDAuCgW89Y0uXP0JTAwMA5mfHplEu4XBC4GBsatGEkTm7Sd1cCtrrygF8fAwLgho3fEYb7FVo3mfLSAgYGxEeMLZJLbGTPagEUAAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aW66DMAxFUeY/ae4AKug+dnqlOJsvVKWQxYflR64LX/fH9bQmXf/0r+sXlwwZMrZl3K/X+xqy6c+V6f3722XIkHEOgwRQEi7ft0Ke9r7y8XcZMmTIAC9OA3f6OWTIkCGDM4J0rVSyypAhQ0aniCUbSp9QK55lyJBxGoN33f///ifzDRkyZGzFqBWiNWptkIl2JUOGjNEMHuA6yVwNxvcjQ4aM2Yy0QdYZcK5qwF2pW4YMGZsz+GGI9MW8xUZWopAtQ4aMgxnkmEU6gOTvLY4wZciQMZqRbo7f83Y/2cmXgCtDhoxBDJ6EpaUvL25rKSlyy5AhYwSDB8faIDMNoJ1jHzJkyDiBQRpeZJxZW0mCe7HdJkOGjM0ZvFlPUrdOgUreVazCZciQMYjRKUpX9edrh0JkyJBxGiM9lto5clFLNL+khjJkyBjHSAvONKXjiSD5WOiSIUPGaEY6GOiMHvkoolgwy5AhYxyDh1QSgtNKk5fEKCmUIUPGaEat9Uau2ueIj6zJkCHjGEYaKFshsl24ypAh40xG+ri0BO0MMlERK0OGjHGMO7zScUIampfltjJkyBjE6MwE+WCAt9ven1xr88mQIWMGoxMuOwliGnC//FeGDBkHMNIis5bqxRU2b8/JkCFDRqPUTA9z8HEC+hIyZMg4mMED8dphwOKAK0OGjK0YpIjlv/OAm65cUIvLkCFjQ0btiEO/xZaGZj5akCFDxiDGHxksslAND4eDAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
@@ -438,7 +461,7 @@ ga('send', 'pageview');
 
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
 
 
 </script>
@@ -470,7 +493,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
