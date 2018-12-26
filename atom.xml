@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.djangoz.com/"/>
-  <updated>2018-12-26T07:29:31.460Z</updated>
+  <updated>2018-12-26T07:32:25.320Z</updated>
   <id>https://www.djangoz.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://www.djangoz.com/2018/12/26/dockermysql/"/>
     <id>https://www.djangoz.com/2018/12/26/dockermysql/</id>
     <published>2018-12-26T06:54:26.000Z</published>
-    <updated>2018-12-26T07:29:31.460Z</updated>
+    <updated>2018-12-26T07:32:25.320Z</updated>
     
     <content type="html"><![CDATA[<p>最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。</p><p>docker安装部分就不介绍了，可看<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">官方文档</a></p><h2 id="1-下载mysql镜像"><a href="#1-下载mysql镜像" class="headerlink" title="1.下载mysql镜像"></a>1.下载mysql镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:8.0</span><br></pre></td></tr></table></figure><p>下载的版本为8.0的mysql</p><h2 id="2-创建容器"><a href="#2-创建容器" class="headerlink" title="2. 创建容器"></a>2. 创建容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3306:3306 -name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0</span><br></pre></td></tr></table></figure><p>创建容器，将容器的3306端口映射到本地的3306端口，命名为mysql，设置数据库密码为root</p><h2 id="3-导出本地数据库"><a href="#3-导出本地数据库" class="headerlink" title="3.导出本地数据库"></a>3.导出本地数据库</h2><p>将本地mysql的数据库导出为sql文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p you_database &gt; you_database.sql</span><br></pre></td></tr></table></figure></p><h2 id="4-将导出的sql文件复制到docker容器里"><a href="#4-将导出的sql文件复制到docker容器里" class="headerlink" title="4.将导出的sql文件复制到docker容器里"></a>4.将导出的sql文件复制到docker容器里</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp you_database.sql mysql:/opt/</span><br></pre></td></tr></table></figure><p>此时sql文件就到mysql容器里的/opt/路径里面了。<br>然后进入容器里面操作<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure></p><p>此时就进入到容器里面了，先在容器里面的mysql创建相应的数据库<br><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">▶ docker exec -it mymysql bash</span><br><span class="line">root@19820b3cb9b8:/# mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 13</span><br><span class="line">Server version: 8.0.13 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> create database YOU_DATABASE;</span><br></pre></td></tr></table></figure></p><p>创建完相应的数据库后，就可以导入之前复制到容器里面的sql文件了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@19820b3cb9b8:/# mysql -u root -p YOUDATABASE &lt; /opt/you_database.sql</span><br></pre></td></tr></table></figure></p><p>此时就大功告成了，然后就可以卸载本地的mysql，达成删库跑路成就了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">▶ brew remove mysql</span><br><span class="line">Uninstalling /usr/local/Cellar/mysql/8.0.12... (257 files, 233.2MB)</span><br></pre></td></tr></table></figure></p>]]></content>
     
@@ -35,8 +35,10 @@
     
     </summary>
     
+      <category term="运维" scheme="https://www.djangoz.com/categories/%E8%BF%90%E7%BB%B4/"/>
     
-      <category term="运维" scheme="https://www.djangoz.com/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+      <category term="docker" scheme="https://www.djangoz.com/tags/docker/"/>
     
   </entry>
   
