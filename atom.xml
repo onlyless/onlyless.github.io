@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.djangoz.com/"/>
-  <updated>2018-12-06T03:26:52.000Z</updated>
+  <updated>2018-12-26T07:27:50.790Z</updated>
   <id>https://www.djangoz.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本地mysql搬迁到docker</title>
+    <link href="https://www.djangoz.com/2018/12/26/dockermysql/"/>
+    <id>https://www.djangoz.com/2018/12/26/dockermysql/</id>
+    <published>2018-12-26T06:54:26.000Z</published>
+    <updated>2018-12-26T07:27:50.790Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。</p><p>docker安装部分就不介绍了，可看<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">官方文档</a></p><h2 id="1-下载mysql镜像"><a href="#1-下载mysql镜像" class="headerlink" title="1.下载mysql镜像"></a>1.下载mysql镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:8.0</span><br></pre></td></tr></table></figure><p>下载的版本为8.0的mysql</p><h2 id="2-创建容器"><a href="#2-创建容器" class="headerlink" title="2. 创建容器"></a>2. 创建容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3306:3306 -name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0</span><br></pre></td></tr></table></figure><p>创建容器，将容器的3306端口映射到本地的3306端口，命名为mysql，设置数据库密码为root</p><h2 id="3-导出本地数据库"><a href="#3-导出本地数据库" class="headerlink" title="3.导出本地数据库"></a>3.导出本地数据库</h2><p>将本地mysql的数据库导出为sql文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p you_database &gt; you_database.sql</span><br></pre></td></tr></table></figure></p><h2 id="4-将导出的sql文件复制到docker容器里"><a href="#4-将导出的sql文件复制到docker容器里" class="headerlink" title="4.将导出的sql文件复制到docker容器里"></a>4.将导出的sql文件复制到docker容器里</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp you_database.sql mysql:/opt/</span><br></pre></td></tr></table></figure><p>此时sql文件就到mysql容器里的/opt/路径里面了。<br>然后进入容器里面操作<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure></p><p>此时就进入到容器里面了，先在容器里面的mysql创建相应的数据库<br><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">▶ docker exec -it mymysql bash</span><br><span class="line">root@19820b3cb9b8:/# mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 13</span><br><span class="line">Server version: 8.0.13 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.</span><br><span class="line"></span><br><span class="line"><span class="meta">mysql&gt;</span> create database YOU_DATABASE;</span><br></pre></td></tr></table></figure></p><p>创建完相应的数据库后，就可以导入之前复制到容器里面的sql文件了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@19820b3cb9b8:/# mysql -u root -p YOUDATABASE &lt; /opt/you_database.sql</span><br></pre></td></tr></table></figure></p><p>此时就大功告成了，然后就可以卸载本地的mysql，达成删库跑路成就了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">▶ brew remove mysql</span><br><span class="line">Uninstalling /usr/local/Cellar/mysql/8.0.12... (257 files, 233.2MB)</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。&lt;/p&gt;
+&lt;p&gt;docker安装部分就不介绍了，可看&lt;a href=&quot;https://docs.docker.com/install/&quot; target=&quot;_blank&quot; rel=&quot;noo
+      
+    
+    </summary>
+    
+    
+      <category term="运维" scheme="https://www.djangoz.com/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
   
   <entry>
     <title>Servlet/JSP简单生成图片验证码并后台验证功能</title>
@@ -332,9 +356,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -361,9 +385,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -415,9 +439,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -445,9 +469,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -475,9 +499,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -505,9 +529,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -535,9 +559,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
@@ -565,39 +589,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
-  </entry>
-  
-  <entry>
-    <title>2018icpc南京网络赛L题Magical Girl Haz（dijkstra+dp)</title>
-    <link href="https://www.djangoz.com/2018/09/29/2018icpcnanjingL/"/>
-    <id>https://www.djangoz.com/2018/09/29/2018icpcnanjingL/</id>
-    <published>2018-09-29T08:22:49.000Z</published>
-    <updated>2018-09-29T08:41:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://nanti.jisuanke.com/t/31001" target="_blank" rel="noopener">题目链接</a></p><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>有N个城市M条路径，可以使K条路径长度变为0，求1到N最短路</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>求最短路很好求，但是题目多了一个限制条件，可以使K条路径长度变为0，这就有点麻烦了，后来想到，这也有点像01背包选与不选的感觉，求最短路的时候加个状态就可以求解了</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e5</span>+<span class="number">500</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> to,val;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; G[maxn];</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;ll,pii&gt; PII;</span><br><span class="line">ll dis[<span class="number">15</span>][maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> N,<span class="keyword">int</span> K)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    priority_queue&lt;PII,<span class="built_in">vector</span>&lt;PII&gt;,greater&lt;PII&gt; &gt; Q;</span><br><span class="line">    Q.push(PII(<span class="number">0</span>,pii(<span class="number">1</span>,K)));</span><br><span class="line">    <span class="built_in">memset</span>(dis,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(dis));</span><br><span class="line">    dis[K][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">        PII t = Q.top();</span><br><span class="line">        Q.pop();</span><br><span class="line">        <span class="keyword">int</span> d = t.first;</span><br><span class="line">        <span class="keyword">int</span> u = t.second.first;</span><br><span class="line">        <span class="keyword">int</span> k = t.second.second;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[u].size();i++)&#123;</span><br><span class="line">            Edge e = G[u][i];</span><br><span class="line">            <span class="keyword">if</span>( dis[k][e.to] &gt; dis[k][u] + e.val)&#123;</span><br><span class="line">                dis[k][e.to] = dis[k][u] + e.val;</span><br><span class="line">                Q.push(PII(dis[k][e.to],pii(e.to,k)));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(k &gt; <span class="number">0</span> &amp;&amp; dis[k][u] &lt; dis[k<span class="number">-1</span>][e.to])&#123;</span><br><span class="line">                dis[k<span class="number">-1</span>][e.to] = dis[k][u];</span><br><span class="line">                Q.push(PII(dis[k<span class="number">-1</span>][e.to],pii(e.to,k<span class="number">-1</span>)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[<span class="number">0</span>][N];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">int</span> N,M,K;</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;N,&amp;M,&amp;K);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            G[i].clear();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> a,b,c;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;a,&amp;b,&amp;c);</span><br><span class="line">            Edge t = (Edge)&#123;b,c&#125;;</span><br><span class="line">            G[a].push_back(t);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = dijkstra(N,K);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;a href=&quot;https://nanti.jisuanke.com/t/31001&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; tit
-      
-    
-    </summary>
-    
-      <category term="c++" scheme="https://www.djangoz.com/categories/c/"/>
-    
-    
-      <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
-    
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   

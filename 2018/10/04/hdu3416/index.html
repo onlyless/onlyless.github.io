@@ -31,9 +31,9 @@ ga('send', 'pageview');
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="ACM,图论,题解">
+    <meta name="keywords" content="ACM,题解,图论">
     <meta name="description" content="题目链接 题意N个城市M条路径，给定起点A，终点B，求有几条从A到B的最短路（其中每经过的路径不能重复） 解题思路先用最短路求出A到B的最短路Min,也求出A到每个城市的距离dis[N],然后反向求B到A的最短路，得到B到每个城市的最短距离dis2[N]，然后遍历每条路径edge，如果dis[edge.from] + edge.len + dis2[edge.to]== Min,就说明这条路径一定">
-<meta name="keywords" content="ACM,图论,题解">
+<meta name="keywords" content="ACM,题解,图论">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hdu3416Marriage Match IV (网络流+最短路)">
 <meta property="og:url" content="https://www.djangoz.com/2018/10/04/hdu3416/index.html">
