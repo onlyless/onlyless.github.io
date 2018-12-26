@@ -4,7 +4,14 @@
   <url>
     <loc>https://www.djangoz.com/2018/12/26/dockermysql/</loc>
     
-    <lastmod>2018-12-26T07:32:25.320Z</lastmod>
+    <lastmod>2018-12-26T07:36:06.240Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2018/03/10/flask_app/</loc>
+    
+    <lastmod>2018-12-26T07:35:37.510Z</lastmod>
     
   </url>
   
@@ -30,7 +37,7 @@
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/categories/index.html</loc>
+    <loc>https://www.djangoz.com/links/index.html</loc>
     
     <lastmod>2018-12-06T06:59:48.000Z</lastmod>
     
@@ -44,14 +51,14 @@
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/links/index.html</loc>
+    <loc>https://www.djangoz.com/2017/08/11/first_time/</loc>
     
     <lastmod>2018-12-06T06:59:48.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/2017/08/11/first_time/</loc>
+    <loc>https://www.djangoz.com/categories/index.html</loc>
     
     <lastmod>2018-12-06T06:59:48.000Z</lastmod>
     
@@ -257,13 +264,6 @@
     <loc>https://www.djangoz.com/2017/09/12/union_find/</loc>
     
     <lastmod>2018-06-10T14:21:02.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2018/03/10/flask_app/</loc>
-    
-    <lastmod>2018-06-10T14:11:14.000Z</lastmod>
     
   </url>
   
