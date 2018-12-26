@@ -4,7 +4,7 @@
   <url>
     <loc>https://www.djangoz.com/2018/12/26/dockermysql/</loc>
     
-    <lastmod>2018-12-26T07:27:50.790Z</lastmod>
+    <lastmod>2018-12-26T07:29:31.460Z</lastmod>
     
   </url>
   
@@ -16,14 +16,7 @@
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/tags/index.html</loc>
-    
-    <lastmod>2018-12-06T06:59:48.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.djangoz.com/2017/08/18/windows_to-linux/</loc>
+    <loc>https://www.djangoz.com/links/index.html</loc>
     
     <lastmod>2018-12-06T06:59:48.000Z</lastmod>
     
@@ -44,7 +37,14 @@
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/links/index.html</loc>
+    <loc>https://www.djangoz.com/2017/08/18/windows_to-linux/</loc>
+    
+    <lastmod>2018-12-06T06:59:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.djangoz.com/2017/08/11/first_time/</loc>
     
     <lastmod>2018-12-06T06:59:48.000Z</lastmod>
     
@@ -58,7 +58,7 @@
   </url>
   
   <url>
-    <loc>https://www.djangoz.com/2017/08/11/first_time/</loc>
+    <loc>https://www.djangoz.com/tags/index.html</loc>
     
     <lastmod>2018-12-06T06:59:48.000Z</lastmod>
     
