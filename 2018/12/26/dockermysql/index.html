@@ -32,18 +32,18 @@ ga('send', 'pageview');
     
     
     <meta name="keywords" content="运维">
-    <meta name="description" content="最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。 docker安装部分就不介绍了，可看官方文档 1.下载mysql镜像1docker pull mysql:8.0 下载的版本为8.0的mysql 2. 创建容器1docker run -p 3306:3306 -name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql">
+    <meta name="description" content="最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。 docker安装部分就不介绍了，可看官方文档 1.下载mysql镜像1docker pull mysql:8.0 下载的版本为8.0的mysql 2. 创建容器1docker run -p 3306:3306  --restart=always -name mysql -e MYSQL_ROOT_PASS">
 <meta name="keywords" content="运维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="本地mysql数据库搬迁到docker">
 <meta property="og:url" content="https://www.djangoz.com/2018/12/26/dockermysql/index.html">
 <meta property="og:site_name" content="DjangoZ&#39;s blog">
-<meta property="og:description" content="最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。 docker安装部分就不介绍了，可看官方文档 1.下载mysql镜像1docker pull mysql:8.0 下载的版本为8.0的mysql 2. 创建容器1docker run -p 3306:3306 -name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql">
+<meta property="og:description" content="最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。 docker安装部分就不介绍了，可看官方文档 1.下载mysql镜像1docker pull mysql:8.0 下载的版本为8.0的mysql 2. 创建容器1docker run -p 3306:3306  --restart=always -name mysql -e MYSQL_ROOT_PASS">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-26T07:36:06.240Z">
+<meta property="og:updated_time" content="2019-01-04T14:02:26.250Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="本地mysql数据库搬迁到docker">
-<meta name="twitter:description" content="最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。 docker安装部分就不介绍了，可看官方文档 1.下载mysql镜像1docker pull mysql:8.0 下载的版本为8.0的mysql 2. 创建容器1docker run -p 3306:3306 -name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql">
+<meta name="twitter:description" content="最近慢慢熟悉了docker，打算将一些开发环境搬迁到docker容器里面便于管理和备份。 docker安装部分就不介绍了，可看官方文档 1.下载mysql镜像1docker pull mysql:8.0 下载的版本为8.0的mysql 2. 创建容器1docker run -p 3306:3306  --restart=always -name mysql -e MYSQL_ROOT_PASS">
     
         <link rel="alternate" type="application/atom+xml" title="DjangoZ&#39;s blog" href="/atom.xml">
     
@@ -208,8 +208,8 @@ ga('send', 'pageview');
 <p>docker安装部分就不介绍了，可看<a href="https://docs.docker.com/install/" target="_blank" rel="noopener">官方文档</a></p>
 <h2 id="1-下载mysql镜像"><a href="#1-下载mysql镜像" class="headerlink" title="1.下载mysql镜像"></a>1.下载mysql镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:8.0</span><br></pre></td></tr></table></figure>
 <p>下载的版本为8.0的mysql</p>
-<h2 id="2-创建容器"><a href="#2-创建容器" class="headerlink" title="2. 创建容器"></a>2. 创建容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3306:3306 -name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0</span><br></pre></td></tr></table></figure>
-<p>创建容器，将容器的3306端口映射到本地的3306端口，命名为mysql，设置数据库密码为root</p>
+<h2 id="2-创建容器"><a href="#2-创建容器" class="headerlink" title="2. 创建容器"></a>2. 创建容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3306:3306  --restart=always -name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0</span><br></pre></td></tr></table></figure>
+<p>创建容器，将容器的3306端口映射到本地的3306端口，设置为docker启动时容器自启动，命名为mysql，设置数据库密码为root</p>
 <h2 id="3-导出本地数据库"><a href="#3-导出本地数据库" class="headerlink" title="3.导出本地数据库"></a>3.导出本地数据库</h2><p>将本地mysql的数据库导出为sql文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p you_database &gt; you_database.sql</span><br></pre></td></tr></table></figure></p>
 <h2 id="4-将导出的sql文件复制到docker容器里"><a href="#4-将导出的sql文件复制到docker容器里" class="headerlink" title="4.将导出的sql文件复制到docker容器里"></a>4.将导出的sql文件复制到docker容器里</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp you_database.sql mysql:/opt/</span><br></pre></td></tr></table></figure>
 <p>此时sql文件就到mysql容器里的/opt/路径里面了。<br>然后进入容器里面操作<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql bash</span><br></pre></td></tr></table></figure></p>
@@ -224,7 +224,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-12-26T07:36:06.240Z" itemprop="dateUpdated">2018-12-26 15:36:06</time>
+    最后更新时间：<time datetime="2019-01-04T14:02:26.250Z" itemprop="dateUpdated">2019-01-04 22:02:26</time>
 </span><br>
 
 
@@ -415,7 +415,7 @@ ga('send', 'pageview');
         </p>
     </div>
     <div class="bottom">
-        <p><span>DjangoZ &copy; 2017 - 2018</span>
+        <p><span>DjangoZ &copy; 2017 - 2019</span>
             <span>
                 
                 Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
