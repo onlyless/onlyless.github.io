@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.djangoz.com/"/>
-  <updated>2019-03-08T08:57:49.857Z</updated>
+  <updated>2019-03-21T06:53:56.658Z</updated>
   <id>https://www.djangoz.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mac高效使用合集(持续更新)</title>
+    <link href="https://www.djangoz.com/2019/03/21/mac/"/>
+    <id>https://www.djangoz.com/2019/03/21/mac/</id>
+    <published>2019-03-21T06:01:38.000Z</published>
+    <updated>2019-03-21T06:53:56.658Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="item2-oh-my-zsh"><a href="#item2-oh-my-zsh" class="headerlink" title="item2+oh-my-zsh"></a>item2+oh-my-zsh</h2><p><a href="https://www.iterm2.com/" target="_blank" rel="noopener">item2官网</a></p><h3 id="item2"><a href="#item2" class="headerlink" title="item2:"></a>item2:</h3><ul><li>同tab多窗口 <ul><li>垂直排列 command + d</li><li>水平排列 command + shift + d</li><li>窗口间切换 command + [ (])</li><li>关闭当前窗口 command + w</li></ul></li></ul><h3 id="oh-my-zsh"><a href="#oh-my-zsh" class="headerlink" title="oh-my-zsh"></a>oh-my-zsh</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</span><br></pre></td></tr></table></figure><ul><li>zshrc<ul><li>ZSH_THEME=”avit”</li><li>plugins=(git zsh-syntax-highlighting zsh-autosuggestions)</li></ul></li><li><p>zsh-syntax-highlighting安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure></li><li><p>zsh-autosuggestions安装</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure></li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure><p>当item2的主题是Solarized Dark时,会覆盖zsh-autosuggestions的提示字体,造成显示不了的情况<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">▶ vim ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh</span><br><span class="line"></span><br><span class="line">: $&#123;ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'&#125;</span><br><span class="line"><span class="meta">#</span> 把fg的颜色从8改为其他颜色,只支持8种颜色,可参考zsh-autosuggestions文档</span><br></pre></td></tr></table></figure></p><h2 id="鼠标控制"><a href="#鼠标控制" class="headerlink" title="鼠标控制"></a>鼠标控制</h2><p>mac外接键盘无法用到触控板,外接鼠标的话,方向逻辑相反,<a href="https://github.com/Caldis/Mos" target="_blank" rel="noopener">Mos</a>很好解决了这个问题,而且可以控制鼠标的滚轮爽如触控板.</p><h3 id="鼠标箭头多屏幕切换"><a href="#鼠标箭头多屏幕切换" class="headerlink" title="鼠标箭头多屏幕切换"></a>鼠标箭头多屏幕切换</h3><p>在多屏幕工作时,经常要用手来操作鼠标箭头到另外一个屏幕,现用软件可实现快捷键切换到其他屏幕</p><p>先安装<a href="http://www.hammerspoon.org/" target="_blank" rel="noopener">Hammerspoon</a><br>open config</p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Set hyper to cmd</span></span><br><span class="line"><span class="keyword">local</span> hyper = &#123;<span class="string">'cmd'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Move Mouse to center of next Monitor</span></span><br><span class="line">hs.hotkey.bind(hyper, <span class="string">'`'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">    <span class="keyword">local</span> screen = hs.mouse.getCurrentScreen()</span><br><span class="line">    <span class="keyword">local</span> nextScreen = screen:<span class="built_in">next</span>()</span><br><span class="line">    <span class="keyword">local</span> rect = nextScreen:fullFrame()</span><br><span class="line">    <span class="keyword">local</span> center = hs.geometry.rectMidPoint(rect)</span><br><span class="line"> </span><br><span class="line">    hs.mouse.setAbsolutePosition(center)</span><br><span class="line"><span class="keyword">end</span>)</span><br></pre></td></tr></table></figure><p>此处将cmd定义为hyper,然后定义hyper+`为切换鼠标箭头到其他屏幕,也可自定义为其他快捷键</p><h2 id="窗口布局"><a href="#窗口布局" class="headerlink" title="窗口布局"></a>窗口布局</h2><p><a href="https://github.com/eczarny/spectacle" target="_blank" rel="noopener">spectacle</a></p><ul><li>移动窗口到到另外一个屏幕 ⌃⌥⌘→</li></ul><p>其他具体操作可参考文档</p><h2 id="mac神器Alfred"><a href="#mac神器Alfred" class="headerlink" title="mac神器Alfred"></a>mac神器Alfred</h2><h3 id="常用workflows"><a href="#常用workflows" class="headerlink" title="常用workflows"></a>常用workflows</h3><ul><li><a href="https://github.com/xudaolong/CodeVar" target="_blank" rel="noopener">CodeVar</a></li><li><a href="https://kapeli.com/dash" target="_blank" rel="noopener">Dash</a></li><li><a href="https://github.com/willfarrell/alfred-encode-decode-workflow" target="_blank" rel="noopener">Encode/Decode</a></li><li><a href="https://github.com/xfslove/alfred-google-translate" target="_blank" rel="noopener">Google Translate</a></li><li><a href="https://github.com/ngreenstein/alfred-process-killer" target="_blank" rel="noopener">Kill Process</a></li><li><a href="https://github.com/LeEnno/alfred-terminalfinder" target="_blank" rel="noopener">TerminalFinder</a></li><li><a href="https://github.com/WiconWang/Alfred-Workflows-TimeStamp" target="_blank" rel="noopener">Timestamp</a></li><li><a href="https://github.com/wensonsmith/YoudaoTranslate" target="_blank" rel="noopener">Youdao Translate</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;item2-oh-my-zsh&quot;&gt;&lt;a href=&quot;#item2-oh-my-zsh&quot; class=&quot;headerlink&quot; title=&quot;item2+oh-my-zsh&quot;&gt;&lt;/a&gt;item2+oh-my-zsh&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://w
+      
+    
+    </summary>
+    
+    
+      <category term="技巧" scheme="https://www.djangoz.com/tags/%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>总结遇到的python2中的坑</title>
@@ -382,9 +405,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -411,9 +434,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -465,9 +488,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -495,9 +518,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -525,9 +548,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -555,39 +578,9 @@
     
       <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
     
-      <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
       <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
-  </entry>
-  
-  <entry>
-    <title>poj2240Arbitrage(判负环)</title>
-    <link href="https://www.djangoz.com/2018/09/30/poj2240/"/>
-    <id>https://www.djangoz.com/2018/09/30/poj2240/</id>
-    <published>2018-09-30T04:13:25.000Z</published>
-    <updated>2018-09-30T04:19:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给n种货币，m条货币之前的汇率，判断最后能否从中套利</p><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>典型的判定负环图的问题，题目给的货币字符串，用map来给不同的字符串一个映射就可以了</p><h3 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; pii;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>,pii&gt; PII;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">105</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">1e6</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> from,to;</span><br><span class="line">    <span class="keyword">double</span> cost;</span><br><span class="line">    Edge()&#123;&#125;</span><br><span class="line">    Edge(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">double</span> c):from(a),to(b),cost(c)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">Edge E[maxm];</span><br><span class="line"><span class="keyword">int</span> N,M;</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>,<span class="keyword">int</span>&gt; money;</span><br><span class="line"><span class="keyword">double</span> dis[maxn];</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">bellman_ford</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        dis[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dis[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;M;j++)&#123;</span><br><span class="line">            Edge e = E[j];</span><br><span class="line">            <span class="keyword">double</span> t = dis[e.from] * e.cost;</span><br><span class="line">            <span class="keyword">if</span>(dis[e.to] &lt; t)&#123;</span><br><span class="line">                dis[e.to] = t;</span><br><span class="line">                <span class="keyword">if</span>(i==N<span class="number">-1</span>)</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> Case = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; N,N)&#123;</span><br><span class="line">        money.clear();</span><br><span class="line">        <span class="built_in">string</span> s;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">            money[s] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; M;</span><br><span class="line">        <span class="keyword">double</span> t;</span><br><span class="line">        <span class="built_in">string</span> s2;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;M;i++)&#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; s &gt;&gt; t &gt;&gt; s2;</span><br><span class="line">            E[i] = Edge(money[s],money[s2],t);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">bool</span> ok = bellman_ford();</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Case "</span>&lt;&lt; Case++ &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">        <span class="keyword">if</span>(!ok)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Yes"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"No"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot; title=&quot;题意&quot;&gt;&lt;/a&gt;题意&lt;/h2&gt;&lt;p&gt;给n种货币，m条货币之前的汇率，判断最后能否从中套利&lt;/p&gt;
-&lt;h2 id=&quot;解题思路&quot;&gt;&lt;a href=&quot;#解题思路&quot; class=&quot;he
-      
-    
-    </summary>
-    
-      <category term="c++" scheme="https://www.djangoz.com/categories/c/"/>
-    
-    
-      <category term="ACM" scheme="https://www.djangoz.com/tags/ACM/"/>
-    
       <category term="题解" scheme="https://www.djangoz.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
-      <category term="图论" scheme="https://www.djangoz.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
   </entry>
   
